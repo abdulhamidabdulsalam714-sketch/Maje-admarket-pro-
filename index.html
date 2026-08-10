@@ -1,7 +1,8 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html><html lang="en">
+<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maje AdMarket Pro</title><style>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maje AdMarket Pro</title><style>
 :root {
   --bg:#101111;
   --surface:#191b1b;
@@ -86,18 +87,13 @@ button {
   min-height:600px;
   display:flex;
   align-items:center;
-
   background:
     radial-gradient(
       circle at 80% 30%,
       rgba(201,164,92,.15),
       transparent 32%
     ),
-    linear-gradient(
-      135deg,
-      #101111,
-      #191b1b
-    );
+    linear-gradient(135deg,#101111,#191b1b);
 }
 
 .hero-inner {
@@ -349,7 +345,7 @@ button {
   margin-bottom:20px;
 }
 
-.form-group > label {
+.form-group label {
   display:block;
   margin-bottom:8px;
   font-size:13px;
@@ -469,10 +465,9 @@ footer {
   .package-card {
     min-height:auto;
   }
-
 }
-
-</style></head><body><nav class="navbar">  <div class="nav-inner"><div class="logo">
+</style></head><body><nav class="navbar">
+  <div class="nav-inner"><div class="logo">
   Maje <span>AdMarket Pro</span>
 </div>
 
@@ -481,7 +476,7 @@ footer {
   <button
     type="button"
     class="nav-btn"
-    id="navPackages"
+    onclick="goTo('packages')"
   >
     Packages
   </button>
@@ -489,7 +484,7 @@ footer {
   <button
     type="button"
     class="nav-btn"
-    id="navAds"
+    onclick="goTo('advertisements')"
   >
     Advertisements
   </button>
@@ -497,14 +492,15 @@ footer {
   <button
     type="button"
     class="nav-btn"
-    id="navCampaign"
+    onclick="goTo('advertise')"
   >
     Create Campaign
   </button>
 
 </div>
 
-  </div></nav><section class="hero">  <div class="hero-inner"><div class="badge">
+  </div>
+</nav><section class="hero">  <div class="hero-inner"><div class="badge">
   Professional Digital Advertising
 </div>
 
@@ -524,7 +520,7 @@ footer {
   <button
     type="button"
     class="main-btn gold"
-    id="startCampaign"
+    onclick="goTo('advertise')"
   >
     Start a Campaign
   </button>
@@ -532,17 +528,15 @@ footer {
   <button
     type="button"
     class="main-btn outline"
-    id="exploreAds"
+    onclick="goTo('advertisements')"
   >
     Explore Advertisements
   </button>
 
 </div>
 
-  </div></section><section
-  class="section"
-  id="packages"
->  <div class="section-heading"><div class="section-label">
+  </div>
+</section><section class="section" id="packages">  <div class="section-heading"><div class="section-label">
   Advertising Packages
 </div>
 
@@ -561,6 +555,7 @@ footer {
   data-package="basic"
   data-duration="7"
   data-price="5"
+  onclick="choosePackage(this)"
 >
 
   <div class="package-name">
@@ -590,6 +585,7 @@ footer {
   data-package="premium"
   data-duration="14"
   data-price="10"
+  onclick="choosePackage(this)"
 >
 
   <div class="popular-label">
@@ -624,6 +620,7 @@ footer {
   data-package="premium_plus"
   data-duration="30"
   data-price="20"
+  onclick="choosePackage(this)"
 >
 
   <div class="package-name">
@@ -647,7 +644,8 @@ footer {
 
 </button>
 
-  </div></section><section
+  </div>
+</section><section
   class="ads-section"
   id="advertisements"
 >  <div class="section"><div class="section-heading">
@@ -683,7 +681,8 @@ footer {
 
 </div>
 
-  </div></section><section
+  </div>
+</section><section
   class="section"
   id="advertise"
 >  <div class="section-heading"><div class="section-label">
@@ -833,7 +832,8 @@ footer {
 
 </form>
 
-  </div></section><section class="section">  <div class="section-heading"><div class="section-label">
+  </div>
+</section><section class="section">  <div class="section-heading"><div class="section-label">
   How It Works
 </div>
 
@@ -852,7 +852,8 @@ footer {
   </h3>
 
   <p>
-    Tap the package you want to use for your campaign.
+    Select the advertising package that
+    suits your campaign.
   </p>
 
 </div>
@@ -869,8 +870,8 @@ footer {
   </h3>
 
   <p>
-    Enter your advertisement information and continue
-    to secure payment.
+    Enter your advertisement information
+    and continue to payment.
   </p>
 
 </div>
@@ -887,13 +888,14 @@ footer {
   </h3>
 
   <p>
-    After payment and approval, your advertisement
-    can go live.
+    After payment and approval, your
+    advertisement can go live.
   </p>
 
 </div>
 
-  </div></section><footer>  <p>
+  </div>
+</section><footer>  <p>
     <span class="footer-brand">
       Maje AdMarket Pro
     </span>
@@ -903,9 +905,9 @@ footer {
     © 2026 Maje AdMarket Pro. All rights reserved.
   </p></footer><script>
 
-/* =========================================
+/* =====================================================
    SUPABASE
-   ========================================= */
+   ===================================================== */
 
 const SUPABASE_URL =
   "https://rkobepfufwybyaixzgcu.supabase.co";
@@ -914,162 +916,64 @@ const SUPABASE_KEY =
   "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
 
 
-/* =========================================
-   PAYMENT EDGE FUNCTION
-   ========================================= */
+/* =====================================================
+   PAYSTACK EDGE FUNCTION
+   ===================================================== */
 
 const PAYMENT_FUNCTION_URL =
   SUPABASE_URL +
   "/functions/v1/initialize-payment";
 
 
-/* =========================================
-   PACKAGE STATE
-   ========================================= */
+/* =====================================================
+   PACKAGE VARIABLES
+   ===================================================== */
 
 let selectedPackage = "basic";
 let selectedDuration = 7;
 let selectedPrice = 5;
 
 
-/* =========================================
-   ELEMENTS
-   ========================================= */
+/* =====================================================
+   NAVIGATION
+   This function is intentionally independent of
+   Supabase and Paystack.
+   ===================================================== */
 
-const packageCards =
-  document.querySelectorAll(".package-card");
+function goTo(sectionId) {
 
-const selectedPackageText =
-  document.getElementById(
-    "selectedPackageText"
-  );
+  const section =
+    document.getElementById(sectionId);
 
-const form =
-  document.getElementById(
-    "advertisementForm"
-  );
-
-const submitButton =
-  document.getElementById(
-    "submitButton"
-  );
-
-const message =
-  document.getElementById(
-    "message"
-  );
-
-
-/* =========================================
-   SCROLL FUNCTION
-   ========================================= */
-
-function scrollToSection(id) {
-
-  const element =
-    document.getElementById(id);
-
-  if (!element) {
+  if (!section) {
     return;
   }
 
-  element.scrollIntoView({
+  section.scrollIntoView({
     behavior:"smooth",
     block:"start"
   });
-
 }
 
 
-/* =========================================
-   NAVIGATION BUTTONS
-   ========================================= */
-
-document
-  .getElementById("startCampaign")
-  .addEventListener(
-    "click",
-    function() {
-
-      scrollToSection(
-        "advertise"
-      );
-
-    }
-  );
-
-
-document
-  .getElementById("exploreAds")
-  .addEventListener(
-    "click",
-    function() {
-
-      scrollToSection(
-        "advertisements"
-      );
-
-    }
-  );
-
-
-document
-  .getElementById("navPackages")
-  .addEventListener(
-    "click",
-    function() {
-
-      scrollToSection(
-        "packages"
-      );
-
-    }
-  );
-
-
-document
-  .getElementById("navAds")
-  .addEventListener(
-    "click",
-    function() {
-
-      scrollToSection(
-        "advertisements"
-      );
-
-    }
-  );
-
-
-document
-  .getElementById("navCampaign")
-  .addEventListener(
-    "click",
-    function() {
-
-      scrollToSection(
-        "advertise"
-      );
-
-    }
-  );
-
-
-/* =========================================
+/* =====================================================
    PACKAGE SELECTION
-   ========================================= */
+   ===================================================== */
 
-function selectPackage(card) {
+function choosePackage(card) {
 
-  packageCards.forEach(
-    function(item) {
+  const cards =
+    document.querySelectorAll(
+      ".package-card"
+    );
 
-      item.classList.remove(
-        "selected"
-      );
+  cards.forEach(function(item) {
 
-    }
-  );
+    item.classList.remove(
+      "selected"
+    );
+
+  });
 
 
   card.classList.add(
@@ -1080,12 +984,10 @@ function selectPackage(card) {
   selectedPackage =
     card.dataset.package;
 
-
   selectedDuration =
     Number(
       card.dataset.duration
     );
-
 
   selectedPrice =
     Number(
@@ -1093,7 +995,7 @@ function selectPackage(card) {
     );
 
 
-  let packageName =
+  let name =
     "Basic";
 
 
@@ -1102,7 +1004,7 @@ function selectPackage(card) {
     "premium"
   ) {
 
-    packageName =
+    name =
       "Premium";
 
   }
@@ -1113,51 +1015,59 @@ function selectPackage(card) {
     "premium_plus"
   ) {
 
-    packageName =
+    name =
       "Premium Plus";
 
   }
 
 
-  selectedPackageText.textContent =
-    packageName +
-    " — $" +
-    selectedPrice +
-    " — " +
-    selectedDuration +
-    " days";
+  const selectedText =
+    document.getElementById(
+      "selectedPackageText"
+    );
 
+
+  if (selectedText) {
+
+    selectedText.textContent =
+      name +
+      " — $" +
+      selectedPrice +
+      " — " +
+      selectedDuration +
+      " days";
+
+  }
+
+
+  /*
+    Automatically take the customer
+    to the campaign form.
+  */
+
+  goTo("advertise");
 }
 
 
-packageCards.forEach(
-  function(card) {
-
-    card.addEventListener(
-      "click",
-      function() {
-
-        selectPackage(card);
-
-        scrollToSection(
-          "advertise"
-        );
-
-      }
-    );
-
-  }
-);
-
-
-/* =========================================
+/* =====================================================
    MESSAGE
-   ========================================= */
+   ===================================================== */
 
 function showMessage(
   text,
-  success = false
+  success
 ) {
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  if (!message) {
+    return;
+  }
+
 
   message.style.display =
     "block";
@@ -1184,175 +1094,210 @@ function showMessage(
 
   message.textContent =
     text;
-
 }
 
 
-/* =========================================
-   ESCAPE HTML
-   ========================================= */
+/* =====================================================
+   FORM
+   ===================================================== */
 
-function escapeHTML(value) {
-
-  const div =
-    document.createElement(
-      "div"
-    );
-
-  div.textContent =
-    value || "";
-
-  return div.innerHTML;
-
-}
+const advertisementForm =
+  document.getElementById(
+    "advertisementForm"
+  );
 
 
-/* =========================================
-   SUBMIT CAMPAIGN
-   ========================================= */
+if (advertisementForm) {
 
-form.addEventListener(
-  "submit",
-  async function(event) {
+  advertisementForm.addEventListener(
+    "submit",
+    async function(event) {
 
-    event.preventDefault();
+      event.preventDefault();
 
 
-    message.style.display =
-      "none";
-
-
-    submitButton.disabled =
-      true;
-
-
-    submitButton.textContent =
-      "Connecting to Paystack...";
-
-
-    const email =
-      document
-        .getElementById("email")
-        .value
-        .trim();
-
-
-    if (!email) {
-
-      showMessage(
-        "Please enter your email address."
-      );
-
-      submitButton.disabled =
-        false;
-
-      submitButton.textContent =
-        "Continue to Payment";
-
-      return;
-
-    }
-
-
-    try {
-
-      /* ================================
-         INITIALIZE PAYSTACK PAYMENT
-         ================================ */
-
-      const paymentResponse =
-        await fetch(
-          PAYMENT_FUNCTION_URL,
-          {
-
-            method:"POST",
-
-            headers: {
-
-              "Content-Type":
-                "application/json"
-
-            },
-
-            body:
-              JSON.stringify({
-
-                amount:
-                  selectedPrice,
-
-                email:
-                  email
-
-              })
-
-          }
+      const submitButton =
+        document.getElementById(
+          "submitButton"
         );
 
 
-      const paymentData =
-        await paymentResponse
-          .json()
-          .catch(
-            function() {
-              return {};
+      const email =
+        document.getElementById(
+          "email"
+        ).value.trim();
+
+
+      if (!email) {
+
+        showMessage(
+          "Please enter your email address.",
+          false
+        );
+
+        return;
+
+      }
+
+
+      submitButton.disabled =
+        true;
+
+      submitButton.textContent =
+        "Connecting to Paystack...";
+
+
+      try {
+
+        /*
+          Send payment request to the
+          Supabase Edge Function.
+        */
+
+        const response =
+          await fetch(
+            PAYMENT_FUNCTION_URL,
+            {
+              method:"POST",
+
+              headers:{
+                "Content-Type":
+                  "application/json",
+
+                "apikey":
+                  SUPABASE_KEY,
+
+                "Authorization":
+                  "Bearer " +
+                  SUPABASE_KEY
+              },
+
+              body:
+                JSON.stringify({
+
+                  amount:
+                    selectedPrice,
+
+                  email:
+                    email
+
+                })
             }
           );
 
 
-      if (
-        !paymentResponse.ok
-      ) {
+        const data =
+          await response
+            .json()
+            .catch(function() {
+              return {};
+            });
 
-        throw new Error(
-          paymentData.error ||
-          paymentData.message ||
-          "Unable to initialize Paystack payment."
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            data.message ||
+            "Payment initialization failed."
+          );
+
+        }
+
+
+        if (
+          !data.authorization_url
+        ) {
+
+          throw new Error(
+            "Paystack did not return a payment link."
+          );
+
+        }
+
+
+        /*
+          Save campaign information temporarily
+          before sending the customer to Paystack.
+        */
+
+        const campaign = {
+
+          email:
+            email,
+
+          advertiser_name:
+            document
+              .getElementById(
+                "advertiser_name"
+              )
+              .value.trim(),
+
+          advert_title:
+            document
+              .getElementById(
+                "advert_title"
+              )
+              .value.trim(),
+
+          description:
+            document
+              .getElementById(
+                "description"
+              )
+              .value.trim(),
+
+          extended_description:
+            document
+              .getElementById(
+                "extended_description"
+              )
+              .value.trim(),
+
+          contact:
+            document
+              .getElementById(
+                "contact"
+              )
+              .value.trim(),
+
+          image_url:
+            document
+              .getElementById(
+                "image_url"
+              )
+              .value.trim(),
+
+          package:
+            selectedPackage,
+
+          duration_days:
+            selectedDuration,
+
+          price:
+            selectedPrice,
+
+          reference:
+            data.reference || null
+
+        };
+
+
+        localStorage.setItem(
+          "maje_pending_campaign",
+          JSON.stringify(campaign)
         );
+
+
+        /*
+          Open Paystack checkout.
+        */
+
+        window.location.href =
+          data.authorization_url;
 
       }
 
+      catch(error) {
 
-      if (
-        !paymentData.authorization_url
-      ) {
-
-        throw new Error(
-          "Paystack did not return a payment link."
-        );
-
-      }
-
-
-      /* ================================
-         CAMPAIGN DATA
-         ================================ */
-
-      const advertisement = {
-
-        advertiser_name:
-          document
-            .getElementById(
-              "advertiser_name"
-            )
-            .value
-            .trim(),
-
-        advert_title:
-          document
-            .getElementById(
-              "advert_title"
-            )
-            .value
-            .trim(),
-
-        description:
-          document
-            .getElementById(
-              "description"
-            )
-            .value
-            .trim(),
-
-        extended_description:
-          document
-        
+        console.err      
