@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maje AdMarket Pro</title><style>
-:root {
+:root{
   --bg:#101111;
   --surface:#191b1b;
   --surface2:#222424;
@@ -14,15 +14,15 @@
   --border:#383936;
 }
 
-* {
+*{
   box-sizing:border-box;
 }
 
-html {
+html{
   scroll-behavior:smooth;
 }
 
-body {
+body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
   background:var(--bg);
@@ -32,15 +32,15 @@ body {
 
 button,
 input,
-textarea {
+textarea{
   font-family:inherit;
 }
 
-button {
+button{
   cursor:pointer;
 }
 
-.navbar {
+.navbar{
   position:sticky;
   top:0;
   z-index:1000;
@@ -48,7 +48,7 @@ button {
   border-bottom:1px solid var(--border);
 }
 
-.nav-inner {
+.nav-inner{
   max-width:1150px;
   margin:auto;
   padding:17px 22px;
@@ -57,33 +57,33 @@ button {
   justify-content:space-between;
 }
 
-.logo {
+.logo{
   color:var(--text);
   font-size:21px;
   font-weight:800;
 }
 
-.logo span {
+.logo span{
   color:var(--gold);
 }
 
-.nav-buttons {
+.nav-buttons{
   display:flex;
   gap:10px;
 }
 
-.nav-btn {
+.nav-btn{
   background:transparent;
   border:0;
   color:var(--muted);
   padding:8px 10px;
 }
 
-.nav-btn:hover {
+.nav-btn:hover{
   color:var(--gold2);
 }
 
-.hero {
+.hero{
   min-height:600px;
   display:flex;
   align-items:center;
@@ -93,17 +93,21 @@ button {
       rgba(201,164,92,.15),
       transparent 32%
     ),
-    linear-gradient(135deg,#101111,#191b1b);
+    linear-gradient(
+      135deg,
+      #101111,
+      #191b1b
+    );
 }
 
-.hero-inner {
+.hero-inner{
   width:100%;
   max-width:1150px;
   margin:auto;
   padding:80px 22px;
 }
 
-.badge {
+.badge{
   display:inline-block;
   padding:7px 12px;
   border:1px solid rgba(201,164,92,.45);
@@ -114,7 +118,7 @@ button {
   text-transform:uppercase;
 }
 
-.hero h1 {
+.hero h1{
   max-width:820px;
   margin:22px 0 18px;
   font-size:clamp(42px,7vw,76px);
@@ -122,24 +126,24 @@ button {
   letter-spacing:-2px;
 }
 
-.hero h1 span {
+.hero h1 span{
   color:var(--gold);
 }
 
-.hero-text {
+.hero-text{
   max-width:650px;
   color:var(--muted);
   font-size:18px;
 }
 
-.button-row {
+.button-row{
   display:flex;
   flex-wrap:wrap;
   gap:12px;
   margin-top:30px;
 }
 
-.main-btn {
+.main-btn{
   border:0;
   border-radius:7px;
   padding:14px 22px;
@@ -148,39 +152,39 @@ button {
   transition:.2s;
 }
 
-.main-btn.gold {
+.main-btn.gold{
   background:var(--gold);
   color:#151515;
 }
 
-.main-btn.gold:hover {
+.main-btn.gold:hover{
   background:var(--gold2);
   transform:translateY(-1px);
 }
 
-.main-btn.outline {
+.main-btn.outline{
   background:transparent;
   color:var(--text);
   border:1px solid var(--border);
 }
 
-.main-btn.outline:hover {
+.main-btn.outline:hover{
   border-color:var(--gold);
   color:var(--gold2);
 }
 
-.main-btn:disabled {
+.main-btn:disabled{
   opacity:.6;
   cursor:not-allowed;
 }
 
-.section {
+.section{
   max-width:1150px;
   margin:auto;
   padding:85px 22px;
 }
 
-.section-label {
+.section-label{
   color:var(--gold);
   text-transform:uppercase;
   letter-spacing:2px;
@@ -188,28 +192,28 @@ button {
   font-weight:800;
 }
 
-.section-heading {
+.section-heading{
   max-width:720px;
   margin-bottom:38px;
 }
 
-.section h2 {
+.section h2{
   margin:8px 0 12px;
   font-size:clamp(30px,5vw,46px);
   line-height:1.15;
 }
 
-.section-description {
+.section-description{
   color:var(--muted);
 }
 
-.packages {
+.packages{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:18px;
 }
 
-.package-card {
+.package-card{
   position:relative;
   width:100%;
   min-height:270px;
@@ -222,18 +226,18 @@ button {
   transition:.2s;
 }
 
-.package-card:hover {
+.package-card:hover{
   border-color:#665d4d;
   transform:translateY(-3px);
 }
 
-.package-card.selected {
+.package-card.selected{
   border-color:var(--gold);
   box-shadow:0 0 0 1px var(--gold);
   background:#1d1d1b;
 }
 
-.popular-label {
+.popular-label{
   position:absolute;
   top:0;
   right:20px;
@@ -246,81 +250,81 @@ button {
   font-weight:900;
 }
 
-.package-name {
+.package-name{
   color:var(--gold2);
   font-weight:800;
   font-size:15px;
 }
 
-.package-price {
+.package-price{
   margin:12px 0 2px;
   font-size:40px;
   font-weight:900;
 }
 
-.package-duration {
+.package-duration{
   color:var(--muted);
   font-size:13px;
 }
 
-.package-card ul {
+.package-card ul{
   padding:0;
   margin:22px 0 0;
   list-style:none;
 }
 
-.package-card li {
+.package-card li{
   padding:7px 0;
   border-bottom:1px solid var(--border);
   color:#c5c1b8;
   font-size:13px;
 }
 
-.ads-section {
+.ads-section{
   background:#0d0e0e;
   border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);
 }
 
-.ads-grid {
+.ads-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:20px;
 }
 
-.ad-card {
+.ad-card{
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:12px;
   overflow:hidden;
 }
 
-.ad-card img {
+.ad-card img{
   display:block;
   width:100%;
   max-height:300px;
   object-fit:cover;
 }
 
-.ad-content {
+.ad-content{
   padding:24px;
 }
 
-.ad-content h3 {
+.ad-content h3{
   margin:0 0 5px;
 }
 
-.advertiser {
+.advertiser{
   color:var(--gold2);
   font-size:13px;
   font-weight:700;
 }
 
-.ad-content p {
+.ad-content p{
   color:var(--muted);
 }
 
-.featured {
+.featured{
   display:inline-block;
   margin-bottom:12px;
   padding:5px 9px;
@@ -332,7 +336,7 @@ button {
   text-transform:uppercase;
 }
 
-.form-wrapper {
+.form-wrapper{
   max-width:780px;
   margin:auto;
   background:var(--surface);
@@ -341,11 +345,11 @@ button {
   padding:35px;
 }
 
-.form-group {
+.form-group{
   margin-bottom:20px;
 }
 
-.form-group label {
+.form-group label{
   display:block;
   margin-bottom:8px;
   font-size:13px;
@@ -353,7 +357,7 @@ button {
 }
 
 input,
-textarea {
+textarea{
   width:100%;
   padding:13px;
   background:#111313;
@@ -365,16 +369,16 @@ textarea {
 }
 
 input:focus,
-textarea:focus {
+textarea:focus{
   border-color:var(--gold);
 }
 
-textarea {
+textarea{
   min-height:130px;
   resize:vertical;
 }
 
-.selected-package {
+.selected-package{
   padding:12px 15px;
   margin-bottom:16px;
   border:1px solid rgba(201,164,92,.35);
@@ -385,7 +389,7 @@ textarea {
   font-weight:700;
 }
 
-#message {
+#message{
   display:none;
   margin-top:18px;
   padding:13px;
@@ -393,35 +397,35 @@ textarea {
   font-size:14px;
 }
 
-.steps {
+.steps{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
 
-.step {
+.step{
   padding:28px;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:10px;
 }
 
-.step-number {
+.step-number{
   color:var(--gold);
   font-size:12px;
   font-weight:900;
 }
 
-.step h3 {
+.step h3{
   margin-bottom:6px;
 }
 
-.step p {
+.step p{
   color:var(--muted);
   font-size:14px;
 }
 
-footer {
+footer{
   border-top:1px solid var(--border);
   padding:45px 22px;
   text-align:center;
@@ -429,40 +433,40 @@ footer {
   font-size:13px;
 }
 
-.footer-brand {
+.footer-brand{
   color:var(--gold);
   font-weight:900;
 }
 
-@media(max-width:800px) {
+@media(max-width:800px){
 
-  .nav-buttons {
+  .nav-buttons{
     display:none;
   }
 
-  .hero {
+  .hero{
     min-height:auto;
   }
 
-  .hero-inner {
+  .hero-inner{
     padding:70px 22px;
   }
 
   .packages,
   .ads-grid,
-  .steps {
+  .steps{
     grid-template-columns:1fr;
   }
 
-  .form-wrapper {
+  .form-wrapper{
     padding:22px;
   }
 
-  .section {
+  .section{
     padding:65px 22px;
   }
 
-  .package-card {
+  .package-card{
     min-height:auto;
   }
 }
@@ -472,35 +476,22 @@ footer {
 </div>
 
 <div class="nav-buttons">
-
-  <button
-    type="button"
-    class="nav-btn"
-    onclick="goTo('packages')"
-  >
+  <button type="button" class="nav-btn" data-scroll="packages">
     Packages
   </button>
 
-  <button
-    type="button"
-    class="nav-btn"
-    onclick="goTo('advertisements')"
-  >
+  <button type="button" class="nav-btn" data-scroll="advertisements">
     Advertisements
   </button>
 
-  <button
-    type="button"
-    class="nav-btn"
-    onclick="goTo('advertise')"
-  >
+  <button type="button" class="nav-btn" data-scroll="advertise">
     Create Campaign
   </button>
-
 </div>
 
   </div>
-</nav><section class="hero">  <div class="hero-inner"><div class="badge">
+</nav><section class="hero">
+  <div class="hero-inner"><div class="badge">
   Professional Digital Advertising
 </div>
 
@@ -520,7 +511,7 @@ footer {
   <button
     type="button"
     class="main-btn gold"
-    onclick="goTo('advertise')"
+    data-scroll="advertise"
   >
     Start a Campaign
   </button>
@@ -528,7 +519,7 @@ footer {
   <button
     type="button"
     class="main-btn outline"
-    onclick="goTo('advertisements')"
+    data-scroll="advertisements"
   >
     Explore Advertisements
   </button>
@@ -540,13 +531,10 @@ footer {
   Advertising Packages
 </div>
 
-<h2>
-  Choose your campaign.
-</h2>
+<h2>Choose your campaign.</h2>
 
 <p class="section-description">
-  Tap a package to select it. You can change your
-  selection before submitting your campaign.
+  Select the advertising package you want to use.
 </p>
 
   </div>  <div class="packages"><button
@@ -555,20 +543,13 @@ footer {
   data-package="basic"
   data-duration="7"
   data-price="5"
-  onclick="choosePackage(this)"
 >
 
-  <div class="package-name">
-    Basic
-  </div>
+  <div class="package-name">Basic</div>
 
-  <div class="package-price">
-    $5
-  </div>
+  <div class="package-price">$5</div>
 
-  <div class="package-duration">
-    7 days
-  </div>
+  <div class="package-duration">7 days</div>
 
   <ul>
     <li>Standard advertisement placement</li>
@@ -578,31 +559,23 @@ footer {
 
 </button>
 
-
 <button
   type="button"
   class="package-card"
   data-package="premium"
   data-duration="14"
   data-price="10"
-  onclick="choosePackage(this)"
 >
 
   <div class="popular-label">
     MOST POPULAR
   </div>
 
-  <div class="package-name">
-    Premium
-  </div>
+  <div class="package-name">Premium</div>
 
-  <div class="package-price">
-    $10
-  </div>
+  <div class="package-price">$10</div>
 
-  <div class="package-duration">
-    14 days
-  </div>
+  <div class="package-duration">14 days</div>
 
   <ul>
     <li>Featured advertisement placement</li>
@@ -613,27 +586,19 @@ footer {
 
 </button>
 
-
 <button
   type="button"
   class="package-card"
   data-package="premium_plus"
   data-duration="30"
   data-price="20"
-  onclick="choosePackage(this)"
 >
 
-  <div class="package-name">
-    Premium Plus
-  </div>
+  <div class="package-name">Premium Plus</div>
 
-  <div class="package-price">
-    $20
-  </div>
+  <div class="package-price">$20</div>
 
-  <div class="package-duration">
-    30 days
-  </div>
+  <div class="package-duration">30 days</div>
 
   <ul>
     <li>Top featured placement</li>
@@ -645,18 +610,13 @@ footer {
 </button>
 
   </div>
-</section><section
-  class="ads-section"
-  id="advertisements"
->  <div class="section"><div class="section-heading">
+</section><section class="ads-section" id="advertisements">  <div class="section"><div class="section-heading">
 
   <div class="section-label">
     Live Campaigns
   </div>
 
-  <h2>
-    Approved advertisements.
-  </h2>
+  <h2>Approved advertisements.</h2>
 
   <p class="section-description">
     Explore businesses currently promoted on
@@ -665,54 +625,38 @@ footer {
 
 </div>
 
-
-<div
-  class="ads-grid"
-  id="approvedAdvertisements"
->
+<div class="ads-grid" id="approvedAdvertisements">
 
   <div class="ad-card">
-
     <div class="ad-content">
       Loading advertisements...
     </div>
-
   </div>
 
 </div>
 
   </div>
-</section><section
-  class="section"
-  id="advertise"
->  <div class="section-heading"><div class="section-label">
+</section><section class="section" id="advertise">  <div class="section-heading"><div class="section-label">
   Create Campaign
 </div>
 
-<h2>
-  Submit your advertisement.
-</h2>
+<h2>Submit your advertisement.</h2>
 
 <p class="section-description">
   Choose your package, provide your campaign details
-  and pay securely through Paystack.
+  and continue to secure payment.
 </p>
 
   </div>  <div class="form-wrapper"><form id="advertisementForm">
 
   <div class="selected-package">
-
     Selected package:
-
     <span id="selectedPackageText">
       Basic — $5 — 7 days
     </span>
-
   </div>
 
-
   <div class="form-group">
-
     <label for="email">
       Email Address
     </label>
@@ -723,12 +667,9 @@ footer {
       placeholder="yourname@gmail.com"
       required
     >
-
   </div>
 
-
   <div class="form-group">
-
     <label for="advertiser_name">
       Advertiser or Business Name
     </label>
@@ -739,12 +680,9 @@ footer {
       placeholder="Your name or business name"
       required
     >
-
   </div>
 
-
   <div class="form-group">
-
     <label for="advert_title">
       Advertisement Title
     </label>
@@ -755,12 +693,9 @@ footer {
       placeholder="Your advertisement title"
       required
     >
-
   </div>
 
-
   <div class="form-group">
-
     <label for="description">
       Advertisement Description
     </label>
@@ -770,12 +705,9 @@ footer {
       placeholder="Describe your product or service"
       required
     ></textarea>
-
   </div>
 
-
   <div class="form-group">
-
     <label for="extended_description">
       Additional Information
     </label>
@@ -784,12 +716,9 @@ footer {
       id="extended_description"
       placeholder="Optional additional information"
     ></textarea>
-
   </div>
 
-
   <div class="form-group">
-
     <label for="contact">
       Contact Information
     </label>
@@ -800,12 +729,9 @@ footer {
       placeholder="Phone, WhatsApp or email"
       required
     >
-
   </div>
 
-
   <div class="form-group">
-
     <label for="image_url">
       Advertisement Image URL
     </label>
@@ -815,9 +741,7 @@ footer {
       id="image_url"
       placeholder="https://example.com/image.jpg"
     >
-
   </div>
-
 
   <button
     type="submit"
@@ -826,7 +750,6 @@ footer {
   >
     Continue to Payment
   </button>
-
 
   <div id="message"></div>
 
@@ -837,61 +760,37 @@ footer {
   How It Works
 </div>
 
-<h2>
-  A simple advertising process.
-</h2>
+<h2>A simple advertising process.</h2>
 
   </div>  <div class="steps"><div class="step">
+  <div class="step-number">01</div>
 
-  <div class="step-number">
-    01
-  </div>
-
-  <h3>
-    Choose a package
-  </h3>
+  <h3>Choose a package</h3>
 
   <p>
-    Select the advertising package that
-    suits your campaign.
+    Select the advertising package you want.
   </p>
-
 </div>
 
-
 <div class="step">
+  <div class="step-number">02</div>
 
-  <div class="step-number">
-    02
-  </div>
-
-  <h3>
-    Create your campaign
-  </h3>
+  <h3>Create your campaign</h3>
 
   <p>
-    Enter your advertisement information
-    and continue to payment.
+    Enter your advertisement information.
   </p>
-
 </div>
 
-
 <div class="step">
+  <div class="step-number">03</div>
 
-  <div class="step-number">
-    03
-  </div>
-
-  <h3>
-    Get published
-  </h3>
+  <h3>Get published</h3>
 
   <p>
-    After payment and approval, your
-    advertisement can go live.
+    After payment and approval, your advertisement
+    can go live.
   </p>
-
 </div>
 
   </div>
@@ -904,10 +803,11 @@ footer {
   </p>  <p>
     © 2026 Maje AdMarket Pro. All rights reserved.
   </p></footer><script>
+"use strict";
 
-/* =====================================================
-   SUPABASE
-   ===================================================== */
+/* =========================================
+   SUPABASE CONFIGURATION
+   ========================================= */
 
 const SUPABASE_URL =
   "https://rkobepfufwybyaixzgcu.supabase.co";
@@ -915,165 +815,54 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
 
-
-/* =====================================================
-   PAYSTACK EDGE FUNCTION
-   ===================================================== */
+/* =========================================
+   EDGE FUNCTION
+   ========================================= */
 
 const PAYMENT_FUNCTION_URL =
   SUPABASE_URL +
   "/functions/v1/initialize-payment";
 
 
-/* =====================================================
-   PACKAGE VARIABLES
-   ===================================================== */
+/* =========================================
+   PACKAGE STATE
+   ========================================= */
 
 let selectedPackage = "basic";
 let selectedDuration = 7;
 let selectedPrice = 5;
 
 
-/* =====================================================
-   NAVIGATION
-   This function is intentionally independent of
-   Supabase and Paystack.
-   ===================================================== */
+/* =========================================
+   HELPERS
+   ========================================= */
 
-function goTo(sectionId) {
+function scrollToSection(id){
 
-  const section =
-    document.getElementById(sectionId);
+  const element =
+    document.getElementById(id);
 
-  if (!section) {
+  if(!element){
+    console.error("Section not found:", id);
     return;
   }
 
-  section.scrollIntoView({
+  element.scrollIntoView({
     behavior:"smooth",
     block:"start"
   });
 }
 
 
-/* =====================================================
-   PACKAGE SELECTION
-   ===================================================== */
-
-function choosePackage(card) {
-
-  const cards =
-    document.querySelectorAll(
-      ".package-card"
-    );
-
-  cards.forEach(function(item) {
-
-    item.classList.remove(
-      "selected"
-    );
-
-  });
-
-
-  card.classList.add(
-    "selected"
-  );
-
-
-  selectedPackage =
-    card.dataset.package;
-
-  selectedDuration =
-    Number(
-      card.dataset.duration
-    );
-
-  selectedPrice =
-    Number(
-      card.dataset.price
-    );
-
-
-  let name =
-    "Basic";
-
-
-  if (
-    selectedPackage ===
-    "premium"
-  ) {
-
-    name =
-      "Premium";
-
-  }
-
-
-  if (
-    selectedPackage ===
-    "premium_plus"
-  ) {
-
-    name =
-      "Premium Plus";
-
-  }
-
-
-  const selectedText =
-    document.getElementById(
-      "selectedPackageText"
-    );
-
-
-  if (selectedText) {
-
-    selectedText.textContent =
-      name +
-      " — $" +
-      selectedPrice +
-      " — " +
-      selectedDuration +
-      " days";
-
-  }
-
-
-  /*
-    Automatically take the customer
-    to the campaign form.
-  */
-
-  goTo("advertise");
-}
-
-
-/* =====================================================
-   MESSAGE
-   ===================================================== */
-
-function showMessage(
-  text,
-  success
-) {
+function showMessage(text, success=false){
 
   const message =
-    document.getElementById(
-      "message"
-    );
+    document.getElementById("message");
 
+  message.style.display = "block";
+  message.textContent = text;
 
-  if (!message) {
-    return;
-  }
-
-
-  message.style.display =
-    "block";
-
-
-  if (success) {
+  if(success){
 
     message.style.background =
       "rgba(114,168,120,.15)";
@@ -1081,223 +870,338 @@ function showMessage(
     message.style.color =
       "#9bc69f";
 
-  } else {
+  }else{
 
     message.style.background =
       "rgba(214,107,107,.15)";
 
     message.style.color =
       "#e59a9a";
-
   }
-
-
-  message.textContent =
-    text;
 }
 
 
-/* =====================================================
-   FORM
-   ===================================================== */
+/* =========================================
+   ALL SCROLL BUTTONS
+   ========================================= */
 
-const advertisementForm =
+document.querySelectorAll(
+  "[data-scroll]"
+).forEach(function(button){
+
+  button.addEventListener(
+    "click",
+    function(){
+
+      const target =
+        button.getAttribute("data-scroll");
+
+      scrollToSection(target);
+
+    }
+  );
+
+});
+
+
+/* =========================================
+   PACKAGE BUTTONS
+   ========================================= */
+
+const packageCards =
+  document.querySelectorAll(
+    ".package-card"
+  );
+
+const selectedPackageText =
+  document.getElementById(
+    "selectedPackageText"
+  );
+
+
+packageCards.forEach(function(card){
+
+  card.addEventListener(
+    "click",
+    function(){
+
+      packageCards.forEach(
+        function(item){
+          item.classList.remove(
+            "selected"
+          );
+        }
+      );
+
+      card.classList.add("selected");
+
+      selectedPackage =
+        card.dataset.package;
+
+      selectedDuration =
+        Number(card.dataset.duration);
+
+      selectedPrice =
+        Number(card.dataset.price);
+
+
+      let packageName = "Basic";
+
+      if(selectedPackage === "premium"){
+        packageName = "Premium";
+      }
+
+      if(selectedPackage === "premium_plus"){
+        packageName = "Premium Plus";
+      }
+
+
+      selectedPackageText.textContent =
+        packageName +
+        " — $" +
+        selectedPrice +
+        " — " +
+        selectedDuration +
+        " days";
+
+      /* Move user to campaign form */
+      scrollToSection("advertise");
+
+    }
+  );
+
+});
+
+
+/* =========================================
+   LOAD APPROVED ADVERTISEMENTS
+   ========================================= */
+
+async function loadAdvertisements(){
+
+  const container =
+    document.getElementById(
+      "approvedAdvertisements"
+    );
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/advertisements" +
+        "?select=*" +
+        "&payment_status=eq.paid" +
+        "&status=eq.approved",
+        {
+          method:"GET",
+
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+          }
+        }
+      );
+
+
+    if(!response.ok){
+      throw new Error(
+        "Unable to load advertisements"
+      );
+    }
+
+
+    const ads =
+      await response.json();
+
+
+    if(!Array.isArray(ads) ||
+       ads.length === 0){
+
+      container.innerHTML =
+        '<div class="ad-card">' +
+        '<div class="ad-content">' +
+        '<h3>No advertisements yet</h3>' +
+        '<p>Approved campaigns will appear here.</p>' +
+        '</div>' +
+        '</div>';
+
+      return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    ads.forEach(function(ad){
+
+      const card =
+        document.createElement("div");
+
+      card.className = "ad-card";
+
+
+      if(ad.image_url){
+
+        const image =
+          document.createElement("img");
+
+        image.src = ad.image_url;
+        image.alt =
+          ad.advert_title ||
+          "Advertisement";
+
+        image.onerror =
+          function(){
+            image.style.display = "none";
+          };
+
+        card.appendChild(image);
+
+      }
+
+
+      const content =
+        document.createElement(
+          "div"
+        );
+
+      content.className =
+        "ad-content";
+
+
+      if(ad.featured){
+
+        const featured =
+          document.createElement(
+            "div"
+          );
+
+        featured.className =
+          "featured";
+
+        featured.textContent =
+          "Featured";
+
+        content.appendChild(
+          featured
+        );
+      }
+
+
+      const title =
+        document.createElement("h3");
+
+      title.textContent =
+        ad.advert_title ||
+        "Advertisement";
+
+
+      const advertiser =
+        document.createElement("div");
+
+      advertiser.className =
+        "advertiser";
+
+      advertiser.textContent =
+        ad.advertiser_name ||
+        "";
+
+
+      const description =
+        document.createElement("p");
+
+      description.textContent =
+        ad.description ||
+        "";
+
+
+      content.appendChild(title);
+      content.appendChild(advertiser);
+      content.appendChild(description);
+
+      card.appendChild(content);
+
+      container.appendChild(card);
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+
+    container.innerHTML =
+      '<div class="ad-card">' +
+      '<div class="ad-content">' +
+      '<h3>Advertisements unavailable</h3>' +
+      '<p>Please try again later.</p>' +
+      '</div>' +
+      '</div>';
+  }
+}
+
+
+/* =========================================
+   CAMPAIGN FORM
+   ========================================= */
+
+const form =
   document.getElementById(
     "advertisementForm"
   );
 
 
-if (advertisementForm) {
+form.addEventListener(
+  "submit",
+  async function(event){
 
-  advertisementForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
+    event.preventDefault();
 
 
-      const submitButton =
-        document.getElementById(
-          "submitButton"
-        );
+    const submitButton =
+      document.getElementById(
+        "submitButton"
+      );
 
 
-      const email =
-        document.getElementById(
-          "email"
-        ).value.trim();
+    const email =
+      document.getElementById(
+        "email"
+      ).value.trim();
 
 
-      if (!email) {
-
-        showMessage(
-          "Please enter your email address.",
-          false
-        );
-
-        return;
-
-      }
+    const advertiserName =
+      document.getElementById(
+        "advertiser_name"
+      ).value.trim();
 
 
-      submitButton.disabled =
-        true;
-
-      submitButton.textContent =
-        "Connecting to Paystack...";
-
-
-      try {
-
-        /*
-          Send payment request to the
-          Supabase Edge Function.
-        */
-
-        const response =
-          await fetch(
-            PAYMENT_FUNCTION_URL,
-            {
-              method:"POST",
-
-              headers:{
-                "Content-Type":
-                  "application/json",
-
-                "apikey":
-                  SUPABASE_KEY,
-
-                "Authorization":
-                  "Bearer " +
-                  SUPABASE_KEY
-              },
-
-              body:
-                JSON.stringify({
-
-                  amount:
-                    selectedPrice,
-
-                  email:
-                    email
-
-                })
-            }
-          );
+    const advertTitle =
+      document.getElementById(
+        "advert_title"
+      ).value.trim();
 
 
-        const data =
-          await response
-            .json()
-            .catch(function() {
-              return {};
-            });
+    const description =
+      document.getElementById(
+        "description"
+      ).value.trim();
 
 
-        if (!response.ok) {
-
-          throw new Error(
-            data.error ||
-            data.message ||
-            "Payment initialization failed."
-          );
-
-        }
+    const extendedDescription =
+      document.getElementById(
+        "extended_description"
+      ).value.trim();
 
 
-        if (
-          !data.authorization_url
-        ) {
-
-          throw new Error(
-            "Paystack did not return a payment link."
-          );
-
-        }
+    const contact =
+      document.getElementById(
+        "contact"
+      ).value.trim();
 
 
-        /*
-          Save campaign information temporarily
-          before sending the customer to Paystack.
-        */
-
-        const campaign = {
-
-          email:
-            email,
-
-          advertiser_name:
-            document
-              .getElementById(
-                "advertiser_name"
-              )
-              .value.trim(),
-
-          advert_title:
-            document
-              .getElementById(
-                "advert_title"
-              )
-              .value.trim(),
-
-          description:
-            document
-              .getElementById(
-                "description"
-              )
-              .value.trim(),
-
-          extended_description:
-            document
-              .getElementById(
-                "extended_description"
-              )
-              .value.trim(),
-
-          contact:
-            document
-              .getElementById(
-                "contact"
-              )
-              .value.trim(),
-
-          image_url:
-            document
-              .getElementById(
-                "image_url"
-              )
-              .value.trim(),
-
-          package:
-            selectedPackage,
-
-          duration_days:
-            selectedDuration,
-
-          price:
-            selectedPrice,
-
-          reference:
-            data.reference || null
-
-        };
-
-
-        localStorage.setItem(
-          "maje_pending_campaign",
-          JSON.stringify(campaign)
-        );
-
-
-        /*
-          Open Paystack checkout.
-        */
-
-        window.location.href =
-          data.authorization_url;
-
-      }
-
-      catch(error) {
-
-        console.err      
+    const imageUrl =
+      document.getElementById(
+        "ima      
