@@ -1,398 +1,894 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advertisement | Maje AdMarket Pro</title>  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #222;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Maje AdMarket Pro</title>
 
-    header {
-      background: #111827;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
+<style>
+:root{
+  --bg:#101111;
+  --surface:#191b1b;
+  --surface2:#222424;
+  --gold:#c9a45c;
+  --gold2:#e0c17a;
+  --text:#f4f1e9;
+  --muted:#aaa69c;
+  --border:#383936;
+}
 
-    header h1 {
-      margin: 0;
-    }
+*{box-sizing:border-box}
 
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 20px;
-    }
+html{scroll-behavior:smooth}
 
-    .ad {
-      background: white;
-      padding: 25px;
-      border-radius: 14px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.08);
-    }
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
 
-    .ad h2 {
-      margin-top: 0;
-      font-size: 30px;
-    }
+button,input,textarea,select{
+  font-family:inherit;
+}
 
-    .ad img {
-      width: 100%;
-      max-height: 450px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin: 20px 0;
-    }
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(16,17,17,.97);
+  border-bottom:1px solid var(--border);
+}
 
-    .description {
-      line-height: 1.7;
-      font-size: 17px;
-    }
+.nav-inner{
+  max-width:1150px;
+  margin:auto;
+  padding:17px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-    .contact {
-      margin-top: 20px;
-      padding: 15px;
-      background: #f3f4f6;
-      border-radius: 8px;
-      font-weight: bold;
-    }
+.logo{
+  color:var(--text);
+  font-size:21px;
+  font-weight:800;
+}
 
-    .share {
-      margin-top: 30px;
-    }
+.logo span{
+  color:var(--gold);
+}
 
-    .share button {
-      border: none;
-      padding: 12px 17px;
-      margin: 5px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+.nav-btn{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--muted);
+  padding:9px 14px;
+  border-radius:7px;
+  cursor:pointer;
+}
 
-    .whatsapp {
-      background: #25D366;
-      color: white;
-    }
+.nav-btn:hover{
+  color:var(--gold2);
+  border-color:var(--gold);
+}
 
-    .facebook {
-      background: #1877F2;
-      color: white;
-    }
+.section{
+  max-width:1150px;
+  margin:auto;
+  padding:70px 22px;
+}
 
-    .x {
-      background: #111827;
-      color: white;
-    }
+.section-label{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:11px;
+  font-weight:800;
+}
 
-    .copy {
-      background: #e5e7eb;
-      color: #111827;
-    }
+h1{
+  margin:8px 0 12px;
+  font-size:clamp(34px,5vw,52px);
+  line-height:1.1;
+}
 
-    .back {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 12px 18px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
+.section-description{
+  color:var(--muted);
+  max-width:700px;
+}
 
-    #status {
-      text-align: center;
-      padding: 30px;
-      background: white;
-      border-radius: 12px;
-    }
-  </style></head><body><header>
-  <h1>Maje AdMarket Pro</h1>
-  <p>Advertise. Reach More People. Grow Your Business.</p>
-</header><div class="container">  <div id="status">
-    Loading advertisement...
-  </div></div><script>
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:35px;
+}
 
-  const SUPABASE_URL =
-    "https://rkobepfufwybyaixzgcu.supabase.co";
+.stat-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:25px;
+}
 
-  const SUPABASE_KEY =
-    "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
+.stat-number{
+  color:var(--gold2);
+  font-size:36px;
+  font-weight:900;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:35px 0 20px;
+}
+
+.filter-btn{
+  padding:10px 17px;
+  border-radius:7px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--muted);
+  cursor:pointer;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+  background:var(--gold);
+  color:#151515;
+  border-color:var(--gold);
+}
+
+.ad-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  margin-bottom:18px;
+  overflow:hidden;
+}
+
+.ad-content{
+  padding:26px;
+}
+
+.ad-content h2{
+  margin:0 0 4px;
+}
+
+.advertiser{
+  color:var(--gold2);
+  font-size:13px;
+  font-weight:700;
+}
+
+.ad-description{
+  color:var(--muted);
+  margin:15px 0;
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.badge{
+  padding:5px 9px;
+  border-radius:5px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  color:var(--muted);
+  font-size:11px;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+.action-btn{
+  padding:11px 17px;
+  border-radius:7px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.approve-btn{
+  background:var(--gold);
+  color:#151515;
+  border:0;
+}
+
+.approve-btn:hover{
+  background:var(--gold2);
+}
+
+.view-btn{
+  background:transparent;
+  color:var(--gold2);
+  border:1px solid var(--gold);
+}
+
+.view-btn:hover{
+  background:var(--gold);
+  color:#151515;
+}
+
+.delete-btn{
+  background:#321c1c;
+  color:#e59a9a;
+  border:1px solid #553333;
+}
+
+.delete-btn:hover{
+  background:#482222;
+}
+
+.message{
+  display:none;
+  margin:20px 0;
+  padding:13px;
+  border-radius:7px;
+  background:rgba(201,164,92,.12);
+  border:1px solid rgba(201,164,92,.3);
+  color:var(--gold2);
+}
+
+.loading,
+.empty{
+  text-align:center;
+  padding:50px 20px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  color:var(--muted);
+}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:45px 22px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.footer-brand{
+  color:var(--gold);
+  font-weight:900;
+}
+
+@media(max-width:700px){
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .section{
+    padding:55px 18px;
+  }
+
+  .nav-inner{
+    padding:15px 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+
+    <div class="logo">
+      Maje <span>AdMarket Pro</span>
+    </div>
+
+    <button
+      class="nav-btn"
+      type="button"
+      onclick="window.location.href='index.html'"
+    >
+      Main Website
+    </button>
+
+  </div>
+</nav>
 
 
-  function escapeHTML(value) {
-    const div = document.createElement("div");
-    div.textContent = value || "";
-    return div.innerHTML;
+<main class="section">
+
+  <div class="section-label">
+    Administration
+  </div>
+
+  <h1>
+    Advertisement Management
+  </h1>
+
+  <p class="section-description">
+    Review and manage advertisements submitted to
+    Maje AdMarket Pro.
+  </p>
+
+
+  <div id="message" class="message"></div>
+
+
+  <div class="stats">
+
+    <div class="stat-card">
+      <div id="totalCount" class="stat-number">0</div>
+      <div class="stat-label">
+        Total advertisements
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div id="pendingCount" class="stat-number">0</div>
+      <div class="stat-label">
+        Pending review
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div id="approvedCount" class="stat-number">0</div>
+      <div class="stat-label">
+        Approved
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="toolbar">
+
+    <button
+      class="filter-btn active"
+      data-filter="all"
+      type="button"
+    >
+      All
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="pending"
+      type="button"
+    >
+      Pending
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="approved"
+      type="button"
+    >
+      Approved
+    </button>
+
+  </div>
+
+
+  <div id="advertisements">
+
+    <div class="loading">
+      Loading advertisements...
+    </div>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <p>
+    <span class="footer-brand">
+      Maje AdMarket Pro
+    </span>
+  </p>
+
+  <p>
+    Professional digital advertising marketplace.
+  </p>
+
+  <p>
+    © 2026 Maje AdMarket Pro. All rights reserved.
+  </p>
+
+</footer>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://rkobepfufwybyaixzgcu.supabase.co";
+
+/*
+Replace this with your Supabase PUBLISHABLE/ANON key.
+Do NOT put your Paystack secret key here.
+*/
+const SUPABASE_KEY =
+"sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
+
+
+let advertisements = [];
+let currentFilter = "all";
+
+
+const container =
+document.getElementById("advertisements");
+
+
+function escapeHTML(value){
+
+  const div =
+  document.createElement("div");
+
+  div.textContent =
+  value || "";
+
+  return div.innerHTML;
+}
+
+
+function showMessage(text){
+
+  const message =
+  document.getElementById("message");
+
+  message.textContent =
+  text;
+
+  message.style.display =
+  "block";
+
+  setTimeout(function(){
+
+    message.style.display =
+    "none";
+
+  },3500);
+}
+
+
+function updateStats(){
+
+  const total =
+  advertisements.length;
+
+  const pending =
+  advertisements.filter(
+    ad => ad.status !== "approved"
+  ).length;
+
+  const approved =
+  advertisements.filter(
+    ad => ad.status === "approved"
+  ).length;
+
+  document.getElementById(
+    "totalCount"
+  ).textContent = total;
+
+  document.getElementById(
+    "pendingCount"
+  ).textContent = pending;
+
+  document.getElementById(
+    "approvedCount"
+  ).textContent = approved;
+}
+
+
+function renderAdvertisements(){
+
+  let list =
+  advertisements;
+
+  if(currentFilter === "pending"){
+
+    list =
+    advertisements.filter(
+      ad => ad.status !== "approved"
+    );
+
+  }
+
+  if(currentFilter === "approved"){
+
+    list =
+    advertisements.filter(
+      ad => ad.status === "approved"
+    );
+
   }
 
 
-  async function loadAdvertisement() {
+  if(!list.length){
 
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
+    container.innerHTML =
+    '<div class="empty">' +
+    'No advertisements found.' +
+    '</div>';
 
-    const id =
-      params.get("id");
+    return;
+  }
+
+
+  container.innerHTML = "";
+
+
+  list.forEach(function(ad){
+
+    const card =
+    document.createElement("article");
+
+    card.className =
+    "ad-card";
+
 
     const status =
-      document.getElementById("status");
+    ad.status || "pending";
 
 
-    if (!id) {
+    card.innerHTML = `
 
-      status.innerHTML =
-        "Advertisement not found.";
+      <div class="ad-content">
 
-      return;
-    }
+        <h2>
+          ${escapeHTML(
+            ad.advert_title ||
+            "Advertisement"
+          )}
+        </h2>
 
+        <div class="advertiser">
+          ${escapeHTML(
+            ad.advertiser_name || ""
+          )}
+        </div>
 
-    try {
+        <p class="ad-description">
+          ${escapeHTML(
+            ad.description || ""
+          )}
+        </p>
 
-      const response =
-        await fetch(
-          SUPABASE_URL +
-          "/rest/v1/advertisements" +
-          "?select=*" +
-          "&id=eq." +
-          encodeURIComponent(id) +
-          "&status=eq.approved" +
-          "&limit=1",
-          {
-            headers: {
-              "apikey": SUPABASE_KEY,
-              "Authorization":
-                "Bearer " + SUPABASE_KEY
-            }
-          }
-        );
+        <div class="meta">
 
+          <span class="badge">
+            Status: ${escapeHTML(status)}
+          </span>
 
-      if (!response.ok) {
-        throw new Error(
-          await response.text()
-        );
-      }
+          <span class="badge">
+            Package:
+            ${escapeHTML(ad.package || "")}
+          </span>
 
-
-      const ads =
-        await response.json();
-
-
-      if (ads.length === 0) {
-
-        status.innerHTML =
-          "This advertisement is not available.";
-
-        return;
-      }
-
-
-      const ad =
-        ads[0];
-
-
-      const image =
-        ad.image_url
-          ? `
-            <img
-              src="${escapeHTML(ad.image_url)}"
-              alt="Advertisement image"
-            >
-          `
-          : "";
-
-
-      const extended =
-        ad.extended_description
-          ? `
-            <p>
-              ${escapeHTML(
-                ad.extended_description
-              )}
-            </p>
-          `
-          : "";
-
-
-      status.outerHTML = `
-
-        <article class="ad">
-
-          <h2>
+          <span class="badge">
+            Payment:
             ${escapeHTML(
-              ad.advert_title ||
-              "Advertisement"
+              ad.payment_status || "unpaid"
             )}
-          </h2>
+          </span>
 
-          <p>
-            <strong>
-              ${escapeHTML(
-                ad.advertiser_name ||
-                ""
-              )}
-            </strong>
-          </p>
+        </div>
 
-          ${image}
+        <div class="actions">
 
-          <div class="description">
-
-            <p>
-              ${escapeHTML(
-                ad.description ||
-                ""
-              )}
-            </p>
-
-            ${extended}
-
-          </div>
-
-          <div class="contact">
-            Contact:
-            ${escapeHTML(
-              ad.contact ||
-              ""
-            )}
-          </div>
-
-          <div class="share">
-
-            <h3>
-              Share this advertisement
-            </h3>
-
-            <button
-              class="whatsapp"
-              onclick="shareWhatsApp()"
-            >
-              WhatsApp
-            </button>
-
-            <button
-              class="facebook"
-              onclick="shareFacebook()"
-            >
-              Facebook
-            </button>
-
-            <button
-              class="x"
-              onclick="shareX()"
-            >
-              X
-            </button>
-
-            <button
-              class="copy"
-              onclick="copyLink()"
-            >
-              Copy Link
-            </button>
-
-          </div>
-
-          <a
-            href="index.html"
-            class="back"
+          <button
+            class="action-btn view-btn"
+            type="button"
           >
-            Back to Maje AdMarket Pro
-          </a>
+            View Advertisement
+          </button>
 
-        </article>
-      `;
+          ${
+            status !== "approved"
+            ?
+            `<button
+              class="action-btn approve-btn"
+              type="button"
+            >
+              Approve
+            </button>`
+            :
+            ""
+          }
 
-    } catch (error) {
+          <button
+            class="action-btn delete-btn"
+            type="button"
+          >
+            Delete
+          </button>
 
-      console.error(error);
+        </div>
 
-      status.innerHTML =
-        "Unable to load this advertisement.";
-
-    }
-
-  }
+      </div>
+    `;
 
 
-  function shareWhatsApp() {
+    card
+    .querySelector(".view-btn")
+    .addEventListener(
+      "click",
+      function(){
 
-    const url =
-      "https://wa.me/?text=" +
-      encodeURIComponent(
-        "Check out this advertisement on Maje AdMarket Pro: " +
-        window.location.href
-      );
+        window.location.href =
+        "ad.html?id=" +
+        encodeURIComponent(ad.id);
 
-    window.open(
-      url,
-      "_blank"
+      }
     );
-  }
 
 
-  function shareFacebook() {
-
-    const url =
-      "https://www.facebook.com/sharer/sharer.php?u=" +
-      encodeURIComponent(
-        window.location.href
-      );
-
-    window.open(
-      url,
-      "_blank"
-    );
-  }
+    const approve =
+    card.querySelector(".approve-btn");
 
 
-  function shareX() {
+    if(approve){
 
-    const url =
-      "https://twitter.com/intent/tweet?url=" +
-      encodeURIComponent(
-        window.location.href
-      );
+      approve.addEventListener(
+        "click",
+        function(){
 
-    window.open(
-      url,
-      "_blank"
-    );
-  }
+          approveAdvertisement(
+            ad.id
+          );
 
-
-  async function copyLink() {
-
-    try {
-
-      await navigator.clipboard.writeText(
-        window.location.href
-      );
-
-      alert(
-        "Advertisement link copied!"
-      );
-
-    } catch (error) {
-
-      alert(
-        "Copy the link from your browser address bar."
+        }
       );
 
     }
 
+
+    card
+    .querySelector(".delete-btn")
+    .addEventListener(
+      "click",
+      function(){
+
+        deleteAdvertisement(
+          ad.id
+        );
+
+      }
+    );
+
+
+    container.appendChild(card);
+
+  });
+}
+
+
+async function loadAdvertisements(){
+
+  try{
+
+    const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/advertisements" +
+      "?select=*" +
+      "&order=created_at.desc",
+      {
+        headers:{
+          "apikey":
+          SUPABASE_KEY,
+
+          "Authorization":
+          "Bearer " +
+          SUPABASE_KEY
+        }
+      }
+    );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        await response.text()
+      );
+
+    }
+
+
+    advertisements =
+    await response.json();
+
+    updateStats();
+
+    renderAdvertisements();
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    container.innerHTML =
+    '<div class="empty">' +
+    'Advertisements could not be loaded.' +
+    '</div>';
+
+  }
+}
+
+
+async function approveAdvertisement(id){
+
+  try{
+
+    const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/advertisements" +
+      "?id=eq." +
+      encodeURIComponent(id),
+      {
+        method:"PATCH",
+
+        headers:{
+          "Content-Type":
+          "application/json",
+
+          "apikey":
+          SUPABASE_KEY,
+
+          "Authorization":
+          "Bearer " +
+          SUPABASE_KEY,
+
+          "Prefer":
+          "return=minimal"
+        },
+
+        body:JSON.stringify({
+          status:"approved"
+        })
+      }
+    );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        await response.text()
+      );
+
+    }
+
+
+    showMessage(
+      "Advertisement approved successfully."
+    );
+
+    await loadAdvertisements();
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Could not approve advertisement."
+    );
+
+  }
+}
+
+
+async function deleteAdvertisement(id){
+
+  if(
+    !confirm(
+      "Delete this advertisement?"
+    )
+  ){
+    return;
   }
 
 
-  loadAdvertisement();
+  try{
 
-</script></body>
+    const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/advertisements" +
+      "?id=eq." +
+      encodeURIComponent(id),
+      {
+        method:"DELETE",
+
+        headers:{
+          "apikey":
+          SUPABASE_KEY,
+
+          "Authorization":
+          "Bearer " +
+          SUPABASE_KEY
+        }
+      }
+    );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        await response.text()
+      );
+
+    }
+
+
+    showMessage(
+      "Advertisement deleted."
+    );
+
+    await loadAdvertisements();
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Could not delete advertisement."
+    );
+
+  }
+}
+
+
+document
+.querySelectorAll(".filter-btn")
+.forEach(function(button){
+
+  button.addEventListener(
+    "click",
+    function(){
+
+      document
+      .querySelectorAll(".filter-btn")
+      .forEach(function(item){
+
+        item.classList.remove(
+          "active"
+        );
+
+      });
+
+
+      button.classList.add(
+        "active"
+      );
+
+
+      currentFilter =
+      button.dataset.filter;
+
+      renderAdvertisements();
+
+    }
+  );
+
+});
+
+
+loadAdvertisements();
+
+</script>
+
+</body>
   </html>
