@@ -1,373 +1,1206 @@
-<!-- INDIVIDUAL ADVERTISEMENT PAGE -->
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maje AdMarket Pro</title><style>
+:root {
+  --bg:#101111;
+  --surface:#191b1b;
+  --surface2:#222424;
+  --gold:#c9a45c;
+  --gold2:#e0c17a;
+  --text:#f4f1e9;
+  --muted:#aaa69c;
+  --border:#383936;
+  --green:#3fa66b;
+}
 
-<section id="adPage" class="ad-page">
+* {
+  box-sizing:border-box;
+}
 
-  <div class="container">
+html {
+  scroll-behavior:smooth;
+}
 
-    <button
-      type="button"
-      class="secondary"
-      id="backToAds"
-    >
-      ← Back to Advertisements
-    </button>
+body {
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
 
-    <div
-      class="card"
-      id="singleAd"
-      style="margin-top:20px"
-    ></div>
+button,
+input,
+textarea {
+  font-family:inherit;
+}
+
+button {
+  cursor:pointer;
+}
+
+.navbar {
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(16,17,17,.97);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-inner {
+  max-width:1150px;
+  margin:auto;
+  padding:17px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo {
+  font-size:21px;
+  font-weight:800;
+}
+
+.logo span {
+  color:var(--gold);
+}
+
+.nav-buttons {
+  display:flex;
+  gap:8px;
+}
+
+.nav-btn {
+  background:transparent;
+  border:0;
+  color:var(--muted);
+  padding:9px 12px;
+  border-radius:6px;
+}
+
+.nav-btn:hover {
+  background:var(--surface);
+  color:var(--gold2);
+}
+
+.hero {
+  min-height:600px;
+  display:flex;
+  align-items:center;
+  background:
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(201,164,92,.15),
+      transparent 32%
+    ),
+    linear-gradient(135deg,#101111,#191b1b);
+}
+
+.hero-inner {
+  width:100%;
+  max-width:1150px;
+  margin:auto;
+  padding:80px 22px;
+}
+
+.badge {
+  display:inline-block;
+  padding:7px 12px;
+  border:1px solid rgba(201,164,92,.45);
+  border-radius:30px;
+  color:var(--gold2);
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.hero h1 {
+  max-width:820px;
+  margin:22px 0 18px;
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.04;
+}
+
+.hero h1 span {
+  color:var(--gold);
+}
+
+.hero-text {
+  max-width:650px;
+  color:var(--muted);
+  font-size:18px;
+}
+
+.button-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:30px;
+}
+
+.main-btn {
+  border:0;
+  border-radius:7px;
+  padding:14px 22px;
+  font-weight:800;
+  font-size:14px;
+  transition:.2s;
+}
+
+.main-btn.gold {
+  background:var(--gold);
+  color:#151515;
+}
+
+.main-btn.gold:hover {
+  background:var(--gold2);
+  transform:translateY(-1px);
+}
+
+.main-btn.outline {
+  background:transparent;
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.main-btn.outline:hover {
+  border-color:var(--gold);
+  color:var(--gold2);
+}
+
+.section {
+  max-width:1150px;
+  margin:auto;
+  padding:80px 22px;
+}
+
+.section-label {
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.section-heading {
+  max-width:720px;
+  margin-bottom:38px;
+}
+
+.section h2 {
+  margin:8px 0 12px;
+  font-size:clamp(30px,5vw,46px);
+}
+
+.section-description {
+  color:var(--muted);
+}
+
+.packages {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.package-card {
+  position:relative;
+  width:100%;
+  min-height:270px;
+  text-align:left;
+  background:var(--surface);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:30px;
+  transition:.2s;
+}
+
+.package-card:hover {
+  border-color:var(--gold);
+  transform:translateY(-3px);
+}
+
+.package-card.selected {
+  border-color:var(--gold);
+  box-shadow:0 0 0 1px var(--gold);
+}
+
+.package-name {
+  color:var(--gold2);
+  font-weight:800;
+}
+
+.package-price {
+  margin:12px 0 2px;
+  font-size:40px;
+  font-weight:900;
+}
+
+.package-duration {
+  color:var(--muted);
+}
+
+.package-card ul {
+  padding:0;
+  margin:22px 0 0;
+  list-style:none;
+}
+
+.package-card li {
+  padding:7px 0;
+  border-bottom:1px solid var(--border);
+  color:#c5c1b8;
+  font-size:13px;
+}
+
+.ads-section {
+  background:#0d0e0e;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.ads-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.ad-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.ad-card img {
+  width:100%;
+  max-height:300px;
+  object-fit:cover;
+  display:block;
+}
+
+.ad-content {
+  padding:24px;
+}
+
+.ad-content h3 {
+  margin-top:0;
+}
+
+.advertiser {
+  color:var(--gold2);
+  font-size:13px;
+  font-weight:700;
+}
+
+.ad-description {
+  color:var(--muted);
+}
+
+.ad-meta {
+  color:var(--muted);
+  font-size:13px;
+}
+
+.featured {
+  display:inline-block;
+  margin-bottom:10px;
+  padding:5px 9px;
+  border:1px solid rgba(201,164,92,.5);
+  color:var(--gold2);
+  border-radius:4px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.form-wrapper {
+  max-width:780px;
+  margin:auto;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:35px;
+}
+
+.form-group {
+  margin-bottom:20px;
+}
+
+.form-group label {
+  display:block;
+  margin-bottom:8px;
+  font-size:13px;
+  font-weight:800;
+}
+
+input,
+textarea {
+  width:100%;
+  padding:13px;
+  background:#111313;
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:7px;
+  outline:none;
+  font-size:15px;
+}
+
+input:focus,
+textarea:focus {
+  border-color:var(--gold);
+}
+
+textarea {
+  min-height:130px;
+  resize:vertical;
+}
+
+.selected-package {
+  padding:12px 15px;
+  margin-bottom:20px;
+  border:1px solid rgba(201,164,92,.35);
+  border-radius:7px;
+  background:#151616;
+  color:var(--gold2);
+  font-weight:700;
+}
+
+.message {
+  display:none;
+  margin-top:18px;
+  padding:13px;
+  border-radius:7px;
+}
+
+.ad-page {
+  display:none;
+  background:#0d0e0e;
+  min-height:100vh;
+  padding:50px 0;
+}
+
+.ad-page-card {
+  max-width:850px;
+  margin:auto;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:30px;
+}
+
+.ad-page-image {
+  width:100%;
+  max-height:500px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.share-box {
+  margin-top:30px;
+  padding-top:25px;
+  border-top:1px solid var(--border);
+}
+
+.share-buttons {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:15px;
+}
+
+.share-buttons button {
+  border:0;
+  padding:12px 17px;
+  border-radius:7px;
+  font-weight:800;
+}
+
+.whatsapp {
+  background:#25D366;
+  color:white;
+}
+
+.instagram {
+  background:#d62976;
+  color:white;
+}
+
+.facebook {
+  background:#1877F2;
+  color:white;
+}
+
+.x {
+  background:#000;
+  color:white;
+  border:1px solid #444 !important;
+}
+
+.copy {
+  background:var(--gold);
+  color:#111;
+}
+
+.back {
+  background:transparent;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:10px 15px;
+  border-radius:7px;
+  margin-bottom:20px;
+}
+
+.views {
+  color:var(--muted);
+  font-size:13px;
+}
+
+.steps {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.step {
+  padding:28px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+}
+
+.step-number {
+  color:var(--gold);
+  font-weight:900;
+}
+
+.step p {
+  color:var(--muted);
+}
+
+footer {
+  border-top:1px solid var(--border);
+  padding:45px 22px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.footer-brand {
+  color:var(--gold);
+  font-weight:900;
+}
+
+@media(max-width:800px) {
+  .nav-buttons {
+    display:none;
+  }
+
+  .packages,
+  .ads-grid,
+  .steps {
+    grid-template-columns:1fr;
+  }
+
+  .form-wrapper {
+    padding:22px;
+  }
+
+  .section {
+    padding:60px 22px;
+  }
+}
+</style></head><body><nav class="navbar">
+  <div class="nav-inner"><div class="logo">
+  Maje <span>AdMarket Pro</span>
+</div>
+
+<div class="nav-buttons">
+
+  <button type="button" class="nav-btn" onclick="goTo('packages')">
+    Packages
+  </button>
+
+  <button type="button" class="nav-btn" onclick="goTo('advertisements')">
+    Advertisements
+  </button>
+
+  <button type="button" class="nav-btn" onclick="goTo('advertise')">
+    Create Campaign
+  </button>
+
+</div>
+
+  </div>
+</nav><section class="hero">  <div class="hero-inner"><div class="badge">
+  Professional Digital Advertising
+</div>
+
+<h1>
+  Put your brand
+  <span>where people see it.</span>
+</h1>
+
+<p class="hero-text">
+  Maje AdMarket Pro gives businesses a professional
+  way to promote products and services online.
+</p>
+
+<div class="button-row">
+
+  <button
+    type="button"
+    class="main-btn gold"
+    onclick="goTo('advertise')"
+  >
+    Start a Campaign
+  </button>
+
+  <button
+    type="button"
+    class="main-btn outline"
+    onclick="goTo('advertisements')"
+  >
+    Explore Advertisements
+  </button>
+
+</div>
+
+  </div></section><section class="section" id="packages">  <div class="section-heading"><div class="section-label">
+  Advertising Packages
+</div>
+
+<h2>Choose your campaign.</h2>
+
+<p class="section-description">
+  Select the package you want for your advertisement.
+</p>
+
+  </div>  <div class="packages"><button
+  type="button"
+  class="package-card selected"
+  data-package="basic"
+  data-duration="7"
+  data-price="5"
+  onclick="selectPackage(this)"
+>
+
+  <div class="package-name">Basic</div>
+
+  <div class="package-price">$5</div>
+
+  <div class="package-duration">7 days</div>
+
+  <ul>
+    <li>Standard advertisement placement</li>
+    <li>Advertisement page</li>
+    <li>Shareable advertisement link</li>
+  </ul>
+
+</button>
+
+<button
+  type="button"
+  class="package-card"
+  data-package="premium"
+  data-duration="14"
+  data-price="10"
+  onclick="selectPackage(this)"
+>
+
+  <div class="package-name">Premium</div>
+
+  <div class="package-price">$10</div>
+
+  <div class="package-duration">14 days</div>
+
+  <ul>
+    <li>Featured advertisement</li>
+    <li>Higher visibility</li>
+    <li>Shareable advertisement link</li>
+  </ul>
+
+</button>
+
+<button
+  type="button"
+  class="package-card"
+  data-package="premium_plus"
+  data-duration="30"
+  data-price="20"
+  onclick="selectPackage(this)"
+>
+
+  <div class="package-name">Premium Plus</div>
+
+  <div class="package-price">$20</div>
+
+  <div class="package-duration">30 days</div>
+
+  <ul>
+    <li>Top featured placement</li>
+    <li>Maximum campaign duration</li>
+    <li>Shareable advertisement link</li>
+  </ul>
+
+</button>
+
+  </div></section><section class="ads-section" id="advertisements">  <div class="section"><div class="section-heading">
+
+  <div class="section-label">
+    Live Campaigns
+  </div>
+
+  <h2>Approved advertisements.</h2>
+
+  <p class="section-description">
+    Explore businesses currently promoted on
+    Maje AdMarket Pro.
+  </p>
+
+</div>
+
+<div
+  class="ads-grid"
+  id="approvedAdvertisements"
+>
+  Loading advertisements...
+</div>
+
+  </div></section><section class="section" id="advertise">  <div class="section-heading"><div class="section-label">
+  Create Campaign
+</div>
+
+<h2>Submit your advertisement.</h2>
+
+<p class="section-description">
+  Provide your advertisement information.
+  Your campaign can then be reviewed by the administrator.
+</p>
+
+  </div>  <div class="form-wrapper"><form id="advertisementForm">
+
+  <div class="selected-package">
+
+    Selected package:
+
+    <span id="selectedPackageText">
+      Basic — $5 — 7 days
+    </span>
 
   </div>
 
-</section>
+  <div class="form-group">
 
-<script>
+    <label for="advertiser_name">
+      Advertiser or Business Name
+    </label>
 
-/* =========================================
-   OPEN UNIQUE ADVERTISEMENT
-========================================= */
+    <input
+      id="advertiser_name"
+      type="text"
+      required
+      placeholder="Business name"
+    >
 
-function openAdvertisement(id) {
+  </div>
 
-  const ads = getAds();
+  <div class="form-group">
 
-  const ad = ads.find(function(item) {
-    return item.id === id;
+    <label for="advert_title">
+      Advertisement Title
+    </label>
+
+    <input
+      id="advert_title"
+      type="text"
+      required
+      placeholder="Advertisement title"
+    >
+
+  </div>
+
+  <div class="form-group">
+
+    <label for="description">
+      Description
+    </label>
+
+    <textarea
+      id="description"
+      required
+      placeholder="Describe your product or service"
+    ></textarea>
+
+  </div>
+
+  <div class="form-group">
+
+    <label for="extended_description">
+      Extended Description
+    </label>
+
+    <textarea
+      id="extended_description"
+      placeholder="Additional information"
+    ></textarea>
+
+  </div>
+
+  <div class="form-group">
+
+    <label for="contact">
+      Contact
+    </label>
+
+    <input
+      id="contact"
+      type="text"
+      required
+      placeholder="Phone, WhatsApp or email"
+    >
+
+  </div>
+
+  <div class="form-group">
+
+    <label for="image_url">
+      Image URL
+    </label>
+
+    <input
+      id="image_url"
+      type="url"
+      placeholder="https://example.com/image.jpg"
+    >
+
+  </div>
+
+  <button
+    type="submit"
+    class="main-btn gold"
+  >
+    Submit Advertisement
+  </button>
+
+  <div
+    class="message"
+    id="formMessage"
+  ></div>
+
+</form>
+
+  </div></section><section
+  class="ad-page"
+  id="adPage"
+>  <div class="section"><button
+  type="button"
+  class="back"
+  onclick="closeAdvertisement()"
+>
+  ← Back to Advertisements
+</button>
+
+<div
+  class="ad-page-card"
+  id="singleAd"
+></div>
+
+  </div></section><section class="section">  <div class="section-heading"><div class="section-label">
+  How It Works
+</div>
+
+<h2>
+  A simple advertising process.
+</h2>
+
+  </div>  <div class="steps"><div class="step">
+  <div class="step-number">01</div>
+  <h3>Choose a package</h3>
+  <p>Select the package that fits your campaign.</p>
+</div>
+
+<div class="step">
+  <div class="step-number">02</div>
+  <h3>Create your campaign</h3>
+  <p>Submit your advertisement information.</p>
+</div>
+
+<div class="step">
+  <div class="step-number">03</div>
+  <h3>Get published</h3>
+  <p>Approved advertisements become publicly visible.</p>
+</div>
+
+  </div></section><footer>  <p>
+    <span class="footer-brand">
+      Maje AdMarket Pro
+    </span>
+  </p>  <p>
+    Professional digital advertising marketplace.
+  </p>  <p>
+    © 2026 Maje AdMarket Pro. All rights reserved.
+  </p></footer><script>
+
+const SUPABASE_URL =
+  "https://rkobepfufwybyaixzgcu.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
+
+
+let selectedPackage = "basic";
+let selectedDuration = 7;
+let selectedPrice = 5;
+
+
+/* ================================
+   NAVIGATION
+================================ */
+
+function goTo(id) {
+
+  const element =
+    document.getElementById(id);
+
+  if (!element) return;
+
+  element.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
   });
-
-  if (!ad) {
-    alert("Advertisement not found.");
-    return;
-  }
-
-  const page = document.getElementById("adPage");
-  const single = document.getElementById("singleAd");
-
-  let imageHTML = "";
-
-  if (ad.image) {
-    imageHTML =
-      '<img src="' +
-      escapeHTML(ad.image) +
-      '" ' +
-      'alt="Advertisement" ' +
-      'style="width:100%;max-height:400px;object-fit:cover;border-radius:10px">';
-  }
-
-  single.innerHTML =
-
-    imageHTML +
-
-    '<div style="margin-top:20px">' +
-
-      '<div class="ad-business">' +
-        escapeHTML(ad.business) +
-      '</div>' +
-
-      '<h2>' +
-        escapeHTML(ad.title) +
-      '</h2>' +
-
-      '<p>' +
-        escapeHTML(ad.description) +
-      '</p>' +
-
-      '<p>' +
-        '<strong>Contact:</strong> ' +
-        escapeHTML(ad.contact) +
-      '</p>' +
-
-      '<p>' +
-        '<strong>Package:</strong> ' +
-        escapeHTML(ad.package) +
-      '</p>' +
-
-    '</div>' +
-
-    '<div class="share-box">' +
-
-      '<strong>Share this advertisement</strong>' +
-
-      '<div class="share-buttons">' +
-
-        '<button ' +
-          'type="button" ' +
-          'id="whatsappShare">' +
-          'WhatsApp' +
-        '</button>' +
-
-        '<button ' +
-          'type="button" ' +
-          'id="instagramShare">' +
-          'Instagram' +
-        '</button>' +
-
-        '<button ' +
-          'type="button" ' +
-          'id="facebookShare">' +
-          'Facebook' +
-        '</button>' +
-
-        '<button ' +
-          'type="button" ' +
-          'id="xShare">' +
-          'X / Twitter' +
-        '</button>' +
-
-        '<button ' +
-          'type="button" ' +
-          'class="secondary" ' +
-          'id="copyLink">' +
-          'Copy Link' +
-        '</button>' +
-
-      '</div>' +
-
-    '</div>';
-
-
-  page.style.display = "block";
-
-  page.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-
-
-  /*
-     UNIQUE LINK FOR THIS ADVERTISEMENT
-  */
-
-  const shareUrl =
-    window.location.href.split("#")[0] +
-    "#ad=" +
-    encodeURIComponent(ad.id);
-
-
-  /*
-     WHATSAPP
-  */
-
-  document
-    .getElementById("whatsappShare")
-    .onclick = function() {
-
-      const url =
-        "https://wa.me/?text=" +
-        encodeURIComponent(
-          ad.title +
-          " - " +
-          shareUrl
-        );
-
-      window.open(url, "_blank");
-
-    };
-
-
-  /*
-     INSTAGRAM
-     
-     Instagram does not provide the same
-     normal web-share URL as Facebook.
-     Use the Android/native share menu.
-  */
-
-  document
-    .getElementById("instagramShare")
-    .onclick = async function() {
-
-      await shareForSocialApp(
-        ad,
-        shareUrl,
-        "Instagram"
-      );
-
-    };
-
-
-  /*
-     FACEBOOK
-  */
-
-  document
-    .getElementById("facebookShare")
-    .onclick = function() {
-
-      const url =
-        "https://www.facebook.com/sharer/sharer.php?u=" +
-        encodeURIComponent(shareUrl);
-
-      window.open(url, "_blank");
-
-    };
-
-
-  /*
-     X / TWITTER
-  */
-
-  document
-    .getElementById("xShare")
-    .onclick = function() {
-
-      const url =
-        "https://twitter.com/intent/tweet?text=" +
-        encodeURIComponent(ad.title) +
-        "&url=" +
-        encodeURIComponent(shareUrl);
-
-      window.open(url, "_blank");
-
-    };
-
-
-  /*
-     COPY LINK
-  */
-
-  document
-    .getElementById("copyLink")
-    .onclick = function() {
-
-      copyToClipboard(shareUrl);
-
-    };
 
 }
 
 
-/* =========================================
-   INSTAGRAM / NATIVE SHARING
-========================================= */
+/* ================================
+   PACKAGE SELECTION
+================================ */
 
-async function shareForSocialApp(
-  ad,
-  url,
-  appName
-) {
+function selectPackage(card) {
 
-  const shareData = {
+  document
+    .querySelectorAll(".package-card")
+    .forEach(function(item) {
 
-    title: ad.title,
+      item.classList.remove("selected");
 
-    text:
-      ad.title +
-      "\n\n" +
-      ad.description,
+    });
 
-    url: url
+  card.classList.add("selected");
 
-  };
+  selectedPackage =
+    card.dataset.package;
+
+  selectedDuration =
+    Number(card.dataset.duration);
+
+  selectedPrice =
+    Number(card.dataset.price);
+
+  let name = "Basic";
+
+  if (selectedPackage === "premium") {
+    name = "Premium";
+  }
+
+  if (selectedPackage === "premium_plus") {
+    name = "Premium Plus";
+  }
+
+  document.getElementById(
+    "selectedPackageText"
+  ).textContent =
+    name +
+    " — $" +
+    selectedPrice +
+    " — " +
+    selectedDuration +
+    " days";
+
+}
 
 
-  /*
-     Android browsers normally open the
-     native share menu here.
+/* ================================
+   LOAD APPROVED ADS
+================================ */
 
-     The user can choose Instagram if
-     Instagram is installed and supports
-     the shared content.
-  */
+async function loadAdvertisements() {
 
-  if (
-    navigator.share
-  ) {
+  const container =
+    document.getElementById(
+      "approvedAdvertisements"
+    );
 
-    try {
+  container.innerHTML =
+    "Loading advertisements...";
 
-      await navigator.share(
-        shareData
+  try {
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/advertisements" +
+        "?select=*" +
+        "&status=eq.approved" +
+        "&order=created_at.desc",
+        {
+          method:"GET",
+
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY
+          }
+        }
       );
 
-      return;
+    if (!response.ok) {
 
-    } catch (error) {
+      throw new Error(
+        await response.text()
+      );
 
-      /*
-         User cancelled sharing.
-         Do nothing.
-      */
+    }
+
+    const ads =
+      await response.json();
+
+    if (!ads.length) {
+
+      container.innerHTML =
+        '<div class="ad-card">' +
+        '<div class="ad-content">' +
+        'No approved advertisements yet.' +
+        '</div></div>';
 
       return;
 
     }
 
+    container.innerHTML = "";
+
+    ads.forEach(function(ad) {
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "ad-card";
+
+      let image = "";
+
+      if (ad.image_url) {
+
+        image =
+          '<img src="' +
+          escapeHTML(ad.image_url) +
+          '" alt="Advertisement">';
+
+      }
+
+      let featured = "";
+
+      if (ad.featured) {
+
+        featured =
+          '<div class="featured">FEATURED</div>';
+
+      }
+
+      card.innerHTML =
+
+        image +
+
+        '<div class="ad-content">' +
+
+          featured +
+
+          '<div class="advertiser">' +
+            escapeHTML(
+              ad.advertiser_name || ""
+            ) +
+          '</div>' +
+
+          '<h3>' +
+            escapeHTML(
+              ad.advert_title || ""
+            ) +
+          '</h3>' +
+
+          '<p class="ad-description">' +
+            escapeHTML(
+              ad.description || ""
+            ) +
+          '</p>' +
+
+          '<p class="ad-meta">' +
+            'Package: ' +
+            escapeHTML(
+              ad.package || ""
+            ) +
+            '<br>' +
+            'Duration: ' +
+            escapeHTML(
+              String(ad.duration_days || "")
+            ) +
+            ' days' +
+          '</p>' +
+
+          '<p class="views">' +
+            'Views: ' +
+            escapeHTML(
+              String(ad.view_count || 0)
+            ) +
+          '</p>' +
+
+          '<button ' +
+            'type="button" ' +
+            'class="main-btn gold" ' +
+            'onclick="openAdvertisement(' +
+              JSON.stringify(ad.id) +
+            ')"' +
+          '>' +
+            'View Advertisement' +
+          '</button>' +
+
+        '</div>';
+
+      container.appendChild(card);
+
+    });
+
+  } catch(error) {
+
+    console.error(error);
+
+    container.innerHTML =
+      '<div class="ad-card">' +
+      '<div class="ad-content">' +
+      'Unable to load advertisements.' +
+      '</div></div>';
+
   }
-
-
-  /*
-     Fallback
-  */
-
-  copyToClipboard(url);
-
-  alert(
-    "Your browser does not support direct sharing. " +
-    "The advertisement link has been copied. " +
-    "Open " +
-    appName +
-    " and paste the link."
-  );
 
 }
 
 
-/* =========================================
-   COPY LINK
-========================================= */
-
-async function copyToClipboard(text) {
-
-  try {
-
-    await navigator.clipboard.writeText(
-      text
-    );
-
-    alert(
-      "Advertisement link copied!"
-    );
-
-  } catch {
-
-    const input =
-      document.createElement("input");
-
-    input.value = text;
-
-    document.body.appendChild(input);
-
-    input.select();
-
-    document.execCommand("copy");
-
-    input.remove();
-
-    alert(
-      "Advertisement link copied!"
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   BACK BUTTON
-========================================= */
+/* ================================
+   SUBMIT AD
+================================ */
 
 document
-  .getElementById("backToAds")
-  .onclick = function() {
+  .getElementById("advertisementForm")
+  .addEventListener(
+    "submit",
+    async function(event) {
 
-    document
-      .getElementById("adPage")
-      .style.display = "none";
+      event.preventDefault();
 
-    goTo("advertisements");
+      const message =
+        document.getElementById(
+          "formMessage"
+        );
 
-  };
+      message.style.display =
+        "block";
 
-    </script>
+      message.textContent =
+        "Submitting advertisement...";
+
+      const advertisement = {
+
+        advertiser_name:
+          document
+            .getElementById(
+              "advertiser_name"
+            )
+            .value
+            .trim(),
+
+        advert_title:
+          document
+            .getElementById(
+              "advert_title"
+            )
+            .value
+            .trim(),
+
+        description:
+          document
+            .getElementById(
+              "description"
+            )
+            .value
+            .trim(),
+
+        contact:
+          document
+            .getElementById(
+              "contact"
+            )
+            .value
+            .trim(),
+
+        image_url:
+          document
+            .getElementById(
+              "image_url"
+            )
+            .value
+            .trim() || null,
+
+        extended_description:
+          document
+            .getElementById(
+              "extended_description"
+            )
+            .value
+            .trim() || null,
+
+        status:
+          "pending",
+
+        featured:
+          selectedPackage !== "basic",
+
+        view_count:
+          0,
+
+        package:
+          selectedPackage,
+
+        duration_days:
+          selectedDuration
+
+      };
+
+      try {
+
+        const response =
+          await fetch(
+            SUPABASE_URL +
+            "/rest/v1/advertisements",
+            {
+              method:"POST",
+
+              headers:{
+                "Content-Type":
+                  "application/json",
+
+                "apikey":
+                  SUPABASE_KEY,
+
+                "Authorization":
+                  "Bearer " +
+                  SUPABASE_KEY,
+
+                "Prefer":
+                  "return=minimal"
+              },
+
+              body:
+                JSON.stringify(
+                  advertisement
+                )
+            }
+       
