@@ -3,20 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Maje AdMarket Pro</title>
 
   <style>
-    :root {
-      --bg: #101111;
-      --surface: #191b1b;
-      --gold: #c9a45c;
-      --gold2: #e0c17a;
-      --text: #f4f1e9;
-      --muted: #aaa69c;
-      --border: #383936;
-    }
-
     * {
       box-sizing: border-box;
     }
@@ -27,406 +16,133 @@
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: Arial, sans-serif;
+      background: #101111;
+      color: #f4f1e9;
     }
 
-    button,
-    input,
-    textarea {
-      font-family: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .navbar {
+    header {
       position: sticky;
       top: 0;
-      z-index: 1000;
-      background: rgba(16, 17, 17, 0.97);
-      border-bottom: 1px solid var(--border);
+      z-index: 10;
+      background: #191b1b;
+      border-bottom: 1px solid #383936;
+      padding: 18px;
     }
 
-    .nav-inner {
-      max-width: 1150px;
+    .nav {
+      max-width: 1100px;
       margin: auto;
-      padding: 17px 22px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      gap: 15px;
     }
 
     .logo {
-      color: var(--text);
-      font-size: 21px;
-      font-weight: 800;
+      font-size: 20px;
+      font-weight: bold;
     }
 
     .logo span {
-      color: var(--gold);
+      color: #c9a45c;
     }
 
-    .nav-buttons {
+    .buttons {
       display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .nav-btn {
-      background: transparent;
-      border: 0;
-      color: var(--muted);
-      padding: 8px 10px;
+    button {
+      appearance: none;
+      -webkit-appearance: none;
+      border: 1px solid #c9a45c;
+      border-radius: 7px;
+      padding: 12px 18px;
+      background: #c9a45c;
+      color: #111;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    .nav-btn:hover {
-      color: var(--gold2);
+    button:hover {
+      background: #e0c17a;
     }
 
     .hero {
-      min-height: 600px;
+      min-height: 550px;
+      padding: 100px 20px;
       display: flex;
       align-items: center;
       background:
         radial-gradient(
           circle at 80% 30%,
-          rgba(201, 164, 92, 0.15),
-          transparent 32%
+          rgba(201,164,92,.15),
+          transparent 35%
         ),
-        linear-gradient(135deg, #101111, #191b1b);
+        #101111;
     }
 
-    .hero-inner {
+    .hero-content {
+      max-width: 1100px;
       width: 100%;
-      max-width: 1150px;
       margin: auto;
-      padding: 80px 22px;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 7px 12px;
-      border: 1px solid rgba(201, 164, 92, 0.45);
-      border-radius: 30px;
-      color: var(--gold2);
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+    h1 {
+      max-width: 750px;
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1.05;
     }
 
-    .hero h1 {
-      max-width: 820px;
-      margin: 22px 0 18px;
-      font-size: clamp(42px, 7vw, 76px);
-      line-height: 1.04;
-      letter-spacing: -2px;
+    h1 span {
+      color: #c9a45c;
     }
 
-    .hero h1 span {
-      color: var(--gold);
-    }
-
-    .hero-text {
+    p {
+      color: #aaa69c;
       max-width: 650px;
-      color: var(--muted);
-      font-size: 18px;
     }
 
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+    section {
+      min-height: 500px;
+      padding: 90px 20px;
+      border-top: 1px solid #383936;
+    }
+
+    .section-content {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .test-box {
       margin-top: 30px;
-    }
-
-    .main-btn {
-      border: 0;
-      border-radius: 7px;
-      padding: 14px 22px;
-      font-weight: 800;
-      font-size: 14px;
-      transition: 0.2s;
-    }
-
-    .main-btn.gold {
-      background: var(--gold);
-      color: #151515;
-    }
-
-    .main-btn.gold:hover {
-      background: var(--gold2);
-      transform: translateY(-1px);
-    }
-
-    .main-btn.outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .main-btn.outline:hover {
-      border-color: var(--gold);
-      color: var(--gold2);
-    }
-
-    .section {
-      max-width: 1150px;
-      margin: auto;
-      padding: 85px 22px;
-    }
-
-    .section-label {
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    .section-heading {
-      max-width: 720px;
-      margin-bottom: 38px;
-    }
-
-    .section h2 {
-      margin: 8px 0 12px;
-      font-size: clamp(30px, 5vw, 46px);
-      line-height: 1.15;
-    }
-
-    .section-description {
-      color: var(--muted);
-    }
-
-    .packages {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .package-card {
-      position: relative;
-      width: 100%;
-      min-height: 270px;
-      text-align: left;
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 30px;
-      transition: 0.2s;
-    }
-
-    .package-card:hover {
-      border-color: #665d4d;
-      transform: translateY(-3px);
-    }
-
-    .package-card.selected {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 1px var(--gold);
-    }
-
-    .popular-label {
-      position: absolute;
-      top: 0;
-      right: 20px;
-      transform: translateY(-50%);
-      padding: 6px 10px;
-      border-radius: 5px;
-      background: var(--gold);
-      color: #151515;
-      font-size: 10px;
-      font-weight: 900;
-    }
-
-    .package-name {
-      color: var(--gold2);
-      font-weight: 800;
-    }
-
-    .package-price {
-      margin: 12px 0 2px;
-      font-size: 40px;
-      font-weight: 900;
-    }
-
-    .package-duration {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .package-card ul {
-      padding: 0;
-      margin: 22px 0 0;
-      list-style: none;
-    }
-
-    .package-card li {
-      padding: 7px 0;
-      border-bottom: 1px solid var(--border);
-      color: #c5c1b8;
-      font-size: 13px;
-    }
-
-    .ads-section {
-      background: #0d0e0e;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .ads-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .ad-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: #191b1b;
+      border: 1px solid #383936;
       border-radius: 12px;
-      overflow: hidden;
     }
 
-    .ad-content {
-      padding: 24px;
+    #result {
+      margin-top: 20px;
+      color: #e0c17a;
+      font-weight: bold;
     }
 
-    .ad-content h3 {
-      margin: 0 0 5px;
-    }
-
-    .advertiser {
-      color: var(--gold2);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .ad-content p {
-      color: var(--muted);
-    }
-
-    .form-wrapper {
-      max-width: 780px;
-      margin: auto;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 35px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 13px;
-      background: #111313;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      outline: none;
-      font-size: 15px;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: var(--gold);
-    }
-
-    textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    .selected-package {
-      padding: 12px 15px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(201, 164, 92, 0.35);
-      border-radius: 7px;
-      background: #151616;
-      color: var(--gold2);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    #message {
-      display: none;
-      margin-top: 18px;
-      padding: 13px;
-      border-radius: 7px;
-      font-size: 14px;
-    }
-
-    .success {
-      background: rgba(114, 168, 120, 0.15);
-      color: #9bc69f;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .step {
-      padding: 28px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-
-    .step-number {
-      color: var(--gold);
-      font-weight: 900;
-    }
-
-    .step p {
-      color: var(--muted);
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 45px 22px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .footer-brand {
-      color: var(--gold);
-      font-weight: 900;
-    }
-
-    @media (max-width: 800px) {
-      .nav-buttons {
-        display: none;
+    @media (max-width: 700px) {
+      .nav {
+        flex-direction: column;
+        align-items: stretch;
       }
 
-      .packages,
-      .ads-grid,
-      .steps {
-        grid-template-columns: 1fr;
+      .buttons {
+        justify-content: center;
       }
 
-      .form-wrapper {
-        padding: 22px;
-      }
-
-      .section {
-        padding: 65px 22px;
+      button {
+        flex: 1;
       }
     }
   </style>
@@ -434,685 +150,266 @@
 
 <body>
 
-<nav class="navbar">
-  <div class="nav-inner">
+<header>
+  <div class="nav">
 
     <div class="logo">
       Maje <span>AdMarket Pro</span>
     </div>
 
-    <div class="nav-buttons">
-      <button class="nav-btn" data-scroll="packages">
+    <div class="buttons">
+
+      <button
+        type="button"
+        id="packagesButton"
+      >
         Packages
       </button>
 
-      <button class="nav-btn" data-scroll="advertisements">
+      <button
+        type="button"
+        id="adsButton"
+      >
         Advertisements
       </button>
 
-      <button class="nav-btn" data-scroll="advertise">
+      <button
+        type="button"
+        id="campaignButton"
+      >
         Create Campaign
       </button>
-    </div>
-
-  </div>
-</nav>
-
-
-<section class="hero">
-  <div class="hero-inner">
-
-    <div class="badge">
-      Professional Digital Advertising
-    </div>
-
-    <h1>
-      Put your brand
-      <span>where people see it.</span>
-    </h1>
-
-    <p class="hero-text">
-      Maje AdMarket Pro gives businesses a professional
-      way to promote products and services online and
-      reach more potential customers.
-    </p>
-
-    <div class="button-row">
-
-      <button
-        class="main-btn gold"
-        data-scroll="advertise"
-      >
-        Start a Campaign
-      </button>
-
-      <button
-        class="main-btn outline"
-        data-scroll="advertisements"
-      >
-        Explore Advertisements
-      </button>
 
     </div>
 
   </div>
-</section>
+</header>
 
 
-<section class="section" id="packages">
+<main>
 
-  <div class="section-heading">
+  <section class="hero" id="home">
 
-    <div class="section-label">
-      Advertising Packages
-    </div>
+    <div class="hero-content">
 
-    <h2>Choose your campaign.</h2>
-
-    <p class="section-description">
-      Select the package you want for your advertisement.
-    </p>
-
-  </div>
-
-
-  <div class="packages">
-
-    <button
-      class="package-card selected"
-      data-package="Basic"
-      data-price="5"
-      data-duration="7"
-    >
-
-      <div class="package-name">
-        Basic
-      </div>
-
-      <div class="package-price">
-        $5
-      </div>
-
-      <div class="package-duration">
-        7 days
-      </div>
-
-      <ul>
-        <li>Standard advertisement placement</li>
-        <li>Advertisement page</li>
-        <li>Shareable advertisement link</li>
-      </ul>
-
-    </button>
-
-
-    <button
-      class="package-card"
-      data-package="Premium"
-      data-price="10"
-      data-duration="14"
-    >
-
-      <div class="popular-label">
-        MOST POPULAR
-      </div>
-
-      <div class="package-name">
-        Premium
-      </div>
-
-      <div class="package-price">
-        $10
-      </div>
-
-      <div class="package-duration">
-        14 days
-      </div>
-
-      <ul>
-        <li>Featured advertisement placement</li>
-        <li>Advertisement page</li>
-        <li>Shareable advertisement link</li>
-        <li>Higher visibility</li>
-      </ul>
-
-    </button>
-
-
-    <button
-      class="package-card"
-      data-package="Premium Plus"
-      data-price="20"
-      data-duration="30"
-    >
-
-      <div class="package-name">
-        Premium Plus
-      </div>
-
-      <div class="package-price">
-        $20
-      </div>
-
-      <div class="package-duration">
-        30 days
-      </div>
-
-      <ul>
-        <li>Top featured placement</li>
-        <li>Advertisement page</li>
-        <li>Shareable advertisement link</li>
-        <li>Maximum campaign duration</li>
-      </ul>
-
-    </button>
-
-  </div>
-</section>
-
-
-<section
-  class="ads-section"
-  id="advertisements"
->
-
-  <div class="section">
-
-    <div class="section-heading">
-
-      <div class="section-label">
-        Advertisements
-      </div>
-
-      <h2>Featured advertisements.</h2>
-
-      <p class="section-description">
-        Advertisements submitted through Maje AdMarket Pro
-        will appear here after approval.
-      </p>
-
-    </div>
-
-
-    <div class="ads-grid" id="adsList">
-
-      <div class="ad-card">
-
-        <div class="ad-content">
-
-          <h3>
-            Your advertisement could appear here.
-          </h3>
-
-          <p>
-            Submit a campaign to add your advertisement
-            to this section.
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<section
-  class="section"
-  id="advertise"
->
-
-  <div class="section-heading">
-
-    <div class="section-label">
-      Create Campaign
-    </div>
-
-    <h2>Submit your advertisement.</h2>
-
-    <p class="section-description">
-      Complete the form below to create your advertising campaign.
-    </p>
-
-  </div>
-
-
-  <div class="form-wrapper">
-
-    <form id="campaignForm">
-
-      <div class="selected-package">
-
-        Selected package:
-        <span id="selectedPackage">
-          Basic — $5 — 7 days
-        </span>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="email">
-          Email Address
-        </label>
-
-        <input
-          id="email"
-          type="email"
-          placeholder="yourname@gmail.com"
-          required
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="business">
-          Advertiser or Business Name
-        </label>
-
-        <input
-          id="business"
-          type="text"
-          placeholder="Your business name"
-          required
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="title">
-          Advertisement Title
-        </label>
-
-        <input
-          id="title"
-          type="text"
-          placeholder="Your advertisement title"
-          required
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="description">
-          Advertisement Description
-        </label>
-
-        <textarea
-          id="description"
-          placeholder="Describe your product or service"
-          required
-        ></textarea>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="contact">
-          Contact Information
-        </label>
-
-        <input
-          id="contact"
-          type="text"
-          placeholder="Phone, WhatsApp or email"
-          required
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="image">
-          Advertisement Image URL
-        </label>
-
-        <input
-          id="image"
-          type="url"
-          placeholder="https://example.com/image.jpg"
-        >
-
-      </div>
-
-
-      <button
-        type="submit"
-        class="main-btn gold"
-      >
-        Submit Campaign
-      </button>
-
-
-      <div id="message"></div>
-
-    </form>
-
-  </div>
-
-</section>
-
-
-<section class="section">
-
-  <div class="section-heading">
-
-    <div class="section-label">
-      How It Works
-    </div>
-
-    <h2>A simple advertising process.</h2>
-
-  </div>
-
-
-  <div class="steps">
-
-    <div class="step">
-
-      <div class="step-number">
-        01
-      </div>
-
-      <h3>
-        Choose a package
-      </h3>
+      <h1>
+        Put your brand
+        <span>where people see it.</span>
+      </h1>
 
       <p>
-        Select the advertising package that suits your campaign.
+        Welcome to Maje AdMarket Pro.
+        Promote your products and services
+        through our advertising marketplace.
       </p>
 
-    </div>
+      <div class="test-box">
 
+        <button
+          type="button"
+          id="startButton"
+        >
+          Start a Campaign
+        </button>
 
-    <div class="step">
+        <button
+          type="button"
+          id="exploreButton"
+        >
+          Explore Advertisements
+        </button>
 
-      <div class="step-number">
-        02
+        <div id="result"></div>
+
       </div>
 
-      <h3>
-        Create your campaign
-      </h3>
-
-      <p>
-        Enter your business and advertisement information.
-      </p>
-
     </div>
 
+  </section>
 
-    <div class="step">
 
-      <div class="step-number">
-        03
+  <section id="packages">
+
+    <div class="section-content">
+
+      <h2>Advertising Packages</h2>
+
+      <p>
+        Choose the package you want for your campaign.
+      </p>
+
+      <div class="test-box">
+
+        <button
+          type="button"
+          class="packageButton"
+          data-package="Basic"
+        >
+          Basic — $5
+        </button>
+
+        <button
+          type="button"
+          class="packageButton"
+          data-package="Premium"
+        >
+          Premium — $10
+        </button>
+
+        <button
+          type="button"
+          class="packageButton"
+          data-package="Premium Plus"
+        >
+          Premium Plus — $20
+        </button>
+
       </div>
 
-      <h3>
-        Get published
-      </h3>
+    </div>
+
+  </section>
+
+
+  <section id="advertisements">
+
+    <div class="section-content">
+
+      <h2>Advertisements</h2>
 
       <p>
-        Your advertisement can be published after review.
+        Approved advertisements will appear here.
       </p>
+
+      <div class="test-box">
+        Your advertisements section is working.
+      </div>
 
     </div>
 
-  </div>
-
-</section>
+  </section>
 
 
-<footer>
+  <section id="campaign">
 
-  <p>
-    <span class="footer-brand">
-      Maje AdMarket Pro
-    </span>
-  </p>
+    <div class="section-content">
 
-  <p>
-    Professional digital advertising marketplace.
-  </p>
+      <h2>Create Campaign</h2>
 
-  <p>
-    © 2026 Maje AdMarket Pro. All rights reserved.
-  </p>
+      <div class="test-box">
 
-</footer>
+        <p>
+          Campaign form section is working.
+        </p>
+
+        <button
+          type="button"
+          id="testSubmit"
+        >
+          Test Campaign Button
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
 
 
 <script>
-  /* ================================
-     NAVIGATION
-     ================================ */
+  "use strict";
 
-  document
-    .querySelectorAll("[data-scroll]")
-    .forEach(function(button) {
+  function goTo(id) {
 
-      button.addEventListener("click", function() {
+    const element = document.getElementById(id);
 
-        const sectionId =
-          button.getAttribute("data-scroll");
+    if (element) {
 
-        const section =
-          document.getElementById(sectionId);
-
-        if (section) {
-          section.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-        }
-
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
       });
-
-    });
-
-
-  /* ================================
-     PACKAGE SELECTION
-     ================================ */
-
-  const packageCards =
-    document.querySelectorAll(".package-card");
-
-  const selectedPackage =
-    document.getElementById("selectedPackage");
-
-
-  packageCards.forEach(function(card) {
-
-    card.addEventListener("click", function() {
-
-      packageCards.forEach(function(item) {
-        item.classList.remove("selected");
-      });
-
-      card.classList.add("selected");
-
-      const name =
-        card.getAttribute("data-package");
-
-      const price =
-        card.getAttribute("data-price");
-
-      const duration =
-        card.getAttribute("data-duration");
-
-      selectedPackage.textContent =
-        name +
-        " — $" +
-        price +
-        " — " +
-        duration +
-        " days";
-
-      document
-        .getElementById("advertise")
-        .scrollIntoView({
-          behavior: "smooth"
-        });
-
-    });
-
-  });
-
-
-  /* ================================
-     CAMPAIGN FORM
-     ================================ */
-
-  const campaignForm =
-    document.getElementById("campaignForm");
-
-  const message =
-    document.getElementById("message");
-
-  const adsList =
-    document.getElementById("adsList");
-
-
-  campaignForm.addEventListener(
-    "submit",
-    function(event) {
-
-      event.preventDefault();
-
-
-      const email =
-        document.getElementById("email").value.trim();
-
-      const business =
-        document.getElementById("business").value.trim();
-
-      const title =
-        document.getElementById("title").value.trim();
-
-      const description =
-        document.getElementById("description").value.trim();
-
-      const contact =
-        document.getElementById("contact").value.trim();
-
-      const image =
-        document.getElementById("image").value.trim();
-
-
-      if (
-        !email ||
-        !business ||
-        !title ||
-        !description ||
-        !contact
-      ) {
-
-        message.style.display = "block";
-
-        message.className = "";
-
-        message.style.background =
-          "rgba(214,107,107,.15)";
-
-        message.style.color =
-          "#e59a9a";
-
-        message.textContent =
-          "Please complete all required fields.";
-
-        return;
-      }
-
-
-      /* CREATE ADVERTISEMENT CARD */
-
-      const card =
-        document.createElement("div");
-
-      card.className = "ad-card";
-
-
-      let imageHTML = "";
-
-      if (image) {
-
-        imageHTML =
-          '<img src="' +
-          image.replace(/"/g, "&quot;") +
-          '" style="width:100%;max-height:300px;object-fit:cover;" alt="Advertisement">';
-
-      }
-
-
-      card.innerHTML =
-        imageHTML +
-
-        '<div class="ad-content">' +
-
-        '<div class="advertiser">' +
-        business.replace(/</g, "&lt;") +
-        '</div>' +
-
-        '<h3>' +
-        title.replace(/</g, "&lt;") +
-        '</h3>' +
-
-        '<p>' +
-        description.replace(/</g, "&lt;") +
-        '</p>' +
-
-        '<p><strong>Contact:</strong> ' +
-        contact.replace(/</g, "&lt;") +
-        '</p>' +
-
-        '</div>';
-
-
-      adsList.prepend(card);
-
-
-      /* SUCCESS MESSAGE */
-
-      message.style.display = "block";
-
-      message.className = "success";
-
-      message.textContent =
-        "Campaign submitted successfully. Payment will be added later.";
-
-
-      /* CLEAR FORM */
-
-      campaignForm.reset();
-
-
-      /* SCROLL TO ADVERTISEMENT */
-
-      setTimeout(function() {
-
-        document
-          .getElementById("advertisements")
-          .scrollIntoView({
-            behavior: "smooth"
-          });
-
-      }, 700);
 
     }
-  );
+
+  }
+
+
+  document
+    .getElementById("packagesButton")
+    .addEventListener("click", function () {
+
+      goTo("packages");
+
+    });
+
+
+  document
+    .getElementById("adsButton")
+    .addEventListener("click", function () {
+
+      goTo("advertisements");
+
+    });
+
+
+  document
+    .getElementById("campaignButton")
+    .addEventListener("click", function () {
+
+      goTo("campaign");
+
+    });
+
+
+  document
+    .getElementById("startButton")
+    .addEventListener("click", function () {
+
+      goTo("campaign");
+
+    });
+
+
+  document
+    .getElementById("exploreButton")
+    .addEventListener("click", function () {
+
+      goTo("advertisements");
+
+    });
+
+
+  document
+    .querySelectorAll(".packageButton")
+    .forEach(function (button) {
+
+      button.addEventListener("click", function () {
+
+        const packageName =
+          button.getAttribute("data-package");
+
+        document.getElementById("result").textContent =
+          "Selected package: " + packageName;
+
+      });
+
+    });
+
+
+  document
+    .getElementById("testSubmit")
+    .addEventListener("click", function () {
+
+      document.getElementById("result").textContent =
+        "Campaign button is working.";
+
+      goTo("home");
+
+    });
 </script>
 
 </body>
-  </html>      
+</html>
