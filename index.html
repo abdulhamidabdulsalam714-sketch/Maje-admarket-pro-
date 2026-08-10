@@ -1,13 +1,13 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Maje AdMarket Pro</title><meta
-name="description"
-content="Maje AdMarket Pro - Advertise, reach more people and grow your business."
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maje AdMarket Pro</title>
+  <meta name="description" content="Maje AdMarket Pro - Advertise, reach more people and grow your business.">  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-«»
-
-  <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -18,7 +18,7 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
     header {
       background: #111827;
       color: white;
-      padding: 20px;
+      padding: 22px 15px;
       text-align: center;
     }
 
@@ -32,21 +32,21 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
     }
 
     .hero {
-      padding: 50px 20px;
+      padding: 55px 20px;
       text-align: center;
       background: white;
     }
 
     .hero h2 {
       font-size: 34px;
-      margin-bottom: 12px;
+      margin: 0 0 15px;
     }
 
     .hero p {
-      font-size: 18px;
-      max-width: 650px;
+      max-width: 700px;
       margin: auto;
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 18px;
     }
 
     .buttons {
@@ -62,8 +62,6 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
       font-weight: bold;
       background: #2563eb;
       color: white;
-      border: none;
-      cursor: pointer;
     }
 
     .button.secondary {
@@ -72,16 +70,16 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
     }
 
     .section {
-      padding: 40px 20px;
       max-width: 1000px;
       margin: auto;
+      padding: 45px 20px;
     }
 
     .section h2 {
       text-align: center;
     }
 
-    .section-intro {
+    .intro {
       text-align: center;
       line-height: 1.6;
     }
@@ -97,36 +95,31 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
       background: white;
       padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
-
-    .card h3 {
-      margin-top: 0;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
     }
 
     .form-container {
-      background: white;
       max-width: 650px;
       margin: 25px auto 0;
       padding: 25px;
+      background: white;
       border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
     }
 
     .form-group {
       margin-bottom: 18px;
     }
 
-    .form-group label {
+    label {
       display: block;
       font-weight: bold;
       margin-bottom: 7px;
     }
 
-    .form-group input,
-    .form-group textarea {
+    input,
+    textarea {
       width: 100%;
-      box-sizing: border-box;
       padding: 12px;
       border: 1px solid #d1d5db;
       border-radius: 8px;
@@ -134,7 +127,7 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
       font-family: Arial, sans-serif;
     }
 
-    .form-group textarea {
+    textarea {
       min-height: 130px;
       resize: vertical;
     }
@@ -142,18 +135,17 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
     .submit-button {
       width: 100%;
       padding: 14px;
+      border: 0;
+      border-radius: 8px;
       background: #2563eb;
       color: white;
-      border: none;
-      border-radius: 8px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
     }
 
     .submit-button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+      opacity: .6;
     }
 
     #message {
@@ -161,15 +153,14 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
       margin-top: 15px;
       padding: 12px;
       border-radius: 8px;
-      line-height: 1.5;
     }
 
     .advertisement-card {
       background: white;
       padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
       margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
     }
 
     .advertisement-card h3 {
@@ -178,20 +169,21 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
     }
 
     .advertisement-card img {
+      display: block;
       width: 100%;
-      max-width: 500px;
+      max-width: 550px;
       max-height: 350px;
       object-fit: cover;
       border-radius: 10px;
-      margin-top: 15px;
+      margin: 18px 0;
     }
 
-    .advertiser-name {
+    .advertiser {
       font-weight: bold;
       color: #374151;
     }
 
-    .advertisement-contact {
+    .contact {
       margin-top: 15px;
       padding: 12px;
       background: #f3f4f6;
@@ -199,7 +191,18 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
       font-weight: bold;
     }
 
-    .view-ad-button {
+    .featured {
+      display: inline-block;
+      padding: 5px 9px;
+      margin-bottom: 10px;
+      background: #f59e0b;
+      color: white;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .view-button {
       display: inline-block;
       margin-top: 18px;
       padding: 12px 18px;
@@ -210,134 +213,96 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
       font-weight: bold;
     }
 
-    .featured-label {
-      display: inline-block;
-      background: #f59e0b;
-      color: white;
-      padding: 5px 9px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .no-advertisements {
-      text-align: center;
+    .empty {
       background: white;
       padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      text-align: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
     }
 
     footer {
+      margin-top: 30px;
+      padding: 25px;
       background: #111827;
       color: white;
       text-align: center;
-      padding: 25px;
-      margin-top: 30px;
     }
   </style></head><body><header>
   <h1>Maje AdMarket Pro</h1>
   <p>Advertise. Reach More People. Grow Your Business.</p>
-</header><section class="hero">  <h2>Put Your Business in Front of More Customers</h2>  <p>
+</header><section class="hero">
+  <h2>Put Your Business in Front of More Customers</h2>  <p>
     Maje AdMarket Pro is an advertising marketplace where businesses
     can promote their products and services to a wider audience.
-  </p>  <div class="buttons"><a href="#advertise" class="button">
-  Advertise With Us
-</a>
-
-<a href="#approved-ads" class="button secondary">
-  View Advertisements
-</a>
-
-  </div></section><!-- APPROVED ADVERTISEMENTS --><section class="section" id="approved-ads">  <h2>Featured Advertisements</h2>  <p class="section-intro">
+  </p>  <div class="buttons">
+    <a href="#advertise" class="button">Advertise With Us</a>
+    <a href="#approved-ads" class="button secondary">View Advertisements</a>
+  </div>
+</section><section class="section" id="approved-ads">  <h2>Approved Advertisements</h2>  <p class="intro">
     Discover businesses and services advertised on Maje AdMarket Pro.
   </p>  <div id="approvedAdvertisements">
     Loading advertisements...
-  </div></section><!-- ADVERTISEMENT SUBMISSION --><section class="section" id="advertise">  <h2>Submit Your Advertisement</h2>  <p class="section-intro">
-    Complete the form below. Your advertisement will be reviewed
-    before publication.
+  </div></section><section class="section" id="advertise">  <h2>Submit Your Advertisement</h2>  <p class="intro">
+    Submit your advertisement for review. Approved advertisements
+    will be displayed on Maje AdMarket Pro.
   </p>  <div class="form-container"><form id="advertisementForm">
 
   <div class="form-group">
-
-    <label for="advertiser_name">
-      Advertiser Name
-    </label>
+    <label for="advertiser_name">Advertiser Name</label>
 
     <input
       type="text"
       id="advertiser_name"
-      required
       placeholder="Enter your name or business name"
+      required
     >
-
   </div>
 
-
   <div class="form-group">
-
-    <label for="advert_title">
-      Advertisement Title
-    </label>
+    <label for="advert_title">Advertisement Title</label>
 
     <input
       type="text"
       id="advert_title"
+      placeholder="Enter advertisement title"
       required
-      placeholder="Enter your advertisement title"
     >
-
   </div>
 
-
   <div class="form-group">
-
-    <label for="description">
-      Advertisement Description
-    </label>
+    <label for="description">Advertisement Description</label>
 
     <textarea
       id="description"
-      required
       placeholder="Describe your product or service"
+      required
     ></textarea>
-
   </div>
 
-
   <div class="form-group">
-
     <label for="extended_description">
       Extended Description (Optional)
     </label>
 
     <textarea
       id="extended_description"
-      placeholder="Add more information about your product or service"
+      placeholder="Add additional information"
     ></textarea>
-
   </div>
 
-
   <div class="form-group">
-
-    <label for="contact">
-      Contact Information
-    </label>
+    <label for="contact">Contact Information</label>
 
     <input
       type="text"
       id="contact"
+      placeholder="Phone, WhatsApp or email"
       required
-      placeholder="Phone number, WhatsApp or email"
     >
-
   </div>
 
-
   <div class="form-group">
-
     <label for="image_url">
       Advertisement Image URL (Optional)
     </label>
@@ -347,9 +312,7 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
       id="image_url"
       placeholder="https://example.com/image.jpg"
     >
-
   </div>
-
 
   <button
     type="submit"
@@ -359,83 +322,60 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
     Submit Advertisement
   </button>
 
-
   <div id="message"></div>
 
 </form>
 
-  </div></section><!-- WHY ADVERTISE --><section class="section">  <h2>Why Advertise With Us?</h2>  <div class="cards"><div class="card">
-
+  </div>
+</section><section class="section">  <h2>Why Advertise With Us?</h2>  <div class="cards"><div class="card">
   <h3>📢 More Visibility</h3>
-
   <p>
-    Show your business to people who are looking
-    for products and services.
+    Show your business to people who are looking for
+    products and services.
   </p>
-
 </div>
 
-
 <div class="card">
-
   <h3>🚀 Grow Your Business</h3>
-
   <p>
-    Promote your products and reach potential
-    customers online.
+    Promote your products and reach potential customers online.
   </p>
-
 </div>
 
-
 <div class="card">
-
   <h3>📱 Mobile Friendly</h3>
-
   <p>
-    Your advertisements can be viewed easily
-    on phones, tablets and computers.
+    Advertisements can be viewed on phones, tablets and computers.
   </p>
-
 </div>
 
-  </div></section><!-- HOW IT WORKS --><section class="section" id="how">  <h2>How It Works</h2>  <div class="cards"><div class="card">
-
+  </div>
+</section><section class="section" id="how">  <h2>How It Works</h2>  <div class="cards"><div class="card">
   <h3>1. Create Your Advert</h3>
-
   <p>
-    Prepare your business advertisement and
-    provide the necessary information.
+    Prepare your business advertisement and provide the
+    necessary information.
   </p>
-
 </div>
-
 
 <div class="card">
-
   <h3>2. Submit Your Advert</h3>
-
   <p>
     Submit your advertisement for review.
   </p>
-
 </div>
-
 
 <div class="card">
-
   <h3>3. Get Published</h3>
-
   <p>
-    Once approved, your advertisement can
-    appear on the platform.
+    Once approved, your advertisement appears on the platform.
   </p>
-
 </div>
 
-  </div></section><footer>  <p>
-    © 2026 Maje AdMarket Pro. All rights reserved.
-  </p></footer><script>
+  </div>
+</section><footer>
+  <p>© 2026 Maje AdMarket Pro. All rights reserved.</p>
+</footer><script>
 
   const SUPABASE_URL =
     "https://rkobepfufwybyaixzgcu.supabase.co";
@@ -445,22 +385,26 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
 
 
   const form =
-    document.getElementById(
-      "advertisementForm"
-    );
+    document.getElementById("advertisementForm");
 
   const submitButton =
-    document.getElementById(
-      "submitButton"
-    );
+    document.getElementById("submitButton");
 
   const message =
-    document.getElementById(
-      "message"
-    );
+    document.getElementById("message");
 
 
-  // SUBMIT ADVERTISEMENT
+  function escapeHTML(value) {
+
+    const div =
+      document.createElement("div");
+
+    div.textContent =
+      value || "";
+
+    return div.innerHTML;
+  }
+
 
   form.addEventListener(
     "submit",
@@ -469,9 +413,7 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
       event.preventDefault();
 
       submitButton.disabled = true;
-
-      submitButton.textContent =
-        "Submitting...";
+      submitButton.textContent = "Submitting...";
 
       message.style.display = "none";
 
@@ -480,49 +422,37 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
 
         advertiser_name:
           document
-            .getElementById(
-              "advertiser_name"
-            )
+            .getElementById("advertiser_name")
             .value
             .trim(),
 
         advert_title:
           document
-            .getElementById(
-              "advert_title"
-            )
+            .getElementById("advert_title")
             .value
             .trim(),
 
         description:
           document
-            .getElementById(
-              "description"
-            )
+            .getElementById("description")
             .value
             .trim(),
 
         extended_description:
           document
-            .getElementById(
-              "extended_description"
-            )
+            .getElementById("extended_description")
             .value
             .trim() || null,
 
         contact:
           document
-            .getElementById(
-              "contact"
-            )
+            .getElementById("contact")
             .value
             .trim(),
 
         image_url:
           document
-            .getElementById(
-              "image_url"
-            )
+            .getElementById("image_url")
             .value
             .trim() || null
 
@@ -533,61 +463,38 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
 
         const response =
           await fetch(
-
             SUPABASE_URL +
             "/rest/v1/advertisements",
-
             {
-
               method: "POST",
 
               headers: {
-
-                "Content-Type":
-                  "application/json",
-
-                "apikey":
-                  SUPABASE_KEY,
-
+                "Content-Type": "application/json",
+                "apikey": SUPABASE_KEY,
                 "Authorization":
-                  "Bearer " +
-                  SUPABASE_KEY,
-
-                "Prefer":
-                  "return=minimal"
-
+                  "Bearer " + SUPABASE_KEY,
+                "Prefer": "return=minimal"
               },
 
               body:
-                JSON.stringify(
-                  advertisement
-                )
-
+                JSON.stringify(advertisement)
             }
-
           );
 
 
         if (!response.ok) {
-
           throw new Error(
             await response.text()
           );
-
         }
 
 
-        message.style.display =
-          "block";
-
-        message.style.background =
-          "#dcfce7";
-
-        message.style.color =
-          "#166534";
+        message.style.display = "block";
+        message.style.background = "#dcfce7";
+        message.style.color = "#166534";
 
         message.textContent =
-          "Advertisement submitted successfully! It is now waiting for review.";
+          "Advertisement submitted successfully! It is waiting for review.";
 
         form.reset();
 
@@ -596,32 +503,23 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
 
         console.error(error);
 
-        message.style.display =
-          "block";
-
-        message.style.background =
-          "#fee2e2";
-
-        message.style.color =
-          "#991b1b";
+        message.style.display = "block";
+        message.style.background = "#fee2e2";
+        message.style.color = "#991b1b";
 
         message.textContent =
-          "Submission failed. Please check your connection and try again.";
+          "Submission failed. Please try again.";
 
       }
 
 
-      submitButton.disabled =
-        false;
-
+      submitButton.disabled = false;
       submitButton.textContent =
         "Submit Advertisement";
 
     }
   );
 
-
-  // LOAD APPROVED ADVERTISEMENTS
 
   async function loadApprovedAdvertisements() {
 
@@ -635,39 +533,27 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
 
       const response =
         await fetch(
-
           SUPABASE_URL +
           "/rest/v1/advertisements" +
           "?select=*" +
           "&status=eq.approved" +
           "&order=created_at.desc",
-
           {
-
             method: "GET",
 
             headers: {
-
-              "apikey":
-                SUPABASE_KEY,
-
+              "apikey": SUPABASE_KEY,
               "Authorization":
-                "Bearer " +
-                SUPABASE_KEY
-
+                "Bearer " + SUPABASE_KEY
             }
-
           }
-
         );
 
 
       if (!response.ok) {
-
         throw new Error(
           await response.text()
         );
-
       }
 
 
@@ -675,18 +561,15 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
         await response.json();
 
 
-      if (
-        advertisements.length === 0
-      ) {
+      if (advertisements.length === 0) {
 
         container.innerHTML = `
-          <div class="no-advertisements">
+          <div class="empty">
             <p>No approved advertisements yet.</p>
           </div>
         `;
 
         return;
-
       }
 
 
@@ -697,22 +580,27 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
         function(ad) {
 
           const card =
-            document.createElement(
-              "div"
-            );
-
+            document.createElement("div");
 
           card.className =
             "advertisement-card";
+
+
+          const featured =
+            ad.featured === true
+              ? `
+                <div class="featured">
+                  ⭐ Featured Advertisement
+                </div>
+              `
+              : "";
 
 
           const image =
             ad.image_url
               ? `
                 <img
-                  src="${escapeHTML(
-                    ad.image_url
-                  )}"
+                  src="${escapeHTML(ad.image_url)}"
                   alt="Advertisement image"
                 >
               `
@@ -731,16 +619,6 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
               : "";
 
 
-          const featured =
-            ad.featured === true
-              ? `
-                <div class="featured-label">
-                  ⭐ Featured
-                </div>
-              `
-              : "";
-
-
           card.innerHTML = `
 
             ${featured}
@@ -752,7 +630,7 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
               )}
             </h3>
 
-            <p class="advertiser-name">
+            <p class="advertiser">
               ${escapeHTML(
                 ad.advertiser_name ||
                 ""
@@ -770,7 +648,7 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
 
             ${image}
 
-            <div class="advertisement-contact">
+            <div class="contact">
               Contact:
               ${escapeHTML(
                 ad.contact ||
@@ -778,12 +656,9 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
               )}
             </div>
 
-
             <a
-              class="view-ad-button"
-              href="ad.html?id=${encodeURIComponent(
-                ad.id
-              )}"
+              class="view-button"
+              href="ad.html?id=${encodeURIComponent(ad.id)}"
             >
               View & Share Advertisement
             </a>
@@ -791,9 +666,7 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
           `;
 
 
-          container.appendChild(
-            card
-          );
+          container.appendChild(card);
 
         }
       );
@@ -803,9 +676,8 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
 
       console.error(error);
 
-
       container.innerHTML = `
-        <div class="no-advertisements">
+        <div class="empty">
           <p>
             Advertisements could not be loaded.
           </p>
@@ -816,25 +688,6 @@ content="Maje AdMarket Pro - Advertise, reach more people and grow your business
 
   }
 
-
-  // SECURITY HELPER
-
-  function escapeHTML(value) {
-
-    const div =
-      document.createElement(
-        "div"
-      );
-
-    div.textContent =
-      value || "";
-
-    return div.innerHTML;
-
-  }
-
-
-  // LOAD ADS
 
   loadApprovedAdvertisements();
 
