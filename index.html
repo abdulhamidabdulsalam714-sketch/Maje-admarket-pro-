@@ -1,8 +1,13 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maje AdMarket Pro</title>  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Maje AdMarket Pro</title><meta
+name="description"
+content="Maje AdMarket Pro - Advertise, reach more people and grow your business."
+
+«»
+
+  <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -76,6 +81,11 @@
       text-align: center;
     }
 
+    .section-intro {
+      text-align: center;
+      line-height: 1.6;
+    }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -143,6 +153,7 @@
 
     .submit-button:disabled {
       opacity: 0.6;
+      cursor: not-allowed;
     }
 
     #message {
@@ -175,12 +186,39 @@
       margin-top: 15px;
     }
 
+    .advertiser-name {
+      font-weight: bold;
+      color: #374151;
+    }
+
     .advertisement-contact {
       margin-top: 15px;
       padding: 12px;
       background: #f3f4f6;
       border-radius: 8px;
       font-weight: bold;
+    }
+
+    .view-ad-button {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 12px 18px;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .featured-label {
+      display: inline-block;
+      background: #f59e0b;
+      color: white;
+      padding: 5px 9px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
     .no-advertisements {
@@ -212,11 +250,11 @@
   View Advertisements
 </a>
 
-  </div></section><!-- APPROVED ADVERTISEMENTS --><section class="section" id="approved-ads">  <h2>Featured Advertisements</h2>  <p style="text-align:center;">
+  </div></section><!-- APPROVED ADVERTISEMENTS --><section class="section" id="approved-ads">  <h2>Featured Advertisements</h2>  <p class="section-intro">
     Discover businesses and services advertised on Maje AdMarket Pro.
   </p>  <div id="approvedAdvertisements">
     Loading advertisements...
-  </div></section><!-- ADVERTISER FORM --><section class="section" id="advertise">  <h2>Submit Your Advertisement</h2>  <p style="text-align:center;">
+  </div></section><!-- ADVERTISEMENT SUBMISSION --><section class="section" id="advertise">  <h2>Submit Your Advertisement</h2>  <p class="section-intro">
     Complete the form below. Your advertisement will be reviewed
     before publication.
   </p>  <div class="form-container"><form id="advertisementForm">
@@ -411,12 +449,10 @@
       "advertisementForm"
     );
 
-
   const submitButton =
     document.getElementById(
       "submitButton"
     );
-
 
   const message =
     document.getElementById(
@@ -432,16 +468,12 @@
 
       event.preventDefault();
 
-
-      submitButton.disabled =
-        true;
+      submitButton.disabled = true;
 
       submitButton.textContent =
         "Submitting...";
 
-
-      message.style.display =
-        "none";
+      message.style.display = "none";
 
 
       const advertisement = {
@@ -554,10 +586,8 @@
         message.style.color =
           "#166534";
 
-
         message.textContent =
           "Advertisement submitted successfully! It is now waiting for review.";
-
 
         form.reset();
 
@@ -565,7 +595,6 @@
       } catch (error) {
 
         console.error(error);
-
 
         message.style.display =
           "block";
@@ -575,7 +604,6 @@
 
         message.style.color =
           "#991b1b";
-
 
         message.textContent =
           "Submission failed. Please check your connection and try again.";
@@ -610,7 +638,7 @@
 
           SUPABASE_URL +
           "/rest/v1/advertisements" +
-          "?select=advertiser_name,advert_title,description,extended_description,contact,image_url,created_at" +
+          "?select=*" +
           "&status=eq.approved" +
           "&order=created_at.desc",
 
@@ -682,7 +710,9 @@
             ad.image_url
               ? `
                 <img
-                  src="${escapeHTML(ad.image_url)}"
+                  src="${escapeHTML(
+                    ad.image_url
+                  )}"
                   alt="Advertisement image"
                 >
               `
@@ -701,7 +731,19 @@
               : "";
 
 
+          const featured =
+            ad.featured === true
+              ? `
+                <div class="featured-label">
+                  ⭐ Featured
+                </div>
+              `
+              : "";
+
+
           card.innerHTML = `
+
+            ${featured}
 
             <h3>
               ${escapeHTML(
@@ -710,13 +752,11 @@
               )}
             </h3>
 
-            <p>
-              <strong>
-                ${escapeHTML(
-                  ad.advertiser_name ||
-                  ""
-                )}
-              </strong>
+            <p class="advertiser-name">
+              ${escapeHTML(
+                ad.advertiser_name ||
+                ""
+              )}
             </p>
 
             <p>
@@ -733,9 +773,20 @@
             <div class="advertisement-contact">
               Contact:
               ${escapeHTML(
-                ad.contact || ""
+                ad.contact ||
+                ""
               )}
             </div>
+
+
+            <a
+              class="view-ad-button"
+              href="ad.html?id=${encodeURIComponent(
+                ad.id
+              )}"
+            >
+              View & Share Advertisement
+            </a>
 
           `;
 
@@ -775,17 +826,15 @@
         "div"
       );
 
-
     div.textContent =
       value || "";
-
 
     return div.innerHTML;
 
   }
 
 
-  // LOAD ADS WHEN PAGE OPENS
+  // LOAD ADS
 
   loadApprovedAdvertisements();
 
