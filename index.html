@@ -1,8 +1,11 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maje AdMarket Pro</title><style>
+<title>Maje AdMarket Pro</title>
+
+<style>
 :root{
   --bg:#101111;
   --surface:#191b1b;
@@ -30,9 +33,7 @@ body{
   line-height:1.6;
 }
 
-button,
-input,
-textarea{
+button,input,textarea{
   font-family:inherit;
 }
 
@@ -93,11 +94,7 @@ button{
       rgba(201,164,92,.15),
       transparent 32%
     ),
-    linear-gradient(
-      135deg,
-      #101111,
-      #191b1b
-    );
+    linear-gradient(135deg,#101111,#191b1b);
 }
 
 .hero-inner{
@@ -356,8 +353,7 @@ button{
   font-weight:800;
 }
 
-input,
-textarea{
+input,textarea{
   width:100%;
   padding:13px;
   background:#111313;
@@ -368,8 +364,7 @@ textarea{
   font-size:15px;
 }
 
-input:focus,
-textarea:focus{
+input:focus,textarea:focus{
   border-color:var(--gold);
 }
 
@@ -470,344 +465,432 @@ footer{
     min-height:auto;
   }
 }
-</style></head><body><nav class="navbar">
-  <div class="nav-inner"><div class="logo">
-  Maje <span>AdMarket Pro</span>
-</div>
+</style>
+</head>
 
-<div class="nav-buttons">
-  <button type="button" class="nav-btn" data-scroll="packages">
-    Packages
-  </button>
+<body>
 
-  <button type="button" class="nav-btn" data-scroll="advertisements">
-    Advertisements
-  </button>
+<nav class="navbar">
+  <div class="nav-inner">
 
-  <button type="button" class="nav-btn" data-scroll="advertise">
-    Create Campaign
-  </button>
-</div>
-
-  </div>
-</nav><section class="hero">
-  <div class="hero-inner"><div class="badge">
-  Professional Digital Advertising
-</div>
-
-<h1>
-  Put your brand
-  <span>where people see it.</span>
-</h1>
-
-<p class="hero-text">
-  Maje AdMarket Pro gives businesses a professional
-  way to promote products and services online and
-  reach more potential customers.
-</p>
-
-<div class="button-row">
-
-  <button
-    type="button"
-    class="main-btn gold"
-    data-scroll="advertise"
-  >
-    Start a Campaign
-  </button>
-
-  <button
-    type="button"
-    class="main-btn outline"
-    data-scroll="advertisements"
-  >
-    Explore Advertisements
-  </button>
-
-</div>
-
-  </div>
-</section><section class="section" id="packages">  <div class="section-heading"><div class="section-label">
-  Advertising Packages
-</div>
-
-<h2>Choose your campaign.</h2>
-
-<p class="section-description">
-  Select the advertising package you want to use.
-</p>
-
-  </div>  <div class="packages"><button
-  type="button"
-  class="package-card selected"
-  data-package="basic"
-  data-duration="7"
-  data-price="5"
->
-
-  <div class="package-name">Basic</div>
-
-  <div class="package-price">$5</div>
-
-  <div class="package-duration">7 days</div>
-
-  <ul>
-    <li>Standard advertisement placement</li>
-    <li>Advertisement page</li>
-    <li>Shareable advertisement link</li>
-  </ul>
-
-</button>
-
-<button
-  type="button"
-  class="package-card"
-  data-package="premium"
-  data-duration="14"
-  data-price="10"
->
-
-  <div class="popular-label">
-    MOST POPULAR
-  </div>
-
-  <div class="package-name">Premium</div>
-
-  <div class="package-price">$10</div>
-
-  <div class="package-duration">14 days</div>
-
-  <ul>
-    <li>Featured advertisement placement</li>
-    <li>Advertisement page</li>
-    <li>Shareable advertisement link</li>
-    <li>Higher visibility</li>
-  </ul>
-
-</button>
-
-<button
-  type="button"
-  class="package-card"
-  data-package="premium_plus"
-  data-duration="30"
-  data-price="20"
->
-
-  <div class="package-name">Premium Plus</div>
-
-  <div class="package-price">$20</div>
-
-  <div class="package-duration">30 days</div>
-
-  <ul>
-    <li>Top featured placement</li>
-    <li>Advertisement page</li>
-    <li>Shareable advertisement link</li>
-    <li>Maximum campaign duration</li>
-  </ul>
-
-</button>
-
-  </div>
-</section><section class="ads-section" id="advertisements">  <div class="section"><div class="section-heading">
-
-  <div class="section-label">
-    Live Campaigns
-  </div>
-
-  <h2>Approved advertisements.</h2>
-
-  <p class="section-description">
-    Explore businesses currently promoted on
-    Maje AdMarket Pro.
-  </p>
-
-</div>
-
-<div class="ads-grid" id="approvedAdvertisements">
-
-  <div class="ad-card">
-    <div class="ad-content">
-      Loading advertisements...
+    <div class="logo">
+      Maje <span>AdMarket Pro</span>
     </div>
-  </div>
 
-</div>
+    <div class="nav-buttons">
 
-  </div>
-</section><section class="section" id="advertise">  <div class="section-heading"><div class="section-label">
-  Create Campaign
-</div>
+      <button type="button" class="nav-btn" id="navPackages">
+        Packages
+      </button>
 
-<h2>Submit your advertisement.</h2>
+      <button type="button" class="nav-btn" id="navAds">
+        Advertisements
+      </button>
 
-<p class="section-description">
-  Choose your package, provide your campaign details
-  and continue to secure payment.
-</p>
+      <button type="button" class="nav-btn" id="navCampaign">
+        Create Campaign
+      </button>
 
-  </div>  <div class="form-wrapper"><form id="advertisementForm">
-
-  <div class="selected-package">
-    Selected package:
-    <span id="selectedPackageText">
-      Basic — $5 — 7 days
-    </span>
-  </div>
-
-  <div class="form-group">
-    <label for="email">
-      Email Address
-    </label>
-
-    <input
-      type="email"
-      id="email"
-      placeholder="yourname@gmail.com"
-      required
-    >
-  </div>
-
-  <div class="form-group">
-    <label for="advertiser_name">
-      Advertiser or Business Name
-    </label>
-
-    <input
-      type="text"
-      id="advertiser_name"
-      placeholder="Your name or business name"
-      required
-    >
-  </div>
-
-  <div class="form-group">
-    <label for="advert_title">
-      Advertisement Title
-    </label>
-
-    <input
-      type="text"
-      id="advert_title"
-      placeholder="Your advertisement title"
-      required
-    >
-  </div>
-
-  <div class="form-group">
-    <label for="description">
-      Advertisement Description
-    </label>
-
-    <textarea
-      id="description"
-      placeholder="Describe your product or service"
-      required
-    ></textarea>
-  </div>
-
-  <div class="form-group">
-    <label for="extended_description">
-      Additional Information
-    </label>
-
-    <textarea
-      id="extended_description"
-      placeholder="Optional additional information"
-    ></textarea>
-  </div>
-
-  <div class="form-group">
-    <label for="contact">
-      Contact Information
-    </label>
-
-    <input
-      type="text"
-      id="contact"
-      placeholder="Phone, WhatsApp or email"
-      required
-    >
-  </div>
-
-  <div class="form-group">
-    <label for="image_url">
-      Advertisement Image URL
-    </label>
-
-    <input
-      type="url"
-      id="image_url"
-      placeholder="https://example.com/image.jpg"
-    >
-  </div>
-
-  <button
-    type="submit"
-    class="main-btn gold"
-    id="submitButton"
-  >
-    Continue to Payment
-  </button>
-
-  <div id="message"></div>
-
-</form>
+    </div>
 
   </div>
-</section><section class="section">  <div class="section-heading"><div class="section-label">
-  How It Works
-</div>
+</nav>
 
-<h2>A simple advertising process.</h2>
+<section class="hero">
 
-  </div>  <div class="steps"><div class="step">
-  <div class="step-number">01</div>
+  <div class="hero-inner">
 
-  <h3>Choose a package</h3>
+    <div class="badge">
+      Professional Digital Advertising
+    </div>
+
+    <h1>
+      Put your brand
+      <span>where people see it.</span>
+    </h1>
+
+    <p class="hero-text">
+      Maje AdMarket Pro gives businesses a professional
+      way to promote products and services online and
+      reach more potential customers.
+    </p>
+
+    <div class="button-row">
+
+      <button
+        type="button"
+        class="main-btn gold"
+        id="startCampaign">
+        Start a Campaign
+      </button>
+
+      <button
+        type="button"
+        class="main-btn outline"
+        id="exploreAds">
+        Explore Advertisements
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section" id="packages">
+
+  <div class="section-heading">
+
+    <div class="section-label">
+      Advertising Packages
+    </div>
+
+    <h2>Choose your campaign.</h2>
+
+    <p class="section-description">
+      Tap a package to select it. You can change your
+      selection before submitting your campaign.
+    </p>
+
+  </div>
+
+  <div class="packages">
+
+    <button
+      type="button"
+      class="package-card selected"
+      data-package="basic"
+      data-duration="7"
+      data-price="5">
+
+      <div class="package-name">Basic</div>
+
+      <div class="package-price">$5</div>
+
+      <div class="package-duration">7 days</div>
+
+      <ul>
+        <li>Standard advertisement placement</li>
+        <li>Advertisement page</li>
+        <li>Shareable advertisement link</li>
+      </ul>
+
+    </button>
+
+    <button
+      type="button"
+      class="package-card"
+      data-package="premium"
+      data-duration="14"
+      data-price="10">
+
+      <div class="popular-label">
+        MOST POPULAR
+      </div>
+
+      <div class="package-name">Premium</div>
+
+      <div class="package-price">$10</div>
+
+      <div class="package-duration">14 days</div>
+
+      <ul>
+        <li>Featured advertisement placement</li>
+        <li>Advertisement page</li>
+        <li>Shareable advertisement link</li>
+        <li>Higher visibility</li>
+      </ul>
+
+    </button>
+
+    <button
+      type="button"
+      class="package-card"
+      data-package="premium_plus"
+      data-duration="30"
+      data-price="20">
+
+      <div class="package-name">
+        Premium Plus
+      </div>
+
+      <div class="package-price">$20</div>
+
+      <div class="package-duration">
+        30 days
+      </div>
+
+      <ul>
+        <li>Top featured placement</li>
+        <li>Advertisement page</li>
+        <li>Shareable advertisement link</li>
+        <li>Maximum campaign duration</li>
+      </ul>
+
+    </button>
+
+  </div>
+
+</section>
+
+<section class="ads-section" id="advertisements">
+
+  <div class="section">
+
+    <div class="section-heading">
+
+      <div class="section-label">
+        Live Campaigns
+      </div>
+
+      <h2>Approved advertisements.</h2>
+
+      <p class="section-description">
+        Explore businesses currently promoted on
+        Maje AdMarket Pro.
+      </p>
+
+    </div>
+
+    <div
+      class="ads-grid"
+      id="approvedAdvertisements">
+
+      <div class="ad-card">
+
+        <div class="ad-content">
+          Loading advertisements...
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section" id="advertise">
+
+  <div class="section-heading">
+
+    <div class="section-label">
+      Create Campaign
+    </div>
+
+    <h2>Submit your advertisement.</h2>
+
+    <p class="section-description">
+      Choose your package, provide your campaign details
+      and pay securely through Paystack.
+    </p>
+
+  </div>
+
+  <div class="form-wrapper">
+
+    <form id="advertisementForm">
+
+      <div class="selected-package">
+
+        Selected package:
+
+        <span id="selectedPackageText">
+          Basic — $5 — 7 days
+        </span>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="email">
+          Email Address
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          placeholder="yourname@gmail.com"
+          required>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="advertiser_name">
+          Advertiser or Business Name
+        </label>
+
+        <input
+          type="text"
+          id="advertiser_name"
+          placeholder="Your name or business name"
+          required>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="advert_title">
+          Advertisement Title
+        </label>
+
+        <input
+          type="text"
+          id="advert_title"
+          placeholder="Your advertisement title"
+          required>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="description">
+          Advertisement Description
+        </label>
+
+        <textarea
+          id="description"
+          placeholder="Describe your product or service"
+          required></textarea>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="extended_description">
+          Additional Information
+        </label>
+
+        <textarea
+          id="extended_description"
+          placeholder="Optional additional information"></textarea>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="contact">
+          Contact Information
+        </label>
+
+        <input
+          type="text"
+          id="contact"
+          placeholder="Phone, WhatsApp or email"
+          required>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="image_url">
+          Advertisement Image URL
+        </label>
+
+        <input
+          type="url"
+          id="image_url"
+          placeholder="https://example.com/image.jpg">
+
+      </div>
+
+      <button
+        type="submit"
+        class="main-btn gold"
+        id="submitButton">
+        Continue to Payment
+      </button>
+
+      <div id="message"></div>
+
+    </form>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <div class="section-label">
+      How It Works
+    </div>
+
+    <h2>
+      A simple advertising process.
+    </h2>
+
+  </div>
+
+  <div class="steps">
+
+    <div class="step">
+
+      <div class="step-number">01</div>
+
+      <h3>Choose a package</h3>
+
+      <p>
+        Tap the package you want to use for your campaign.
+      </p>
+
+    </div>
+
+    <div class="step">
+
+      <div class="step-number">02</div>
+
+      <h3>Create your campaign</h3>
+
+      <p>
+        Enter your advertisement information and continue
+        to secure payment.
+      </p>
+
+    </div>
+
+    <div class="step">
+
+      <div class="step-number">03</div>
+
+      <h3>Get published</h3>
+
+      <p>
+        After payment and approval, your advertisement
+        can go live.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
 
   <p>
-    Select the advertising package you want.
-  </p>
-</div>
-
-<div class="step">
-  <div class="step-number">02</div>
-
-  <h3>Create your campaign</h3>
-
-  <p>
-    Enter your advertisement information.
-  </p>
-</div>
-
-<div class="step">
-  <div class="step-number">03</div>
-
-  <h3>Get published</h3>
-
-  <p>
-    After payment and approval, your advertisement
-    can go live.
-  </p>
-</div>
-
-  </div>
-</section><footer>  <p>
     <span class="footer-brand">
       Maje AdMarket Pro
     </span>
-  </p>  <p>
-    Professional digital advertising marketplace.
-  </p>  <p>
-    © 2026 Maje AdMarket Pro. All rights reserved.
-  </p></footer><script>
-"use strict";
+  </p>
 
-/* =========================================
+  <p>
+    Professional digital advertising marketplace.
+  </p>
+
+  <p>
+    © 2026 Maje AdMarket Pro. All rights reserved.
+  </p>
+
+</footer>
+
+<script>
+
+/* ==========================================
    SUPABASE CONFIGURATION
-   ========================================= */
+   ========================================== */
 
 const SUPABASE_URL =
   "https://rkobepfufwybyaixzgcu.supabase.co";
@@ -815,27 +898,46 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
 
-/* =========================================
-   EDGE FUNCTION
-   ========================================= */
-
 const PAYMENT_FUNCTION_URL =
   SUPABASE_URL +
   "/functions/v1/initialize-payment";
 
 
-/* =========================================
+/* ==========================================
    PACKAGE STATE
-   ========================================= */
+   ========================================== */
 
 let selectedPackage = "basic";
 let selectedDuration = 7;
 let selectedPrice = 5;
 
 
-/* =========================================
-   HELPERS
-   ========================================= */
+/* ==========================================
+   GET ELEMENTS
+   ========================================== */
+
+const packageCards =
+  document.querySelectorAll(".package-card");
+
+const selectedPackageText =
+  document.getElementById("selectedPackageText");
+
+const form =
+  document.getElementById("advertisementForm");
+
+const submitButton =
+  document.getElementById("submitButton");
+
+const message =
+  document.getElementById("message");
+
+const advertisements =
+  document.getElementById("approvedAdvertisements");
+
+
+/* ==========================================
+   SECTION NAVIGATION
+   ========================================== */
 
 function scrollToSection(id){
 
@@ -843,7 +945,6 @@ function scrollToSection(id){
     document.getElementById(id);
 
   if(!element){
-    console.error("Section not found:", id);
     return;
   }
 
@@ -854,186 +955,181 @@ function scrollToSection(id){
 }
 
 
-function showMessage(text, success=false){
+/* ==========================================
+   HERO BUTTONS
+   ========================================== */
 
-  const message =
-    document.getElementById("message");
+document
+.getElementById("startCampaign")
+.addEventListener("click",function(){
 
-  message.style.display = "block";
-  message.textContent = text;
-
-  if(success){
-
-    message.style.background =
-      "rgba(114,168,120,.15)";
-
-    message.style.color =
-      "#9bc69f";
-
-  }else{
-
-    message.style.background =
-      "rgba(214,107,107,.15)";
-
-    message.style.color =
-      "#e59a9a";
-  }
-}
-
-
-/* =========================================
-   ALL SCROLL BUTTONS
-   ========================================= */
-
-document.querySelectorAll(
-  "[data-scroll]"
-).forEach(function(button){
-
-  button.addEventListener(
-    "click",
-    function(){
-
-      const target =
-        button.getAttribute("data-scroll");
-
-      scrollToSection(target);
-
-    }
-  );
+  scrollToSection("advertise");
 
 });
 
 
-/* =========================================
-   PACKAGE BUTTONS
-   ========================================= */
+document
+.getElementById("exploreAds")
+.addEventListener("click",function(){
 
-const packageCards =
-  document.querySelectorAll(
-    ".package-card"
-  );
+  scrollToSection("advertisements");
 
-const selectedPackageText =
-  document.getElementById(
-    "selectedPackageText"
-  );
+});
+
+
+/* ==========================================
+   NAVIGATION BUTTONS
+   ========================================== */
+
+document
+.getElementById("navPackages")
+.addEventListener("click",function(){
+
+  scrollToSection("packages");
+
+});
+
+
+document
+.getElementById("navAds")
+.addEventListener("click",function(){
+
+  scrollToSection("advertisements");
+
+});
+
+
+document
+.getElementById("navCampaign")
+.addEventListener("click",function(){
+
+  scrollToSection("advertise");
+
+});
+
+
+/* ==========================================
+   PACKAGE SELECTION
+   ========================================== */
+
+function selectPackage(card){
+
+  packageCards.forEach(function(item){
+
+    item.classList.remove("selected");
+
+  });
+
+  card.classList.add("selected");
+
+  selectedPackage =
+    card.dataset.package;
+
+  selectedDuration =
+    Number(card.dataset.duration);
+
+  selectedPrice =
+    Number(card.dataset.price);
+
+  let name = "Basic";
+
+  if(selectedPackage === "premium"){
+    name = "Premium";
+  }
+
+  if(selectedPackage === "premium_plus"){
+    name = "Premium Plus";
+  }
+
+  selectedPackageText.textContent =
+    name +
+    " — $" +
+    selectedPrice +
+    " — " +
+    selectedDuration +
+    " days";
+}
 
 
 packageCards.forEach(function(card){
 
-  card.addEventListener(
-    "click",
-    function(){
+  card.addEventListener("click",function(){
 
-      packageCards.forEach(
-        function(item){
-          item.classList.remove(
-            "selected"
-          );
-        }
-      );
+    selectPackage(card);
 
-      card.classList.add("selected");
+    scrollToSection("advertise");
 
-      selectedPackage =
-        card.dataset.package;
-
-      selectedDuration =
-        Number(card.dataset.duration);
-
-      selectedPrice =
-        Number(card.dataset.price);
-
-
-      let packageName = "Basic";
-
-      if(selectedPackage === "premium"){
-        packageName = "Premium";
-      }
-
-      if(selectedPackage === "premium_plus"){
-        packageName = "Premium Plus";
-      }
-
-
-      selectedPackageText.textContent =
-        packageName +
-        " — $" +
-        selectedPrice +
-        " — " +
-        selectedDuration +
-        " days";
-
-      /* Move user to campaign form */
-      scrollToSection("advertise");
-
-    }
-  );
+  });
 
 });
 
 
-/* =========================================
+/* ==========================================
+   MESSAGE
+   ========================================== */
+
+function showMessage(text,success=false){
+
+  message.style.display = "block";
+
+  message.style.background =
+    success
+      ? "rgba(114,168,120,.15)"
+      : "rgba(214,107,107,.15)";
+
+  message.style.color =
+    success
+      ? "#9bc69f"
+      : "#e59a9a";
+
+  message.textContent = text;
+}
+
+
+/* ==========================================
    LOAD APPROVED ADVERTISEMENTS
-   ========================================= */
+   ========================================== */
 
 async function loadAdvertisements(){
 
-  const container =
-    document.getElementById(
-      "approvedAdvertisements"
-    );
+  advertisements.innerHTML =
+    '<div class="ad-card"><div class="ad-content">Loading advertisements...</div></div>';
 
   try{
 
     const response =
       await fetch(
         SUPABASE_URL +
-        "/rest/v1/advertisements" +
-        "?select=*" +
-        "&payment_status=eq.paid" +
-        "&status=eq.approved",
+        "/rest/v1/advertisements?select=*&approval_status=eq.approved&payment_status=eq.paid&order=created_at.desc",
         {
           method:"GET",
-
           headers:{
             "apikey":SUPABASE_KEY,
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY
+            "Authorization":"Bearer " + SUPABASE_KEY
           }
         }
       );
 
-
     if(!response.ok){
-      throw new Error(
-        "Unable to load advertisements"
-      );
-    }
 
+      throw new Error(
+        "Could not load advertisements."
+      );
+
+    }
 
     const ads =
       await response.json();
 
+    if(!Array.isArray(ads) || ads.length === 0){
 
-    if(!Array.isArray(ads) ||
-       ads.length === 0){
-
-      container.innerHTML =
-        '<div class="ad-card">' +
-        '<div class="ad-content">' +
-        '<h3>No advertisements yet</h3>' +
-        '<p>Approved campaigns will appear here.</p>' +
-        '</div>' +
-        '</div>';
+      advertisements.innerHTML =
+        '<div class="ad-card"><div class="ad-content">No approved advertisements yet.</div></div>';
 
       return;
     }
 
-
-    container.innerHTML = "";
-
+    advertisements.innerHTML = "";
 
     ads.forEach(function(ad){
 
@@ -1042,89 +1138,37 @@ async function loadAdvertisements(){
 
       card.className = "ad-card";
 
+      const image =
+        ad.image_url
+          ? '<img src="' +
+            escapeHTML(ad.image_url) +
+            '" alt="Advertisement">'
+          : "";
 
-      if(ad.image_url){
+      const featured =
+        ad.featured
+          ? '<span class="featured">Featured</span>'
+          : "";
 
-        const image =
-          document.createElement("img");
+      card.innerHTML =
+        image +
+        '<div class="ad-content">' +
+        featured +
+        '<h3>' +
+        escapeHTML(ad.advert_title) +
+        '</h3>' +
+        '<div class="advertiser">' +
+        escapeHTML(ad.advertiser_name) +
+        '</div>' +
+        '<p>' +
+        escapeHTML(ad.description) +
+        '</p>' +
+        '<p><strong>Contact:</strong> ' +
+        escapeHTML(ad.contact) +
+        '</p>' +
+        '</div>';
 
-        image.src = ad.image_url;
-        image.alt =
-          ad.advert_title ||
-          "Advertisement";
-
-        image.onerror =
-          function(){
-            image.style.display = "none";
-          };
-
-        card.appendChild(image);
-
-      }
-
-
-      const content =
-        document.createElement(
-          "div"
-        );
-
-      content.className =
-        "ad-content";
-
-
-      if(ad.featured){
-
-        const featured =
-          document.createElement(
-            "div"
-          );
-
-        featured.className =
-          "featured";
-
-        featured.textContent =
-          "Featured";
-
-        content.appendChild(
-          featured
-        );
-      }
-
-
-      const title =
-        document.createElement("h3");
-
-      title.textContent =
-        ad.advert_title ||
-        "Advertisement";
-
-
-      const advertiser =
-        document.createElement("div");
-
-      advertiser.className =
-        "advertiser";
-
-      advertiser.textContent =
-        ad.advertiser_name ||
-        "";
-
-
-      const description =
-        document.createElement("p");
-
-      description.textContent =
-        ad.description ||
-        "";
-
-
-      content.appendChild(title);
-      content.appendChild(advertiser);
-      content.appendChild(description);
-
-      card.appendChild(content);
-
-      container.appendChild(card);
+      advertisements.appendChild(card);
 
     });
 
@@ -1132,76 +1176,29 @@ async function loadAdvertisements(){
 
     console.error(error);
 
-    container.innerHTML =
-      '<div class="ad-card">' +
-      '<div class="ad-content">' +
-      '<h3>Advertisements unavailable</h3>' +
-      '<p>Please try again later.</p>' +
-      '</div>' +
-      '</div>';
+    advertisements.innerHTML =
+      '<div class="ad-card"><div class="ad-content">Unable to load advertisements right now.</div></div>';
+
   }
 }
 
 
-/* =========================================
+/* ==========================================
+   ESCAPE HTML
+   ========================================== */
+
+function escapeHTML(value){
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    value == null ? "" : String(value);
+
+  return div.innerHTML;
+}
+
+
+/* ==========================================
    CAMPAIGN FORM
-   ========================================= */
-
-const form =
-  document.getElementById(
-    "advertisementForm"
-  );
-
-
-form.addEventListener(
-  "submit",
-  async function(event){
-
-    event.preventDefault();
-
-
-    const submitButton =
-      document.getElementById(
-        "submitButton"
-      );
-
-
-    const email =
-      document.getElementById(
-        "email"
-      ).value.trim();
-
-
-    const advertiserName =
-      document.getElementById(
-        "advertiser_name"
-      ).value.trim();
-
-
-    const advertTitle =
-      document.getElementById(
-        "advert_title"
-      ).value.trim();
-
-
-    const description =
-      document.getElementById(
-        "description"
-      ).value.trim();
-
-
-    const extendedDescription =
-      document.getElementById(
-        "extended_description"
-      ).value.trim();
-
-
-    const contact =
-      document.getElementById(
-        "contact"
-      ).value.trim();
-
-
-    const imageUrl =
-      document.getElementById(
-        "ima      
+   ====      
