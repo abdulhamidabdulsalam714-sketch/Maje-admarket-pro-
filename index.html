@@ -1,600 +1,525 @@
 <!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8"><meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
-«»
-
-<meta
-name="description"
-content="Maje AdMarket Pro - Professional online advertising marketplace."
-
-«»
-
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maje AdMarket Pro</title><style>
-
 :root {
-  --bg: #101111;
-  --surface: #181a1a;
-  --surface-2: #202323;
-  --gold: #c9a45c;
-  --gold-light: #e1c27a;
-  --text: #f4f1e9;
-  --muted: #aaa69c;
-  --border: #353635;
-  --danger: #d66b6b;
-  --success: #72a878;
+  --bg:#101111;
+  --surface:#191b1b;
+  --surface2:#222424;
+  --gold:#c9a45c;
+  --gold2:#e0c17a;
+  --text:#f4f1e9;
+  --muted:#aaa69c;
+  --border:#383936;
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing:border-box;
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior:smooth;
 }
 
 body {
-  margin: 0;
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
 }
 
-a {
-  color: inherit;
+button {
+  font-family:inherit;
 }
-
-
-/* NAVIGATION */
 
 .navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: rgba(16,17,17,.96);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(10px);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(16,17,17,.97);
+  border-bottom:1px solid var(--border);
 }
 
 .nav-inner {
-  max-width: 1150px;
-  margin: auto;
-  padding: 18px 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  max-width:1150px;
+  margin:auto;
+  padding:17px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
 .logo {
-  text-decoration: none;
-  font-size: 21px;
-  font-weight: 800;
-  letter-spacing: .3px;
+  color:var(--text);
+  font-size:21px;
+  font-weight:800;
 }
 
 .logo span {
-  color: var(--gold);
+  color:var(--gold);
 }
 
-.nav-links {
-  display: flex;
-  gap: 25px;
+.nav-buttons {
+  display:flex;
+  gap:10px;
 }
 
-.nav-links a {
-  text-decoration: none;
-  color: var(--muted);
-  font-size: 14px;
+.nav-btn {
+  background:transparent;
+  border:0;
+  color:var(--muted);
+  padding:8px 10px;
+  cursor:pointer;
 }
 
-.nav-links a:hover {
-  color: var(--gold-light);
+.nav-btn:hover {
+  color:var(--gold2);
 }
-
-
-/* HERO */
 
 .hero {
-  min-height: 620px;
-  display: flex;
-  align-items: center;
+  min-height:600px;
+  display:flex;
+  align-items:center;
   background:
     radial-gradient(
       circle at 80% 30%,
-      rgba(201,164,92,.14),
-      transparent 30%
+      rgba(201,164,92,.15),
+      transparent 32%
     ),
-    linear-gradient(
-      135deg,
-      #101111,
-      #181a1a
-    );
+    linear-gradient(135deg,#101111,#191b1b);
 }
 
 .hero-inner {
-  width: 100%;
-  max-width: 1150px;
-  margin: auto;
-  padding: 80px 22px;
+  width:100%;
+  max-width:1150px;
+  margin:auto;
+  padding:80px 22px;
 }
 
 .badge {
-  display: inline-block;
-  padding: 7px 12px;
-  border: 1px solid rgba(201,164,92,.45);
-  border-radius: 30px;
-  color: var(--gold-light);
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  display:inline-block;
+  padding:7px 12px;
+  border:1px solid rgba(201,164,92,.45);
+  border-radius:30px;
+  color:var(--gold2);
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
 }
 
 .hero h1 {
-  max-width: 800px;
-  margin: 22px 0 18px;
-  font-size: clamp(42px, 7vw, 76px);
-  line-height: 1.05;
-  letter-spacing: -2px;
+  max-width:820px;
+  margin:22px 0 18px;
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.04;
+  letter-spacing:-2px;
 }
 
 .hero h1 span {
-  color: var(--gold);
+  color:var(--gold);
 }
 
 .hero-text {
-  max-width: 650px;
-  color: var(--muted);
-  font-size: 18px;
+  max-width:650px;
+  color:var(--muted);
+  font-size:18px;
 }
 
-.hero-buttons {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+.button-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:30px;
 }
 
-.btn {
-  display: inline-block;
-  padding: 13px 22px;
-  border-radius: 7px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
+.main-btn {
+  border:0;
+  border-radius:7px;
+  padding:14px 22px;
+  font-weight:800;
+  font-size:14px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.btn-primary {
-  background: var(--gold);
-  color: #151515;
+.main-btn.gold {
+  background:var(--gold);
+  color:#151515;
 }
 
-.btn-primary:hover {
-  background: var(--gold-light);
+.main-btn.gold:hover {
+  background:var(--gold2);
+  transform:translateY(-1px);
 }
 
-.btn-outline {
-  border: 1px solid var(--border);
-  color: var(--text);
+.main-btn.outline {
+  background:transparent;
+  color:var(--text);
+  border:1px solid var(--border);
 }
 
-.btn-outline:hover {
-  border-color: var(--gold);
-  color: var(--gold-light);
+.main-btn.outline:hover {
+  border-color:var(--gold);
+  color:var(--gold2);
 }
-
-
-/* SECTIONS */
 
 .section {
-  max-width: 1150px;
-  margin: auto;
-  padding: 90px 22px;
-}
-
-.section-heading {
-  max-width: 700px;
-  margin-bottom: 40px;
+  max-width:1150px;
+  margin:auto;
+  padding:85px 22px;
 }
 
 .section-label {
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 12px;
-  font-weight: 700;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.section-heading {
+  max-width:720px;
+  margin-bottom:38px;
 }
 
 .section h2 {
-  margin: 8px 0 12px;
-  font-size: clamp(30px, 5vw, 46px);
-  line-height: 1.15;
+  margin:8px 0 12px;
+  font-size:clamp(30px,5vw,46px);
+  line-height:1.15;
 }
 
 .section-description {
-  color: var(--muted);
+  color:var(--muted);
 }
-
-
-/* PACKAGES */
 
 .packages {
-  display: grid;
-  grid-template-columns:
-    repeat(3, 1fr);
-  gap: 18px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
 }
 
-.package {
-  position: relative;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 30px;
-  transition: .2s;
+.package-card {
+  position:relative;
+  width:100%;
+  min-height:270px;
+  text-align:left;
+  background:var(--surface);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:30px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.package:hover {
-  transform: translateY(-4px);
-  border-color: #5a5548;
+.package-card:hover {
+  border-color:#665d4d;
+  transform:translateY(-3px);
 }
 
-.package.popular {
-  border-color: var(--gold);
-  box-shadow:
-    0 0 0 1px rgba(201,164,92,.12);
+.package-card.selected {
+  border-color:var(--gold);
+  box-shadow:0 0 0 1px var(--gold);
+  background:#1d1d1b;
 }
 
 .popular-label {
-  position: absolute;
-  top: 0;
-  right: 20px;
-  transform: translateY(-50%);
-  background: var(--gold);
-  color: #151515;
-  padding: 6px 11px;
-  border-radius: 5px;
-  font-size: 11px;
-  font-weight: 800;
+  position:absolute;
+  top:0;
+  right:20px;
+  transform:translateY(-50%);
+  padding:6px 10px;
+  border-radius:5px;
+  background:var(--gold);
+  color:#151515;
+  font-size:10px;
+  font-weight:900;
 }
 
 .package-name {
-  color: var(--gold-light);
-  font-size: 15px;
-  font-weight: 700;
+  color:var(--gold2);
+  font-weight:800;
+  font-size:15px;
 }
 
 .package-price {
-  margin: 15px 0 5px;
-  font-size: 40px;
-  font-weight: 800;
+  margin:12px 0 2px;
+  font-size:40px;
+  font-weight:900;
 }
 
 .package-duration {
-  color: var(--muted);
-  font-size: 14px;
+  color:var(--muted);
+  font-size:13px;
 }
 
-.package ul {
-  padding: 0;
-  margin: 25px 0 0;
-  list-style: none;
+.package-card ul {
+  padding:0;
+  margin:22px 0 0;
+  list-style:none;
 }
 
-.package li {
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border);
-  color: #c4c0b7;
-  font-size: 14px;
+.package-card li {
+  padding:7px 0;
+  border-bottom:1px solid var(--border);
+  color:#c5c1b8;
+  font-size:13px;
 }
-
-.package li:last-child {
-  border-bottom: 0;
-}
-
-
-/* ADVERTISEMENTS */
 
 .ads-section {
-  background: #0d0e0e;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  background:#0d0e0e;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
 }
 
 .ads-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(2, 1fr);
-  gap: 20px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
 }
 
 .ad-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.ad-card-content {
-  padding: 24px;
-}
-
-.ad-card h3 {
-  margin: 0 0 7px;
-  font-size: 21px;
-}
-
-.advertiser {
-  color: var(--gold-light);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.ad-card p {
-  color: var(--muted);
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
 }
 
 .ad-card img {
-  display: block;
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
+  display:block;
+  width:100%;
+  max-height:300px;
+  object-fit:cover;
+}
+
+.ad-content {
+  padding:24px;
+}
+
+.ad-content h3 {
+  margin:0 0 5px;
+}
+
+.advertiser {
+  color:var(--gold2);
+  font-size:13px;
+  font-weight:700;
+}
+
+.ad-content p {
+  color:var(--muted);
 }
 
 .featured {
-  display: inline-block;
-  margin-bottom: 12px;
-  padding: 5px 9px;
-  border: 1px solid rgba(201,164,92,.5);
-  color: var(--gold-light);
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
+  display:inline-block;
+  margin-bottom:12px;
+  padding:5px 9px;
+  border:1px solid rgba(201,164,92,.5);
+  border-radius:4px;
+  color:var(--gold2);
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
 }
 
-
-/* FORM */
-
 .form-wrapper {
-  max-width: 780px;
-  margin: auto;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 35px;
+  max-width:780px;
+  margin:auto;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:35px;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom:20px;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 13px;
-  font-weight: 700;
+.form-group > label {
+  display:block;
+  margin-bottom:8px;
+  font-size:13px;
+  font-weight:800;
 }
 
 input,
 textarea {
-  width: 100%;
-  padding: 13px;
-  background: #111313;
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  outline: none;
-  font-family: inherit;
-  font-size: 15px;
+  width:100%;
+  padding:13px;
+  background:#111313;
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:7px;
+  outline:none;
+  font-family:inherit;
+  font-size:15px;
 }
 
 input:focus,
 textarea:focus {
-  border-color: var(--gold);
+  border-color:var(--gold);
 }
 
 textarea {
-  min-height: 130px;
-  resize: vertical;
+  min-height:130px;
+  resize:vertical;
 }
 
-
-/* PACKAGE SELECTOR */
-
-.package-selector {
-  display: grid;
-  grid-template-columns:
-    repeat(3, 1fr);
-  gap: 12px;
+.selected-package {
+  padding:12px 15px;
+  margin-bottom:16px;
+  border:1px solid rgba(201,164,92,.35);
+  border-radius:7px;
+  background:#151616;
+  color:var(--gold2);
+  font-size:14px;
+  font-weight:700;
 }
-
-.package-option {
-  position: relative;
-}
-
-.package-option input {
-  position: absolute;
-  opacity: 0;
-}
-
-.package-option label {
-  display: block;
-  height: 100%;
-  padding: 17px;
-  background: #111313;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.package-option input:checked + label {
-  border-color: var(--gold);
-  box-shadow:
-    0 0 0 1px var(--gold);
-}
-
-.option-title {
-  color: var(--gold-light);
-  font-weight: 800;
-}
-
-.option-price {
-  display: block;
-  margin: 5px 0;
-  font-size: 23px;
-  font-weight: 800;
-}
-
-.option-duration {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-
-/* MESSAGE */
 
 #message {
-  display: none;
-  margin-top: 18px;
-  padding: 13px;
-  border-radius: 7px;
-  font-size: 14px;
+  display:none;
+  margin-top:18px;
+  padding:13px;
+  border-radius:7px;
+  font-size:14px;
 }
 
-
-/* HOW IT WORKS */
-
 .steps {
-  display: grid;
-  grid-template-columns:
-    repeat(3, 1fr);
-  gap: 20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
 }
 
 .step {
-  padding: 28px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  padding:28px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
 }
 
 .step-number {
-  color: var(--gold);
-  font-size: 13px;
-  font-weight: 800;
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
 }
 
 .step h3 {
-  margin-bottom: 7px;
+  margin-bottom:6px;
 }
 
 .step p {
-  color: var(--muted);
-  font-size: 14px;
+  color:var(--muted);
+  font-size:14px;
 }
 
-
-/* FOOTER */
-
 footer {
-  border-top: 1px solid var(--border);
-  padding: 45px 22px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 13px;
+  border-top:1px solid var(--border);
+  padding:45px 22px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
 }
 
 .footer-brand {
-  color: var(--gold);
-  font-weight: 800;
+  color:var(--gold);
+  font-weight:900;
 }
 
+@media(max-width:800px) {
 
-/* MOBILE */
-
-@media (max-width: 800px) {
-
-  .nav-links {
-    display: none;
+  .nav-buttons {
+    display:none;
   }
 
   .hero {
-    min-height: auto;
+    min-height:auto;
   }
 
   .hero-inner {
-    padding: 70px 22px;
+    padding:70px 22px;
   }
 
   .packages,
   .ads-grid,
   .steps {
-    grid-template-columns: 1fr;
-  }
-
-  .package-selector {
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr;
   }
 
   .form-wrapper {
-    padding: 22px;
+    padding:22px;
   }
 
   .section {
-    padding: 65px 22px;
+    padding:65px 22px;
+  }
+
+  .package-card {
+    min-height:auto;
   }
 
 }
-
-</style></head><body><nav class="navbar"><div class="nav-inner"><a
-href="#top"
-class="logo"
+</style></head><body><nav class="navbar"><div class="nav-inner"><div class="logo">
+Maje <span>AdMarket Pro</span>
+</div><div class="nav-buttons"><button
+type="button"
+class="nav-btn"
+id="navPackages"
 
 «»
 
-Maje <span>AdMarket Pro</span>
-</a>
-
-<div class="nav-links"><a href="#packages">
 Packages
-</a><a href="#advertisements">
+</button>
+
+<button
+type="button"
+class="nav-btn"
+id="navAds"
+
+«»
+
 Advertisements
-</a><a href="#advertise">
-Advertise
-</a></div></div></nav><main id="top"><section class="hero"><div class="hero-inner"><div class="badge">
+</button>
+
+<button
+type="button"
+class="nav-btn"
+id="navCampaign"
+
+«»
+
+Create Campaign
+</button>
+
+</div></div></nav><section class="hero"><div class="hero-inner"><div class="badge">
 Professional Digital Advertising
 </div><h1>
 Put your brand
 <span>where people see it.</span>
 </h1><p class="hero-text">
-Maje AdMarket Pro gives businesses a simple,
-professional way to promote products and
-services online and reach more potential customers.
-</p><div class="hero-buttons"><a
-href="#advertise"
-class="btn btn-primary"
+Maje AdMarket Pro gives businesses a professional
+way to promote products and services online and
+reach more potential customers.
+</p><div class="button-row"><button
+type="button"
+class="main-btn gold"
+id="startCampaign"
 
 «»
 
-Start Advertising
-</a>
+Start a Campaign
+</button>
 
-<a
-href="#advertisements"
-class="btn btn-outline"
+<button
+type="button"
+class="main-btn outline"
+id="exploreAds"
 
 «»
 
 Explore Advertisements
-</a>
+</button>
 
 </div></div></section><section
   class="section"
@@ -602,23 +527,39 @@ Explore Advertisements
 ><div class="section-heading"><div class="section-label">
 Advertising Packages
 </div><h2>
-Choose the visibility your business needs.
+Choose your campaign.
 </h2><p class="section-description">
-Flexible advertising options designed for
-different budgets and campaign durations.
-</p></div><div class="packages"><div class="package"><div class="package-name">
+Tap a package to select it. You can change your
+selection before submitting your campaign.
+</p></div><div class="packages"><button
+type="button"
+class="package-card selected"
+data-package="basic"
+data-duration="7"
+data-price="5"
+
+«»
+
+<div class="package-name">
 Basic
 </div><div class="package-price">
 $5
 </div><div class="package-duration">
 7 days
-</div><ul><li>
-Standard advertisement placement
-</li><li>
-Advertisement page
-</li><li>
-Shareable advertisement link
-</li></ul></div><div class="package popular"><div class="popular-label">
+</div><ul>
+<li>Standard advertisement placement</li>
+<li>Advertisement page</li>
+<li>Shareable advertisement link</li>
+</ul></button><button
+type="button"
+class="package-card"
+data-package="premium"
+data-duration="14"
+data-price="10"
+
+«»
+
+<div class="popular-label">
 MOST POPULAR
 </div><div class="package-name">
 Premium
@@ -626,54 +567,62 @@ Premium
 $10
 </div><div class="package-duration">
 14 days
-</div><ul><li>
-Featured advertisement placement
-</li><li>
-Advertisement page
-</li><li>
-Shareable advertisement link
-</li><li>
-Higher visibility
-</li></ul></div><div class="package"><div class="package-name">
+</div><ul>
+<li>Featured advertisement placement</li>
+<li>Advertisement page</li>
+<li>Shareable advertisement link</li>
+<li>Higher visibility</li>
+</ul></button><button
+type="button"
+class="package-card"
+data-package="premium_plus"
+data-duration="30"
+data-price="20"
+
+«»
+
+<div class="package-name">
 Premium Plus
 </div><div class="package-price">
 $20
 </div><div class="package-duration">
 30 days
-</div><ul><li>
-Top featured placement
-</li><li>
-Advertisement page
-</li><li>
-Shareable advertisement link
-</li><li>
-Maximum campaign duration
-</li></ul></div></div></section><section
+</div><ul>
+<li>Top featured placement</li>
+<li>Advertisement page</li>
+<li>Shareable advertisement link</li>
+<li>Maximum campaign duration</li>
+</ul></button></div></section><section
   class="ads-section"
   id="advertisements"
 ><div class="section"><div class="section-heading"><div class="section-label">
 Live Campaigns
 </div><h2>
-Approved advertisements
+Approved advertisements.
 </h2><p class="section-description">
 Explore businesses currently promoted on
 Maje AdMarket Pro.
 </p></div><div
   class="ads-grid"
   id="approvedAdvertisements"
-><div class="ad-card"><div class="ad-card-content"><p>
+><div class="ad-card"><div class="ad-content">
 Loading advertisements...
-</p></div></div></div></div></section><section
+</div></div></div></div></section><section
   class="section"
   id="advertise"
 ><div class="section-heading"><div class="section-label">
-Start a Campaign
+Create Campaign
 </div><h2>
 Submit your advertisement.
 </h2><p class="section-description">
-Choose your package, provide your campaign
-details and submit your advertisement for review.
-</p></div><div class="form-wrapper"><form id="advertisementForm"><div class="form-group"><label for="advertiser_name">
+Choose your package, provide your campaign details
+and submit your advertisement for review.
+</p></div><div class="form-wrapper"><form id="advertisementForm"><div class="selected-package">
+Selected package:
+<span id="selectedPackageText">
+Basic — $5 — 7 days
+</span>
+</div><div class="form-group"><label for="advertiser_name">
 Advertiser or Business Name
 </label><input
 type="text"
@@ -723,54 +672,9 @@ placeholder="https://example.com/image.jpg"
 
 «»
 
-</div><div class="form-group"><label>
-Select Your Package
-</label><div class="package-selector"><div class="package-option"><input
-type="radio"
-name="package"
-id="basicPackage"
-value="basic"
-checked
-
-«»
-
-<label for="basicPackage"><span class="option-title">
-Basic
-</span><span class="option-price">
-$5
-</span><span class="option-duration">
-7 days
-</span></label></div><div class="package-option"><input
-type="radio"
-name="package"
-id="premiumPackage"
-value="premium"
-
-«»
-
-<label for="premiumPackage"><span class="option-title">
-Premium
-</span><span class="option-price">
-$10
-</span><span class="option-duration">
-14 days
-</span></label></div><div class="package-option"><input
-type="radio"
-name="package"
-id="premiumPlusPackage"
-value="premium_plus"
-
-«»
-
-<label for="premiumPlusPackage"><span class="option-title">
-Premium Plus
-</span><span class="option-price">
-$20
-</span><span class="option-duration">
-30 days
-</span></label></div></div></div><button
+</div><button
 type="submit"
-class="btn btn-primary"
+class="main-btn gold"
 id="submitButton"
 
 «»
@@ -787,23 +691,22 @@ A simple advertising process.
 </div><h3>
 Choose a package
 </h3><p>
-Select the advertising duration and
-visibility level that suits your campaign.
+Tap the package you want to use for your campaign.
 </p></div><div class="step"><div class="step-number">
 02
 </div><h3>
-Submit your campaign
+Create your campaign
 </h3><p>
-Provide your advertisement information
-and submit it for review.
+Enter your advertisement information and submit it
+for review.
 </p></div><div class="step"><div class="step-number">
 03
 </div><h3>
 Get published
 </h3><p>
-After approval and payment verification,
-your advertisement can go live.
-</p></div></div></section></main><footer><p>
+After approval and payment verification, your
+advertisement can go live.
+</p></div></div></section><footer><p>
 <span class="footer-brand">
 Maje AdMarket Pro
 </span>
@@ -818,6 +721,195 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
 "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
+
+
+let selectedPackage = "basic";
+let selectedDuration = 7;
+let selectedPrice = 5;
+
+
+const packageCards =
+document.querySelectorAll(
+".package-card"
+);
+
+const selectedPackageText =
+document.getElementById(
+"selectedPackageText"
+);
+
+
+function scrollToSection(id) {
+
+const element =
+document.getElementById(id);
+
+if (element) {
+
+element.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+}
+
+}
+
+
+function selectPackage(card) {
+
+packageCards.forEach(
+function(item) {
+
+item.classList.remove(
+"selected"
+);
+
+}
+);
+
+
+card.classList.add(
+"selected"
+);
+
+
+selectedPackage =
+card.dataset.package;
+
+selectedDuration =
+Number(card.dataset.duration);
+
+selectedPrice =
+Number(card.dataset.price);
+
+
+let packageName =
+"Basic";
+
+
+if (
+selectedPackage ===
+"premium"
+) {
+
+packageName =
+"Premium";
+
+}
+
+
+if (
+selectedPackage ===
+"premium_plus"
+) {
+
+packageName =
+"Premium Plus";
+
+}
+
+
+selectedPackageText.textContent =
+packageName +
+" — $" +
+selectedPrice +
+" — " +
+selectedDuration +
+" days";
+
+
+}
+
+
+packageCards.forEach(
+function(card) {
+
+card.addEventListener(
+"click",
+function() {
+
+selectPackage(card);
+
+scrollToSection(
+"advertise"
+);
+
+}
+);
+
+}
+);
+
+
+document.getElementById(
+"startCampaign"
+).addEventListener(
+"click",
+function() {
+
+scrollToSection(
+"advertise"
+);
+
+}
+);
+
+
+document.getElementById(
+"exploreAds"
+).addEventListener(
+"click",
+function() {
+
+scrollToSection(
+"advertisements"
+);
+
+}
+);
+
+
+document.getElementById(
+"navPackages"
+).addEventListener(
+"click",
+function() {
+
+scrollToSection(
+"packages"
+);
+
+}
+);
+
+
+document.getElementById(
+"navAds"
+).addEventListener(
+"click",
+function() {
+
+scrollToSection(
+"advertisements"
+);
+
+}
+);
+
+
+document.getElementById(
+"navCampaign"
+).addEventListener(
+"click",
+function() {
+
+scrollToSection(
+"advertise"
+);
+
+}
+);
 
 
 const form =
@@ -839,7 +931,9 @@ document.getElementById(
 function escapeHTML(value) {
 
 const div =
-document.createElement("div");
+document.createElement(
+"div"
+);
 
 div.textContent =
 value || "";
@@ -863,86 +957,45 @@ submitButton.textContent =
 "Submitting...";
 
 
-const selectedPackage =
-document.querySelector(
-'input[name="package"]:checked'
-).value;
-
-
-let durationDays = 7;
-
-
-if (
-selectedPackage ===
-"premium"
-) {
-
-durationDays = 14;
-
-}
-
-
-if (
-selectedPackage ===
-"premium_plus"
-) {
-
-durationDays = 30;
-
-}
-
-
 const advertisement = {
 
 advertiser_name:
-document
-.getElementById(
+document.getElementById(
 "advertiser_name"
-)
-.value.trim(),
+).value.trim(),
 
 advert_title:
-document
-.getElementById(
+document.getElementById(
 "advert_title"
-)
-.value.trim(),
+).value.trim(),
 
 description:
-document
-.getElementById(
+document.getElementById(
 "description"
-)
-.value.trim(),
+).value.trim(),
 
 extended_description:
-document
-.getElementById(
+document.getElementById(
 "extended_description"
-)
-.value.trim() ||
+).value.trim() ||
 null,
 
 contact:
-document
-.getElementById(
+document.getElementById(
 "contact"
-)
-.value.trim(),
+).value.trim(),
 
 image_url:
-document
-.getElementById(
+document.getElementById(
 "image_url"
-)
-.value.trim() ||
+).value.trim() ||
 null,
 
 package:
 selectedPackage,
 
 duration_days:
-durationDays,
+selectedDuration,
 
 featured:
 false,
@@ -963,10 +1016,9 @@ SUPABASE_URL +
 
 {
 
-method:
-"POST",
+method:"POST",
 
-headers: {
+headers:{
 
 "Content-Type":
 "application/json",
@@ -1012,14 +1064,49 @@ message.style.color =
 "#9bc69f";
 
 message.textContent =
-"Advertisement submitted successfully. " +
-"Your campaign is awaiting review and payment.";
+"Campaign submitted successfully. " +
+"Your advertisement is awaiting review and payment.";
+
 
 form.reset();
 
 
+selectedPackage =
+"basic";
+
+selectedDuration =
+7;
+
+selectedPrice =
+5;
+
+
+packageCards.forEach(
+function(card,index) {
+
+card.classList.remove(
+"selected"
+);
+
+if (index === 0) {
+
+card.classList.add(
+"selected"
+);
+
 }
-catch (error) {
+
+}
+);
+
+
+selectedPackageText.textContent =
+"Basic — $5 — 7 days";
+
+
+}
+
+catch(error) {
 
 console.error(error);
 
@@ -1070,7 +1157,7 @@ SUPABASE_URL +
 
 {
 
-headers: {
+headers:{
 
 "apikey":
 SUPABASE_KEY,
@@ -1104,9 +1191,8 @@ advertisements.length === 0
 ) {
 
 container.innerHTML =
-
 '<div class="ad-card">' +
-'<div class="ad-card-content">' +
+'<div class="ad-content">' +
 "No approved advertisements yet." +
 "</div></div>";
 
@@ -1120,7 +1206,6 @@ container.innerHTML = "";
 
 advertisements.forEach(
 function(ad) {
-
 
 const card =
 document.createElement(
@@ -1149,9 +1234,7 @@ ad.image_url
 ?
 
 '<img src="' +
-escapeHTML(
-ad.image_url
-) +
+escapeHTML(ad.image_url) +
 '" alt="Advertisement">'
 
 :
@@ -1163,7 +1246,7 @@ card.innerHTML =
 
 image +
 
-'<div class="ad-card-content">' +
+'<div class="ad-content">' +
 
 featured +
 
@@ -1194,19 +1277,33 @@ ad.description ||
 
 "</p>" +
 
-'<a class="btn btn-primary" href="ad.html?id=' +
-
-encodeURIComponent(
-ad.id
-) +
-
-'">' +
+'<button type="button" class="main-btn gold view-ad">' +
 
 "View Advertisement" +
 
-"</a>" +
+"</button>" +
 
 "</div>";
+
+
+const viewButton =
+card.querySelector(
+".view-ad"
+);
+
+
+viewButton.addEventListener(
+"click",
+function() {
+
+window.location.href =
+"ad.html?id=" +
+encodeURIComponent(
+ad.id
+);
+
+}
+);
 
 
 container.appendChild(
@@ -1219,15 +1316,15 @@ card
 
 
 }
-catch (error) {
+
+catch(error) {
 
 console.error(error);
 
 
 container.innerHTML =
-
 '<div class="ad-card">' +
-'<div class="ad-card-content">' +
+'<div class="ad-content">' +
 "Advertisements could not be loaded." +
 "</div></div>";
 
@@ -1238,4 +1335,5 @@ container.innerHTML =
 
 loadApprovedAdvertisements();
 
-</script></body></html>
+</script></body>
+  </html>
