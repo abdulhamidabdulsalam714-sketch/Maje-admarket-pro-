@@ -1,8 +1,7 @@
-<!DOCTYPE html><html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maje AdMarket Pro</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maje AdMarket Pro</title><style>
+
 :root {
   --bg:#101111;
   --surface:#191b1b;
@@ -34,6 +33,10 @@ button,
 input,
 textarea {
   font-family:inherit;
+}
+
+button {
+  cursor:pointer;
 }
 
 .navbar {
@@ -73,7 +76,6 @@ textarea {
   border:0;
   color:var(--muted);
   padding:8px 10px;
-  cursor:pointer;
 }
 
 .nav-btn:hover {
@@ -84,13 +86,18 @@ textarea {
   min-height:600px;
   display:flex;
   align-items:center;
+
   background:
     radial-gradient(
       circle at 80% 30%,
       rgba(201,164,92,.15),
       transparent 32%
     ),
-    linear-gradient(135deg,#101111,#191b1b);
+    linear-gradient(
+      135deg,
+      #101111,
+      #191b1b
+    );
 }
 
 .hero-inner {
@@ -142,7 +149,6 @@ textarea {
   padding:14px 22px;
   font-weight:800;
   font-size:14px;
-  cursor:pointer;
   transition:.2s;
 }
 
@@ -165,6 +171,11 @@ textarea {
 .main-btn.outline:hover {
   border-color:var(--gold);
   color:var(--gold2);
+}
+
+.main-btn:disabled {
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 .section {
@@ -212,7 +223,6 @@ textarea {
   border:1px solid var(--border);
   border-radius:12px;
   padding:30px;
-  cursor:pointer;
   transition:.2s;
 }
 
@@ -429,6 +439,7 @@ footer {
 }
 
 @media(max-width:800px) {
+
   .nav-buttons {
     display:none;
   }
@@ -458,31 +469,42 @@ footer {
   .package-card {
     min-height:auto;
   }
+
 }
-</style></head><body><nav class="navbar">
-  <div class="nav-inner"><div class="logo">
+
+</style></head><body><nav class="navbar">  <div class="nav-inner"><div class="logo">
   Maje <span>AdMarket Pro</span>
 </div>
 
 <div class="nav-buttons">
 
-  <button type="button" class="nav-btn" id="navPackages">
+  <button
+    type="button"
+    class="nav-btn"
+    id="navPackages"
+  >
     Packages
   </button>
 
-  <button type="button" class="nav-btn" id="navAds">
+  <button
+    type="button"
+    class="nav-btn"
+    id="navAds"
+  >
     Advertisements
   </button>
 
-  <button type="button" class="nav-btn" id="navCampaign">
+  <button
+    type="button"
+    class="nav-btn"
+    id="navCampaign"
+  >
     Create Campaign
   </button>
 
 </div>
 
-  </div>
-</nav><section class="hero">
-  <div class="hero-inner"><div class="badge">
+  </div></nav><section class="hero">  <div class="hero-inner"><div class="badge">
   Professional Digital Advertising
 </div>
 
@@ -499,18 +521,28 @@ footer {
 
 <div class="button-row">
 
-  <button type="button" class="main-btn gold" id="startCampaign">
+  <button
+    type="button"
+    class="main-btn gold"
+    id="startCampaign"
+  >
     Start a Campaign
   </button>
 
-  <button type="button" class="main-btn outline" id="exploreAds">
+  <button
+    type="button"
+    class="main-btn outline"
+    id="exploreAds"
+  >
     Explore Advertisements
   </button>
 
 </div>
 
-  </div>
-</section><section class="section" id="packages">  <div class="section-heading"><div class="section-label">
+  </div></section><section
+  class="section"
+  id="packages"
+>  <div class="section-heading"><div class="section-label">
   Advertising Packages
 </div>
 
@@ -530,18 +562,27 @@ footer {
   data-duration="7"
   data-price="5"
 >
-  <div class="package-name">Basic</div>
 
-  <div class="package-price">$5</div>
+  <div class="package-name">
+    Basic
+  </div>
 
-  <div class="package-duration">7 days</div>
+  <div class="package-price">
+    $5
+  </div>
+
+  <div class="package-duration">
+    7 days
+  </div>
 
   <ul>
     <li>Standard advertisement placement</li>
     <li>Advertisement page</li>
     <li>Shareable advertisement link</li>
   </ul>
+
 </button>
+
 
 <button
   type="button"
@@ -550,15 +591,22 @@ footer {
   data-duration="14"
   data-price="10"
 >
+
   <div class="popular-label">
     MOST POPULAR
   </div>
 
-  <div class="package-name">Premium</div>
+  <div class="package-name">
+    Premium
+  </div>
 
-  <div class="package-price">$10</div>
+  <div class="package-price">
+    $10
+  </div>
 
-  <div class="package-duration">14 days</div>
+  <div class="package-duration">
+    14 days
+  </div>
 
   <ul>
     <li>Featured advertisement placement</li>
@@ -566,7 +614,9 @@ footer {
     <li>Shareable advertisement link</li>
     <li>Higher visibility</li>
   </ul>
+
 </button>
+
 
 <button
   type="button"
@@ -575,11 +625,18 @@ footer {
   data-duration="30"
   data-price="20"
 >
-  <div class="package-name">Premium Plus</div>
 
-  <div class="package-price">$20</div>
+  <div class="package-name">
+    Premium Plus
+  </div>
 
-  <div class="package-duration">30 days</div>
+  <div class="package-price">
+    $20
+  </div>
+
+  <div class="package-duration">
+    30 days
+  </div>
 
   <ul>
     <li>Top featured placement</li>
@@ -587,10 +644,13 @@ footer {
     <li>Shareable advertisement link</li>
     <li>Maximum campaign duration</li>
   </ul>
+
 </button>
 
-  </div>
-</section><section class="ads-section" id="advertisements">  <div class="section"><div class="section-heading">
+  </div></section><section
+  class="ads-section"
+  id="advertisements"
+>  <div class="section"><div class="section-heading">
 
   <div class="section-label">
     Live Campaigns
@@ -607,18 +667,26 @@ footer {
 
 </div>
 
-<div class="ads-grid" id="approvedAdvertisements">
+
+<div
+  class="ads-grid"
+  id="approvedAdvertisements"
+>
 
   <div class="ad-card">
+
     <div class="ad-content">
       Loading advertisements...
     </div>
+
   </div>
 
 </div>
 
-  </div>
-</section><section class="section" id="advertise">  <div class="section-heading"><div class="section-label">
+  </div></section><section
+  class="section"
+  id="advertise"
+>  <div class="section-heading"><div class="section-label">
   Create Campaign
 </div>
 
@@ -634,11 +702,15 @@ footer {
   </div>  <div class="form-wrapper"><form id="advertisementForm">
 
   <div class="selected-package">
+
     Selected package:
+
     <span id="selectedPackageText">
       Basic — $5 — 7 days
     </span>
+
   </div>
+
 
   <div class="form-group">
 
@@ -655,6 +727,7 @@ footer {
 
   </div>
 
+
   <div class="form-group">
 
     <label for="advertiser_name">
@@ -669,6 +742,7 @@ footer {
     >
 
   </div>
+
 
   <div class="form-group">
 
@@ -685,6 +759,7 @@ footer {
 
   </div>
 
+
   <div class="form-group">
 
     <label for="description">
@@ -699,6 +774,7 @@ footer {
 
   </div>
 
+
   <div class="form-group">
 
     <label for="extended_description">
@@ -711,6 +787,7 @@ footer {
     ></textarea>
 
   </div>
+
 
   <div class="form-group">
 
@@ -727,6 +804,7 @@ footer {
 
   </div>
 
+
   <div class="form-group">
 
     <label for="image_url">
@@ -741,6 +819,7 @@ footer {
 
   </div>
 
+
   <button
     type="submit"
     class="main-btn gold"
@@ -749,12 +828,12 @@ footer {
     Continue to Payment
   </button>
 
+
   <div id="message"></div>
 
 </form>
 
-  </div>
-</section><section class="section">  <div class="section-heading"><div class="section-label">
+  </div></section><section class="section">  <div class="section-heading"><div class="section-label">
   How It Works
 </div>
 
@@ -763,7 +842,10 @@ footer {
 </h2>
 
   </div>  <div class="steps"><div class="step">
-  <div class="step-number">01</div>
+
+  <div class="step-number">
+    01
+  </div>
 
   <h3>
     Choose a package
@@ -772,10 +854,15 @@ footer {
   <p>
     Tap the package you want to use for your campaign.
   </p>
+
 </div>
 
+
 <div class="step">
-  <div class="step-number">02</div>
+
+  <div class="step-number">
+    02
+  </div>
 
   <h3>
     Create your campaign
@@ -785,10 +872,15 @@ footer {
     Enter your advertisement information and continue
     to secure payment.
   </p>
+
 </div>
 
+
 <div class="step">
-  <div class="step-number">03</div>
+
+  <div class="step-number">
+    03
+  </div>
 
   <h3>
     Get published
@@ -798,10 +890,10 @@ footer {
     After payment and approval, your advertisement
     can go live.
   </p>
+
 </div>
 
-  </div>
-</section><footer>  <p>
+  </div></section><footer>  <p>
     <span class="footer-brand">
       Maje AdMarket Pro
     </span>
@@ -812,26 +904,18 @@ footer {
   </p></footer><script>
 
 /* =========================================
-   SUPABASE SETTINGS
+   SUPABASE
    ========================================= */
 
 const SUPABASE_URL =
   "https://rkobepfufwybyaixzgcu.supabase.co";
-
-/*
- IMPORTANT:
- Replace the value below with your Supabase
- PUBLISHABLE KEY / ANON KEY.
-
- NEVER put PAYSTACK_SECRET_KEY here.
-*/
 
 const SUPABASE_KEY =
   "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
 
 
 /* =========================================
-   PAYMENT FUNCTION
+   PAYMENT EDGE FUNCTION
    ========================================= */
 
 const PAYMENT_FUNCTION_URL =
@@ -840,7 +924,7 @@ const PAYMENT_FUNCTION_URL =
 
 
 /* =========================================
-   PACKAGE SETTINGS
+   PACKAGE STATE
    ========================================= */
 
 let selectedPackage = "basic";
@@ -856,20 +940,28 @@ const packageCards =
   document.querySelectorAll(".package-card");
 
 const selectedPackageText =
-  document.getElementById("selectedPackageText");
+  document.getElementById(
+    "selectedPackageText"
+  );
 
 const form =
-  document.getElementById("advertisementForm");
+  document.getElementById(
+    "advertisementForm"
+  );
 
 const submitButton =
-  document.getElementById("submitButton");
+  document.getElementById(
+    "submitButton"
+  );
 
 const message =
-  document.getElementById("message");
+  document.getElementById(
+    "message"
+  );
 
 
 /* =========================================
-   NAVIGATION
+   SCROLL FUNCTION
    ========================================= */
 
 function scrollToSection(id) {
@@ -877,65 +969,90 @@ function scrollToSection(id) {
   const element =
     document.getElementById(id);
 
-  if (element) {
-
-    element.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-
+  if (!element) {
+    return;
   }
+
+  element.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
 }
 
 
-document.getElementById(
-  "startCampaign"
-).addEventListener(
-  "click",
-  function() {
-    scrollToSection("advertise");
-  }
-);
+/* =========================================
+   NAVIGATION BUTTONS
+   ========================================= */
+
+document
+  .getElementById("startCampaign")
+  .addEventListener(
+    "click",
+    function() {
+
+      scrollToSection(
+        "advertise"
+      );
+
+    }
+  );
 
 
-document.getElementById(
-  "exploreAds"
-).addEventListener(
-  "click",
-  function() {
-    scrollToSection("advertisements");
-  }
-);
+document
+  .getElementById("exploreAds")
+  .addEventListener(
+    "click",
+    function() {
+
+      scrollToSection(
+        "advertisements"
+      );
+
+    }
+  );
 
 
-document.getElementById(
-  "navPackages"
-).addEventListener(
-  "click",
-  function() {
-    scrollToSection("packages");
-  }
-);
+document
+  .getElementById("navPackages")
+  .addEventListener(
+    "click",
+    function() {
+
+      scrollToSection(
+        "packages"
+      );
+
+    }
+  );
 
 
-document.getElementById(
-  "navAds"
-).addEventListener(
-  "click",
-  function() {
-    scrollToSection("advertisements");
-  }
-);
+document
+  .getElementById("navAds")
+  .addEventListener(
+    "click",
+    function() {
+
+      scrollToSection(
+        "advertisements"
+      );
+
+    }
+  );
 
 
-document.getElementById(
-  "navCampaign"
-).addEventListener(
-  "click",
-  function() {
-    scrollToSection("advertise");
-  }
-);
+document
+  .getElementById("navCampaign")
+  .addEventListener(
+    "click",
+    function() {
+
+      scrollToSection(
+        "advertise"
+      );
+
+    }
+  );
 
 
 /* =========================================
@@ -954,30 +1071,53 @@ function selectPackage(card) {
     }
   );
 
-  card.classList.add("selected");
+
+  card.classList.add(
+    "selected"
+  );
+
 
   selectedPackage =
     card.dataset.package;
 
+
   selectedDuration =
-    Number(card.dataset.duration);
+    Number(
+      card.dataset.duration
+    );
+
 
   selectedPrice =
-    Number(card.dataset.price);
+    Number(
+      card.dataset.price
+    );
 
-  let packageName = "Basic";
+
+  let packageName =
+    "Basic";
+
 
   if (
-    selectedPackage === "premium"
+    selectedPackage ===
+    "premium"
   ) {
-    packageName = "Premium";
+
+    packageName =
+      "Premium";
+
   }
 
+
   if (
-    selectedPackage === "premium_plus"
+    selectedPackage ===
+    "premium_plus"
   ) {
-    packageName = "Premium Plus";
+
+    packageName =
+      "Premium Plus";
+
   }
+
 
   selectedPackageText.textContent =
     packageName +
@@ -986,6 +1126,7 @@ function selectPackage(card) {
     " — " +
     selectedDuration +
     " days";
+
 }
 
 
@@ -1018,7 +1159,9 @@ function showMessage(
   success = false
 ) {
 
-  message.style.display = "block";
+  message.style.display =
+    "block";
+
 
   if (success) {
 
@@ -1038,7 +1181,10 @@ function showMessage(
 
   }
 
-  message.textContent = text;
+
+  message.textContent =
+    text;
+
 }
 
 
@@ -1049,17 +1195,20 @@ function showMessage(
 function escapeHTML(value) {
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   div.textContent =
     value || "";
 
   return div.innerHTML;
+
 }
 
 
 /* =========================================
-   SUBMIT ADVERTISEMENT
+   SUBMIT CAMPAIGN
    ========================================= */
 
 form.addEventListener(
@@ -1068,12 +1217,17 @@ form.addEventListener(
 
     event.preventDefault();
 
-    message.style.display = "none";
 
-    submitButton.disabled = true;
+    message.style.display =
+      "none";
+
+
+    submitButton.disabled =
+      true;
+
 
     submitButton.textContent =
-      "Preparing Payment...";
+      "Connecting to Paystack...";
 
 
     const email =
@@ -1083,149 +1237,122 @@ form.addEventListener(
         .trim();
 
 
-    const advertisement = {
+    if (!email) {
 
-      advertiser_name:
-        document
-          .getElementById(
-            "advertiser_name"
-          )
-          .value
-          .trim(),
+      showMessage(
+        "Please enter your email address."
+      );
 
-      advert_title:
-        document
-          .getElementById(
-            "advert_title"
-          )
-          .value
-          .trim(),
+      submitButton.disabled =
+        false;
 
-      description:
-        document
-          .getElementById(
-            "description"
-          )
-          .value
-          .trim(),
+      submitButton.textContent =
+        "Continue to Payment";
 
-      extended_description:
-        document
-          .getElementById(
-            "extended_description"
-          )
-          .value
-          .trim() || null,
+      return;
 
-      contact:
-        document
-          .getElementById(
-            "contact"
-          )
-          .value
-          .trim(),
-
-      image_url:
-        document
-          .getElementById(
-            "image_url"
-          )
-          .value
-          .trim() || null,
-
-      package:
-        selectedPackage,
-
-      duration_days:
-        selectedDuration,
-
-      featured:
-        selectedPackage !== "basic",
-
-      payment_status:
-        "unpaid"
-    };
+    }
 
 
     try {
 
-      /* =====================================
-         STEP 1:
-         CREATE ADVERTISEMENT RECORD
-         ===================================== */
+      /* ================================
+         INITIALIZE PAYSTACK PAYMENT
+         ================================ */
 
-      submitButton.textContent =
-        "Saving Campaign...";
-
-
-      const advertisementResponse =
+      const paymentResponse =
         await fetch(
-
-          SUPABASE_URL +
-          "/rest/v1/advertisements",
-
+          PAYMENT_FUNCTION_URL,
           {
+
             method:"POST",
 
-            headers:{
+            headers: {
 
               "Content-Type":
-                "application/json",
+                "application/json"
 
-              "apikey":
-                SUPABASE_KEY,
-
-              "Authorization":
-                "Bearer " +
-                SUPABASE_KEY,
-
-              "Prefer":
-                "return=minimal"
             },
 
             body:
-              JSON.stringify(
-                advertisement
-              )
-          }
+              JSON.stringify({
 
+                amount:
+                  selectedPrice,
+
+                email:
+                  email
+
+              })
+
+          }
         );
 
 
+      const paymentData =
+        await paymentResponse
+          .json()
+          .catch(
+            function() {
+              return {};
+            }
+          );
+
+
       if (
-        !advertisementResponse.ok
+        !paymentResponse.ok
       ) {
 
-        const errorText =
-          await advertisementResponse.text();
-
         throw new Error(
-          "Campaign submission failed: " +
-          errorText
+          paymentData.error ||
+          paymentData.message ||
+          "Unable to initialize Paystack payment."
         );
 
       }
 
 
-      /* =====================================
-         STEP 2:
-         INITIALIZE PAYSTACK PAYMENT
-         ===================================== */
+      if (
+        !paymentData.authorization_url
+      ) {
 
-      submitButton.textContent =
-        "Connecting to Paystack...";
+        throw new Error(
+          "Paystack did not return a payment link."
+        );
+
+      }
 
 
-      const paymentResponse =
-        await fetch(
+      /* ================================
+         CAMPAIGN DATA
+         ================================ */
 
-          PAYMENT_FUNCTION_URL,
+      const advertisement = {
 
-          {
+        advertiser_name:
+          document
+            .getElementById(
+              "advertiser_name"
+            )
+            .value
+            .trim(),
 
-            method:"POST",
+        advert_title:
+          document
+            .getElementById(
+              "advert_title"
+            )
+            .value
+            .trim(),
 
-            headers:{
+        description:
+          document
+            .getElementById(
+              "description"
+            )
+            .value
+            .trim(),
 
-              "Content-Type":
-                "applicati
+        extended_description:
+          document
+        
