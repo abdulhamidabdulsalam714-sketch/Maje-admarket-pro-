@@ -1,151 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maje AdMarket Pro</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maje AdMarket Pro</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #101111;
-      color: #f4f1e9;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #101111;
+  color: #f4f1e9;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: #191b1b;
-      border-bottom: 1px solid #383936;
-      padding: 18px;
-    }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #191b1b;
+  border-bottom: 1px solid #383936;
+  padding: 18px;
+}
 
-    .nav {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-    }
+.nav {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
 
-    .logo {
-      font-size: 20px;
-      font-weight: bold;
-    }
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
 
-    .logo span {
-      color: #c9a45c;
-    }
+.logo span {
+  color: #c9a45c;
+}
 
-    .buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+.buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
-    button {
-      appearance: none;
-      -webkit-appearance: none;
-      border: 1px solid #c9a45c;
-      border-radius: 7px;
-      padding: 12px 18px;
-      background: #c9a45c;
-      color: #111;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid #c9a45c;
+  border-radius: 7px;
+  padding: 12px 18px;
+  background: #c9a45c;
+  color: #111;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    button:hover {
-      background: #e0c17a;
-    }
+button:hover {
+  background: #e0c17a;
+}
 
-    .hero {
-      min-height: 550px;
-      padding: 100px 20px;
-      display: flex;
-      align-items: center;
-      background:
-        radial-gradient(
-          circle at 80% 30%,
-          rgba(201,164,92,.15),
-          transparent 35%
-        ),
-        #101111;
-    }
+.hero {
+  min-height: 500px;
+  padding: 90px 20px;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(201,164,92,.15),
+      transparent 35%
+    ),
+    #101111;
+}
 
-    .hero-content {
-      max-width: 1100px;
-      width: 100%;
-      margin: auto;
-    }
+.hero-content,
+.section-content {
+  max-width: 1100px;
+  width: 100%;
+  margin: auto;
+}
 
-    h1 {
-      max-width: 750px;
-      font-size: clamp(42px, 7vw, 72px);
-      line-height: 1.05;
-    }
+h1 {
+  max-width: 750px;
+  font-size: clamp(42px, 7vw, 72px);
+  line-height: 1.05;
+}
 
-    h1 span {
-      color: #c9a45c;
-    }
+h1 span {
+  color: #c9a45c;
+}
 
-    p {
-      color: #aaa69c;
-      max-width: 650px;
-    }
+p {
+  color: #aaa69c;
+  max-width: 650px;
+}
 
-    section {
-      min-height: 500px;
-      padding: 90px 20px;
-      border-top: 1px solid #383936;
-    }
+section {
+  min-height: 450px;
+  padding: 80px 20px;
+  border-top: 1px solid #383936;
+}
 
-    .section-content {
-      max-width: 1100px;
-      margin: auto;
-    }
+.box {
+  margin-top: 30px;
+  padding: 30px;
+  background: #191b1b;
+  border: 1px solid #383936;
+  border-radius: 12px;
+}
 
-    .test-box {
-      margin-top: 30px;
-      padding: 30px;
-      background: #191b1b;
-      border: 1px solid #383936;
-      border-radius: 12px;
-    }
+.package-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
 
-    #result {
-      margin-top: 20px;
-      color: #e0c17a;
-      font-weight: bold;
-    }
+.package {
+  text-align: left;
+  min-height: 180px;
+  background: #191b1b;
+  color: #f4f1e9;
+  border: 1px solid #383936;
+}
 
-    @media (max-width: 700px) {
-      .nav {
-        flex-direction: column;
-        align-items: stretch;
-      }
+.package.selected {
+  border: 2px solid #c9a45c;
+}
 
-      .buttons {
-        justify-content: center;
-      }
+.package strong {
+  display: block;
+  font-size: 25px;
+  margin-bottom: 10px;
+  color: #e0c17a;
+}
 
-      button {
-        flex: 1;
-      }
-    }
-  </style>
+.package .price {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+form {
+  max-width: 700px;
+}
+
+label {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 7px;
+  border: 1px solid #383936;
+  background: #111313;
+  color: white;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #c9a45c;
+}
+
+#selectedPackage {
+  color: #e0c17a;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#formMessage {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 7px;
+  display: none;
+}
+
+.success {
+  background: rgba(80,160,90,.15);
+  color: #9bc69f;
+}
+
+.error {
+  background: rgba(200,70,70,.15);
+  color: #e59a9a;
+}
+
+@media(max-width: 750px) {
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .buttons {
+    justify-content: center;
+  }
+
+  .package-list {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -159,24 +236,15 @@
 
     <div class="buttons">
 
-      <button
-        type="button"
-        id="packagesButton"
-      >
+      <button type="button" id="packagesButton">
         Packages
       </button>
 
-      <button
-        type="button"
-        id="adsButton"
-      >
+      <button type="button" id="adsButton">
         Advertisements
       </button>
 
-      <button
-        type="button"
-        id="campaignButton"
-      >
+      <button type="button" id="campaignButton">
         Create Campaign
       </button>
 
@@ -186,230 +254,411 @@
 </header>
 
 
-<main>
+<section id="home">
 
-  <section class="hero" id="home">
+  <div class="hero-content">
 
-    <div class="hero-content">
+    <h1>
+      Put your brand
+      <span>where people see it.</span>
+    </h1>
 
-      <h1>
-        Put your brand
-        <span>where people see it.</span>
-      </h1>
+    <p>
+      Maje AdMarket Pro helps businesses promote
+      products and services online.
+    </p>
 
-      <p>
-        Welcome to Maje AdMarket Pro.
-        Promote your products and services
-        through our advertising marketplace.
-      </p>
+    <div class="box">
 
-      <div class="test-box">
+      <button type="button" id="startButton">
+        Start a Campaign
+      </button>
 
-        <button
-          type="button"
-          id="startButton"
-        >
-          Start a Campaign
-        </button>
-
-        <button
-          type="button"
-          id="exploreButton"
-        >
-          Explore Advertisements
-        </button>
-
-        <div id="result"></div>
-
-      </div>
+      <button type="button" id="exploreButton">
+        Explore Advertisements
+      </button>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <section id="packages">
+<section id="packages">
 
-    <div class="section-content">
+  <div class="section-content">
 
-      <h2>Advertising Packages</h2>
+    <h2>Advertising Packages</h2>
 
-      <p>
-        Choose the package you want for your campaign.
-      </p>
+    <p>
+      Select the package you want.
+    </p>
 
-      <div class="test-box">
+    <div class="package-list">
 
-        <button
-          type="button"
-          class="packageButton"
-          data-package="Basic"
-        >
-          Basic — $5
-        </button>
-
-        <button
-          type="button"
-          class="packageButton"
-          data-package="Premium"
-        >
-          Premium — $10
-        </button>
-
-        <button
-          type="button"
-          class="packageButton"
-          data-package="Premium Plus"
-        >
-          Premium Plus — $20
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
+      <button
+        type="button"
+        class="package"
+        data-name="Basic"
+        data-price="5"
+      >
+        <strong>Basic</strong>
+        <span class="price">$5</span>
+        <br>
+        7 days
+      </button>
 
 
-  <section id="advertisements">
+      <button
+        type="button"
+        class="package"
+        data-name="Premium"
+        data-price="10"
+      >
+        <strong>Premium</strong>
+        <span class="price">$10</span>
+        <br>
+        14 days
+      </button>
 
-    <div class="section-content">
 
-      <h2>Advertisements</h2>
-
-      <p>
-        Approved advertisements will appear here.
-      </p>
-
-      <div class="test-box">
-        Your advertisements section is working.
-      </div>
+      <button
+        type="button"
+        class="package"
+        data-name="Premium Plus"
+        data-price="20"
+      >
+        <strong>Premium Plus</strong>
+        <span class="price">$20</span>
+        <br>
+        30 days
+      </button>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <section id="campaign">
+<section id="advertisements">
 
-    <div class="section-content">
+  <div class="section-content">
 
-      <h2>Create Campaign</h2>
+    <h2>Advertisements</h2>
 
-      <div class="test-box">
+    <p>
+      Approved advertisements will appear here.
+    </p>
 
-        <p>
-          Campaign form section is working.
-        </p>
+    <div class="box">
+      No advertisements have been published yet.
+    </div>
 
-        <button
-          type="button"
-          id="testSubmit"
+  </div>
+
+</section>
+
+
+<section id="campaign">
+
+  <div class="section-content">
+
+    <h2>Create Campaign</h2>
+
+    <div class="box">
+
+      <div id="selectedPackage">
+        Selected package: Basic — $5
+      </div>
+
+      <form id="campaignForm">
+
+        <label for="businessName">
+          Business / Advertiser Name
+        </label>
+
+        <input
+          type="text"
+          id="businessName"
+          placeholder="Enter business name"
+          required
         >
-          Test Campaign Button
+
+
+        <label for="title">
+          Advertisement Title
+        </label>
+
+        <input
+          type="text"
+          id="title"
+          placeholder="Enter advertisement title"
+          required
+        >
+
+
+        <label for="description">
+          Advertisement Description
+        </label>
+
+        <textarea
+          id="description"
+          placeholder="Describe your product or service"
+          required
+        ></textarea>
+
+
+        <label for="contact">
+          Contact Information
+        </label>
+
+        <input
+          type="text"
+          id="contact"
+          placeholder="Phone, WhatsApp or email"
+          required
+        >
+
+
+        <label for="image">
+          Advertisement Image URL
+        </label>
+
+        <input
+          type="url"
+          id="image"
+          placeholder="https://example.com/image.jpg"
+        >
+
+
+        <br><br>
+
+        <button type="submit">
+          Submit Campaign
         </button>
 
-      </div>
+      </form>
+
+      <div id="formMessage"></div>
 
     </div>
 
-  </section>
+  </div>
 
-</main>
+</section>
 
 
 <script>
-  "use strict";
 
-  function goTo(id) {
+"use strict";
 
-    const element = document.getElementById(id);
 
-    if (element) {
+/* NAVIGATION */
 
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+function goTo(id) {
 
-    }
+  const element =
+    document.getElementById(id);
+
+  if (element) {
+
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
 
   }
 
-
-  document
-    .getElementById("packagesButton")
-    .addEventListener("click", function () {
-
-      goTo("packages");
-
-    });
+}
 
 
-  document
-    .getElementById("adsButton")
-    .addEventListener("click", function () {
+document
+  .getElementById("packagesButton")
+  .addEventListener("click", function() {
 
-      goTo("advertisements");
+    goTo("packages");
 
-    });
-
-
-  document
-    .getElementById("campaignButton")
-    .addEventListener("click", function () {
-
-      goTo("campaign");
-
-    });
+  });
 
 
-  document
-    .getElementById("startButton")
-    .addEventListener("click", function () {
+document
+  .getElementById("adsButton")
+  .addEventListener("click", function() {
 
-      goTo("campaign");
+    goTo("advertisements");
 
-    });
-
-
-  document
-    .getElementById("exploreButton")
-    .addEventListener("click", function () {
-
-      goTo("advertisements");
-
-    });
+  });
 
 
-  document
-    .querySelectorAll(".packageButton")
-    .forEach(function (button) {
+document
+  .getElementById("campaignButton")
+  .addEventListener("click", function() {
 
-      button.addEventListener("click", function () {
+    goTo("campaign");
 
-        const packageName =
-          button.getAttribute("data-package");
-
-        document.getElementById("result").textContent =
-          "Selected package: " + packageName;
-
-      });
-
-    });
+  });
 
 
-  document
-    .getElementById("testSubmit")
-    .addEventListener("click", function () {
+document
+  .getElementById("startButton")
+  .addEventListener("click", function() {
 
-      document.getElementById("result").textContent =
-        "Campaign button is working.";
+    goTo("campaign");
 
-      goTo("home");
+  });
+
+
+document
+  .getElementById("exploreButton")
+  .addEventListener("click", function() {
+
+    goTo("advertisements");
+
+  });
+
+
+/* PACKAGE SELECTION */
+
+let selectedName = "Basic";
+let selectedPrice = 5;
+
+
+const packageButtons =
+  document.querySelectorAll(".package");
+
+
+packageButtons.forEach(function(button) {
+
+  button.addEventListener("click", function() {
+
+    packageButtons.forEach(function(item) {
+
+      item.classList.remove("selected");
 
     });
+
+
+    button.classList.add("selected");
+
+
+    selectedName =
+      button.getAttribute("data-name");
+
+
+    selectedPrice =
+      Number(
+        button.getAttribute("data-price")
+      );
+
+
+    document
+      .getElementById("selectedPackage")
+      .textContent =
+        "Selected package: " +
+        selectedName +
+        " — $" +
+        selectedPrice;
+
+
+    goTo("campaign");
+
+  });
+
+});
+
+
+/* CAMPAIGN FORM */
+
+document
+  .getElementById("campaignForm")
+  .addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    const businessName =
+      document
+        .getElementById("businessName")
+        .value
+        .trim();
+
+
+    const title =
+      document
+        .getElementById("title")
+        .value
+        .trim();
+
+
+    const description =
+      document
+        .getElementById("description")
+        .value
+        .trim();
+
+
+    const contact =
+      document
+        .getElementById("contact")
+        .value
+        .trim();
+
+
+    if (
+      !businessName ||
+      !title ||
+      !description ||
+      !contact
+    ) {
+
+      showMessage(
+        "Please complete all required fields.",
+        false
+      );
+
+      return;
+
+    }
+
+
+    showMessage(
+      "Campaign received successfully! " +
+      "Package: " +
+      selectedName +
+      " — $" +
+      selectedPrice +
+      ".",
+      true
+    );
+
+
+    document
+      .getElementById("campaignForm")
+      .reset();
+
+  });
+
+
+function showMessage(text, success) {
+
+  const message =
+    document.getElementById(
+      "formMessage"
+    );
+
+
+  message.style.display = "block";
+
+  message.className =
+    success ? "success" : "error";
+
+  message.textContent = text;
+
+}
+
 </script>
 
 </body>
-</html>
+          </html>
