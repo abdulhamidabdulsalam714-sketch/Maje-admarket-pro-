@@ -1,0 +1,509 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Advertisement | Maje AdMarket Pro</title><meta
+name="description"
+content="View this advertisement on Maje AdMarket Pro."
+
+«»
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .advertisement {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .advertisement h2 {
+      margin-top: 0;
+      font-size: 30px;
+    }
+
+    .advertisement img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .description {
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .contact {
+      background: #f3f4f6;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .share {
+      margin-top: 25px;
+    }
+
+    .share button {
+      border: none;
+      padding: 12px 18px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .facebook {
+      background: #1877F2;
+      color: white;
+    }
+
+    .x {
+      background: #111;
+      color: white;
+    }
+
+    .copy {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 18px;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    #message {
+      text-align: center;
+      padding: 30px;
+    }
+  </style></head><body><header>
+  <h1>Maje AdMarket Pro</h1>
+  <p>Advertise. Reach More People. Grow Your Business.</p>
+</header><div class="container">  <div id="content">
+    <div id="message">
+      Loading advertisement...
+    </div>
+  </div></div><script>
+
+  const SUPABASE_URL =
+    "https://rkobepfufwybyaixzgcu.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
+
+
+  function escapeHTML(value) {
+
+    const div =
+      document.createElement("div");
+
+    div.textContent =
+      value || "";
+
+    return div.innerHTML;
+
+  }
+
+
+  function getAdvertisementId() {
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    return params.get("id");
+
+  }
+
+
+  async function loadAdvertisement() {
+
+    const id =
+      getAdvertisementId();
+
+    const content =
+      document.getElementById(
+        "content"
+      );
+
+
+    if (!id) {
+
+      content.innerHTML = `
+        <div id="message">
+          Advertisement not found.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    try {
+
+      const response =
+        await fetch(
+
+          SUPABASE_URL +
+          "/rest/v1/advertisements" +
+          "?select=*" +
+          "&id=eq." +
+          encodeURIComponent(id) +
+          "&status=eq.approved" +
+          "&limit=1",
+
+          {
+
+            headers: {
+
+              "apikey":
+                SUPABASE_KEY,
+
+              "Authorization":
+                "Bearer " +
+                SUPABASE_KEY
+
+            }
+
+          }
+
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          await response.text()
+        );
+
+      }
+
+
+      const ads =
+        await response.json();
+
+
+      if (ads.length === 0) {
+
+        content.innerHTML = `
+          <div id="message">
+            This advertisement is not available.
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      const ad =
+        ads[0];
+
+
+      const image =
+        ad.image_url
+          ? `
+            <img
+              src="${escapeHTML(
+                ad.image_url
+              )}"
+              alt="Advertisement"
+            >
+          `
+          : "";
+
+
+      const extended =
+        ad.extended_description
+          ? `
+            <p>
+              ${escapeHTML(
+                ad.extended_description
+              )}
+            </p>
+          `
+          : "";
+
+
+      content.innerHTML = `
+
+        <article class="advertisement">
+
+          <h2>
+            ${escapeHTML(
+              ad.advert_title ||
+              "Advertisement"
+            )}
+          </h2>
+
+          <p>
+            <strong>
+              ${escapeHTML(
+                ad.advertiser_name ||
+                ""
+              )}
+            </strong>
+          </p>
+
+          ${image}
+
+          <div class="description">
+
+            <p>
+              ${escapeHTML(
+                ad.description ||
+                ""
+              )}
+            </p>
+
+            ${extended}
+
+          </div>
+
+          <div class="contact">
+
+            Contact:
+            ${escapeHTML(
+              ad.contact ||
+              ""
+            )}
+
+          </div>
+
+
+          <div class="share">
+
+            <h3>
+              Share this advertisement
+            </h3>
+
+            <button
+              class="whatsapp"
+              onclick="shareWhatsApp()"
+            >
+              WhatsApp
+            </button>
+
+            <button
+              class="facebook"
+              onclick="shareFacebook()"
+            >
+              Facebook
+            </button>
+
+            <button
+              class="x"
+              onclick="shareX()"
+            >
+              X
+            </button>
+
+            <button
+              class="copy"
+              onclick="copyLink()"
+            >
+              Copy Link
+            </button>
+
+          </div>
+
+
+          <a
+            href="index.html"
+            class="back"
+          >
+            Back to Maje AdMarket Pro
+          </a>
+
+        </article>
+
+      `;
+
+
+      incrementViews(id);
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      content.innerHTML = `
+        <div id="message">
+          Unable to load this advertisement.
+        </div>
+      `;
+
+    }
+
+  }
+
+
+  function shareWhatsApp() {
+
+    const url =
+      encodeURIComponent(
+        window.location.href
+      );
+
+    window.open(
+      "https://wa.me/?text=" +
+      url,
+      "_blank"
+    );
+
+  }
+
+
+  function shareFacebook() {
+
+    const url =
+      encodeURIComponent(
+        window.location.href
+      );
+
+    window.open(
+      "https://www.facebook.com/sharer/sharer.php?u=" +
+      url,
+      "_blank"
+    );
+
+  }
+
+
+  function shareX() {
+
+    const url =
+      encodeURIComponent(
+        window.location.href
+      );
+
+    window.open(
+      "https://twitter.com/intent/tweet?url=" +
+      url,
+      "_blank"
+    );
+
+  }
+
+
+  async function copyLink() {
+
+    try {
+
+      await navigator.clipboard.writeText(
+        window.location.href
+      );
+
+      alert(
+        "Advertisement link copied!"
+      );
+
+    } catch (error) {
+
+      alert(
+        "Copy failed. Please copy the address manually."
+      );
+
+    }
+
+  }
+
+
+  async function incrementViews(id) {
+
+    try {
+
+      const response =
+        await fetch(
+
+          SUPABASE_URL +
+          "/rest/v1/advertisements" +
+          "?id=eq." +
+          encodeURIComponent(id),
+
+          {
+
+            method: "PATCH",
+
+            headers: {
+
+              "Content-Type":
+                "application/json",
+
+              "apikey":
+                SUPABASE_KEY,
+
+              "Authorization":
+                "Bearer " +
+                SUPABASE_KEY,
+
+              "Prefer":
+                "return=minimal"
+
+            },
+
+            body: JSON.stringify({
+
+              view_count:
+                1
+
+            })
+
+          }
+
+        );
+
+    } catch (error) {
+
+      console.log(
+        "View count could not be updated."
+      );
+
+    }
+
+  }
+
+
+  loadAdvertisement();
+
+</script></body>
+  </html>
