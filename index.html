@@ -182,7 +182,20 @@ textarea{
   color:white;
   font-size:15px;
 }
+select{
+  width:100%;
+  padding:14px;
+  border-radius:7px;
+  border:1px solid #383936;
+  background:#111313;
+  color:white;
+  font-size:15px;
+}
 
+select:focus{
+  outline:none;
+  border-color:#c9a45c;
+      }
 textarea{
   min-height:130px;
   resize:vertical;
@@ -460,7 +473,39 @@ textarea:focus{
       placeholder="Phone, WhatsApp or email"
       required
     >
+<label for="paymentCurrency">Payment Currency</label>
 
+<select id="paymentCurrency" required>
+  <option value="USD">🇺🇸 USD — US Dollar</option>
+  <option value="NGN">🇳🇬 NGN — Nigerian Naira</option>
+  <option value="GBP">🇬🇧 GBP — British Pound</option>
+  <option value="EUR">🇪🇺 EUR — Euro</option>
+  <option value="CAD">🇨🇦 CAD — Canadian Dollar</option>
+  <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
+</select>
+
+<div
+  id="paymentAmountPreview"
+  style="margin-top:12px;color:#e0c17a;font-weight:bold"
+>
+<label for="paymentCurrency">Payment Currency</label>
+
+<select id="paymentCurrency" required>
+  <option value="USD">🇺🇸 USD — US Dollar</option>
+  <option value="NGN">🇳🇬 NGN — Nigerian Naira</option>
+  <option value="GBP">🇬🇧 GBP — British Pound</option>
+  <option value="EUR">🇪🇺 EUR — Euro</option>
+  <option value="CAD">🇨🇦 CAD — Canadian Dollar</option>
+  <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
+</select>
+
+<div
+  id="paymentAmountPreview"
+  style="margin-top:12px;color:#e0c17a;font-weight:bold"
+>
+  Payment amount will be calculated after you continue.
+</div>  Payment amount will be calculated after you continue.
+</div>
     <label for="image">
       Advertisement Image URL
     </label>
@@ -721,7 +766,8 @@ get("campaignForm").addEventListener(
 
     const image =
       get("image").value.trim();
-
+const paymentCurrency =
+  get("paymentCurrency").value;
 
     if(
       !business ||
@@ -809,7 +855,9 @@ get("campaignForm").addEventListener(
       view_count: 0,
       package: selectedPackage.name,
       duration_days: selectedPackage.duration,
-      payment_status: "pending"
+      payment_status: "pending",
+     payment_currency: paymentCurrency,
+price_usd: selectedPackage.price 
     })
   }
 );
