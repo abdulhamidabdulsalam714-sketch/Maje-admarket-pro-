@@ -881,8 +881,7 @@ function saveAds(ads) {
 
 
    
-  
-/* ======================================
+  /* ======================================
    CREATE CAMPAIGN
 ====================================== */
 
@@ -923,14 +922,13 @@ get("campaignForm").onsubmit = async function(event) {
     );
 
     return;
-
   }
 
 
   /* ======================================
-     CREATE LOCAL AD OBJECT
-     These fields keep your existing
-     advertisement page working.
+     LOCAL AD OBJECT
+     Keeps your existing advertisement
+     page and sharing buttons working.
   ====================================== */
 
   const ad = {
@@ -969,7 +967,7 @@ get("campaignForm").onsubmit = async function(event) {
 
 
   /* ======================================
-     SEND ADVERTISEMENT TO SUPABASE
+     SEND TO SUPABASE
   ====================================== */
 
   try {
@@ -1015,25 +1013,25 @@ get("campaignForm").onsubmit = async function(event) {
           image_url:
             ad.image || null,
 
-          package:
-            ad.package,
-
-          duration_day:
-            ad.duration,
-
           status:
             "pending",
 
           extended_description:
             "",
 
-          featured:
+          Featured:
             false,
 
           view_count:
             0,
 
-          payments:
+          package:
+            ad.package,
+
+          duration_days:
+            ad.duration,
+
+          payment_status:
             "pending"
 
         })
@@ -1059,19 +1057,17 @@ get("campaignForm").onsubmit = async function(event) {
 
       showMessage(
         "Advertisement could not be created. " +
-        "Supabase returned an error.",
+        "Supabase error: " +
+        errorText,
         false
       );
 
       return;
-
     }
 
 
     /* ======================================
-       KEEP A LOCAL COPY
-       This preserves your current
-       advertisement page and buttons.
+       KEEP LOCAL COPY
     ====================================== */
 
     const ads =
@@ -1099,7 +1095,7 @@ get("campaignForm").onsubmit = async function(event) {
 
 
     /* ======================================
-       OPEN THE ADVERTISEMENT
+       OPEN ADVERTISEMENT
     ====================================== */
 
     setTimeout(function() {
@@ -1120,13 +1116,14 @@ get("campaignForm").onsubmit = async function(event) {
 
     showMessage(
       "Advertisement could not be created. " +
-      "Please check your internet connection.",
+      error.message,
       false
     );
 
   }
 
 };
+            
 
 /* ======================================
    SHOW MESSAGE
