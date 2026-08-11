@@ -1,329 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maje AdMarket Pro</title>
 
 <style>
-
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#101111;
+  color:#f4f1e9;
 }
-
-html {
-  scroll-behavior: smooth;
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#191b1b;
+  border-bottom:1px solid #383936;
 }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #101111;
-  color: #f4f1e9;
+.nav{
+  max-width:1100px;
+  margin:auto;
+  padding:16px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
 }
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: #191b1b;
-  border-bottom: 1px solid #383936;
+.logo{font-size:20px;font-weight:bold}
+.logo span{color:#c9a45c}
+.nav-buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
-
-.nav {
-  max-width: 1100px;
-  margin: auto;
-  padding: 16px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
+button{
+  border:0;
+  border-radius:7px;
+  padding:12px 17px;
+  background:#c9a45c;
+  color:#111;
+  font-weight:bold;
+  cursor:pointer;
 }
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
+button:hover{background:#e0c17a}
+button.secondary{
+  background:transparent;
+  color:#f4f1e9;
+  border:1px solid #383936;
 }
-
-.logo span {
-  color: #c9a45c;
-}
-
-.nav-buttons {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-button {
-  border: 0;
-  border-radius: 7px;
-  padding: 12px 17px;
-  background: #c9a45c;
-  color: #111;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #e0c17a;
-}
-
-button.secondary {
-  background: transparent;
-  color: #f4f1e9;
-  border: 1px solid #383936;
-}
-
-.hero {
-  min-height: 500px;
-  padding: 80px 20px;
-  display: flex;
-  align-items: center;
+.hero{
+  min-height:500px;
+  padding:80px 20px;
+  display:flex;
+  align-items:center;
   background:
-    radial-gradient(
-      circle at 80% 30%,
-      rgba(201,164,92,.15),
-      transparent 35%
-    ),
+    radial-gradient(circle at 80% 30%,rgba(201,164,92,.15),transparent 35%),
     #101111;
 }
-
-.container {
-  max-width: 1100px;
-  width: 100%;
-  margin: auto;
+.container{
+  max-width:1100px;
+  width:100%;
+  margin:auto;
 }
-
-h1 {
-  max-width: 760px;
-  font-size: clamp(42px, 7vw, 72px);
-  line-height: 1.05;
+h1{
+  max-width:760px;
+  font-size:clamp(42px,7vw,72px);
+  line-height:1.05;
 }
-
-h1 span {
-  color: #c9a45c;
+h1 span{color:#c9a45c}
+h2{font-size:36px}
+p{color:#aaa69c}
+.hero p{max-width:650px;font-size:18px}
+.hero-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:30px;
 }
-
-h2 {
-  font-size: 36px;
+section{
+  padding:80px 20px;
+  border-top:1px solid #383936;
 }
-
-p {
-  color: #aaa69c;
+.package-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
 }
-
-.hero p {
-  max-width: 650px;
-  font-size: 18px;
+.package{
+  min-height:190px;
+  text-align:left;
+  background:#191b1b;
+  color:#f4f1e9;
+  border:1px solid #383936;
 }
-
-.hero-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 30px;
+.package.selected{border:2px solid #c9a45c}
+.package-name{
+  display:block;
+  color:#e0c17a;
+  font-size:18px;
+  margin-bottom:12px;
 }
-
-section {
-  padding: 80px 20px;
-  border-top: 1px solid #383936;
+.package-price{
+  display:block;
+  color:white;
+  font-size:32px;
+  margin-bottom:8px;
 }
-
-.package-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+.card{
+  padding:28px;
+  background:#191b1b;
+  border:1px solid #383936;
+  border-radius:12px;
 }
-
-.package {
-  min-height: 190px;
-  text-align: left;
-  background: #191b1b;
-  color: #f4f1e9;
-  border: 1px solid #383936;
+form{max-width:720px}
+label{
+  display:block;
+  margin-top:18px;
+  margin-bottom:7px;
+  font-weight:bold;
 }
-
-.package.selected {
-  border: 2px solid #c9a45c;
+input,textarea{
+  width:100%;
+  padding:14px;
+  border-radius:7px;
+  border:1px solid #383936;
+  background:#111313;
+  color:white;
+  font-size:15px;
 }
-
-.package-name {
-  display: block;
-  color: #e0c17a;
-  font-size: 18px;
-  margin-bottom: 12px;
+textarea{
+  min-height:130px;
+  resize:vertical;
 }
-
-.package-price {
-  display: block;
-  color: white;
-  font-size: 32px;
-  margin-bottom: 8px;
+input:focus,textarea:focus{
+  outline:none;
+  border-color:#c9a45c;
 }
-
-.card {
-  padding: 28px;
-  background: #191b1b;
-  border: 1px solid #383936;
-  border-radius: 12px;
+.selected-package{
+  color:#e0c17a;
+  font-weight:bold;
+  margin-bottom:20px;
 }
-
-form {
-  max-width: 720px;
+.ads-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
 }
-
-label {
-  display: block;
-  margin-top: 18px;
-  margin-bottom: 7px;
-  font-weight: bold;
+.ad-card{
+  background:#191b1b;
+  border:1px solid #383936;
+  border-radius:12px;
+  overflow:hidden;
 }
-
-input,
-textarea {
-  width: 100%;
-  padding: 14px;
-  border-radius: 7px;
-  border: 1px solid #383936;
-  background: #111313;
-  color: white;
-  font-size: 15px;
+.ad-card img{
+  width:100%;
+  max-height:280px;
+  object-fit:cover;
 }
-
-textarea {
-  min-height: 130px;
-  resize: vertical;
+.ad-body{padding:22px}
+.ad-body h3{margin-top:0}
+.ad-business{
+  color:#e0c17a;
+  font-weight:bold;
 }
-
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: #c9a45c;
+.ad-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:18px;
 }
-
-.selected-package {
-  color: #e0c17a;
-  font-weight: bold;
-  margin-bottom: 20px;
+.ad-page{display:none}
+.share-box{
+  margin-top:25px;
+  padding:20px;
+  background:#111313;
+  border:1px solid #383936;
+  border-radius:10px;
 }
-
-.ads-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+.share-buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:15px;
 }
-
-.ad-card {
-  background: #191b1b;
-  border: 1px solid #383936;
-  border-radius: 12px;
-  overflow: hidden;
+#message{
+  display:none;
+  margin-top:20px;
+  padding:14px;
+  border-radius:7px;
 }
-
-.ad-card img {
-  width: 100%;
-  max-height: 280px;
-  object-fit: cover;
+.success{
+  background:rgba(80,160,90,.15);
+  color:#9bc69f;
 }
-
-.ad-body {
-  padding: 22px;
+.error{
+  background:rgba(200,70,70,.15);
+  color:#e59a9a;
 }
-
-.ad-body h3 {
-  margin-top: 0;
-}
-
-.ad-business {
-  color: #e0c17a;
-  font-weight: bold;
-}
-
-.ad-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 18px;
-}
-
-.ad-page {
-  display: none;
-}
-
-.share-box {
-  margin-top: 25px;
-  padding: 20px;
-  background: #111313;
-  border: 1px solid #383936;
-  border-radius: 10px;
-}
-
-.share-buttons {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 15px;
-}
-
-.share-buttons button {
-  background: #c9a45c;
-}
-
-.share-buttons button.secondary {
-  background: transparent;
-}
-
-#message {
-  display: none;
-  margin-top: 20px;
-  padding: 14px;
-  border-radius: 7px;
-}
-
-.success {
-  background: rgba(80,160,90,.15);
-  color: #9bc69f;
-}
-
-.error {
-  background: rgba(200,70,70,.15);
-  color: #e59a9a;
-}
-
-@media(max-width: 800px) {
-
-  .nav {
-    flex-direction: column;
-    align-items: stretch;
+@media(max-width:800px){
+  .nav{
+    flex-direction:column;
+    align-items:stretch;
   }
-
-  .nav-buttons {
-    justify-content: center;
-  }
-
-  .package-grid,
-  .ads-grid {
-    grid-template-columns: 1fr;
-  }
-
+  .nav-buttons{justify-content:center}
+  .package-grid,.ads-grid{grid-template-columns:1fr}
 }
-
 </style>
-
 </head>
 
 <body>
 
 <header>
-
 <div class="nav">
 
 <div class="logo">
@@ -331,30 +222,16 @@ Maje <span>AdMarket Pro</span>
 </div>
 
 <div class="nav-buttons">
-
-<button type="button" id="navPackages">
-Packages
-</button>
-
-<button type="button" id="navAds">
-Advertisements
-</button>
-
-<button type="button" id="navCampaign">
-Create Campaign
-</button>
-
+<button type="button" id="navPackages">Packages</button>
+<button type="button" id="navAds">Advertisements</button>
+<button type="button" id="navCampaign">Create Campaign</button>
 </div>
 
 </div>
-
 </header>
 
 
-<!-- HOME -->
-
 <section id="home">
-
 <div class="container">
 
 <h1>
@@ -368,39 +245,25 @@ way to promote products and services online.
 </p>
 
 <div class="hero-buttons">
-
 <button type="button" id="startCampaign">
 Start a Campaign
 </button>
 
-<button
-  type="button"
-  class="secondary"
-  id="exploreAds"
->
+<button type="button" class="secondary" id="exploreAds">
 Explore Advertisements
 </button>
-
 </div>
 
 </div>
-
 </section>
 
 
-<!-- PACKAGES -->
-
 <section id="packages">
-
 <div class="container">
 
-<h2>
-Advertising Packages
-</h2>
+<h2>Advertising Packages</h2>
 
-<p>
-Choose a package for your advertisement.
-</p>
+<p>Choose a package for your advertisement.</p>
 
 <div class="package-grid">
 
@@ -411,19 +274,10 @@ Choose a package for your advertisement.
   data-price="5"
   data-duration="7"
 >
-
-<span class="package-name">
-Basic
-</span>
-
-<span class="package-price">
-$5
-</span>
-
+<span class="package-name">Basic</span>
+<span class="package-price">$5</span>
 7 days
-
 </button>
-
 
 <button
   type="button"
@@ -432,19 +286,10 @@ $5
   data-price="10"
   data-duration="14"
 >
-
-<span class="package-name">
-Premium
-</span>
-
-<span class="package-price">
-$10
-</span>
-
+<span class="package-name">Premium</span>
+<span class="package-price">$10</span>
 14 days
-
 </button>
-
 
 <button
   type="button"
@@ -453,75 +298,43 @@ $10
   data-price="20"
   data-duration="30"
 >
-
-<span class="package-name">
-Premium Plus
-</span>
-
-<span class="package-price">
-$20
-</span>
-
+<span class="package-name">Premium Plus</span>
+<span class="package-price">$20</span>
 30 days
-
 </button>
 
 </div>
-
 </div>
-
 </section>
 
-
-<!-- ADVERTISEMENTS -->
 
 <section id="advertisements">
-
 <div class="container">
 
-<h2>
-Advertisements
-</h2>
+<h2>Advertisements</h2>
 
-<p>
-Campaigns created on this device will appear here.
-</p>
+<p>Campaigns created on this device will appear here.</p>
 
-<div
-  class="ads-grid"
-  id="adsList"
-></div>
+<div class="ads-grid" id="adsList"></div>
 
 </div>
-
 </section>
 
 
-<!-- CREATE CAMPAIGN -->
-
 <section id="campaign">
-
 <div class="container">
 
-<h2>
-Create Campaign
-</h2>
+<h2>Create Campaign</h2>
 
 <div class="card">
 
-<div
-  class="selected-package"
-  id="selectedPackage"
->
+<div class="selected-package" id="selectedPackage">
 Selected package: Basic — $5 — 7 days
 </div>
 
 <form id="campaignForm">
 
-<label for="business">
-Business / Advertiser Name
-</label>
-
+<label for="business">Business / Advertiser Name</label>
 <input
   id="business"
   type="text"
@@ -529,11 +342,7 @@ Business / Advertiser Name
   required
 >
 
-
-<label for="title">
-Advertisement Title
-</label>
-
+<label for="title">Advertisement Title</label>
 <input
   id="title"
   type="text"
@@ -541,22 +350,14 @@ Advertisement Title
   required
 >
 
-
-<label for="description">
-Advertisement Description
-</label>
-
+<label for="description">Advertisement Description</label>
 <textarea
   id="description"
   placeholder="Describe your product or service"
   required
 ></textarea>
 
-
-<label for="contact">
-Contact Information
-</label>
-
+<label for="contact">Contact Information</label>
 <input
   id="contact"
   type="text"
@@ -564,11 +365,7 @@ Contact Information
   required
 >
 
-
-<label for="image">
-Advertisement Image URL
-</label>
-
+<label for="image">Advertisement Image URL</label>
 <input
   id="image"
   type="url"
@@ -586,18 +383,11 @@ Create Advertisement
 <div id="message"></div>
 
 </div>
-
 </div>
-
 </section>
 
 
-<!-- INDIVIDUAL ADVERTISEMENT -->
-
-<section
-  id="adPage"
-  class="ad-page"
->
+<section id="adPage" class="ad-page">
 
 <div class="container">
 
@@ -616,7 +406,6 @@ Create Advertisement
 ></div>
 
 </div>
-
 </section>
 
 
@@ -626,19 +415,19 @@ Create Advertisement
 
 
 /* ======================================
-   SUPABASE CONFIGURATION
+   SUPABASE
 ====================================== */
 
 const SUPABASE_URL =
   "https://rkobepfufwybyaixzgcu.supabase.co";
 
 /*
-   Replace this placeholder with your
-   Supabase PUBLISHABLE key.
+ IMPORTANT:
+ Put your Supabase publishable key here.
+ Do NOT put a service-role/secret key here.
 */
-
 const SUPABASE_KEY =
-  "YOUR_SUPABASE_PUBLISHABLE_KEY";
+  "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
 
 
 /* ======================================
@@ -646,13 +435,9 @@ const SUPABASE_KEY =
 ====================================== */
 
 let selectedPackage = {
-
-  name: "Basic",
-
-  price: 5,
-
-  duration: 7
-
+  name:"Basic",
+  price:5,
+  duration:7
 };
 
 
@@ -660,27 +445,20 @@ let selectedPackage = {
    HELPERS
 ====================================== */
 
-function get(id) {
-
+function get(id){
   return document.getElementById(id);
-
 }
 
+function goTo(id){
 
-function goTo(id) {
+  const element=get(id);
 
-  const element = get(id);
-
-  if (!element) return;
+  if(!element)return;
 
   element.scrollIntoView({
-
-    behavior: "smooth",
-
-    block: "start"
-
+    behavior:"smooth",
+    block:"start"
   });
-
 }
 
 
@@ -688,47 +466,31 @@ function goTo(id) {
    NAVIGATION
 ====================================== */
 
-get("navPackages").onclick = function() {
-
+get("navPackages").onclick=function(){
   goTo("packages");
-
 };
 
-
-get("navAds").onclick = function() {
-
+get("navAds").onclick=function(){
   goTo("advertisements");
-
 };
 
-
-get("navCampaign").onclick = function() {
-
+get("navCampaign").onclick=function(){
   goTo("campaign");
-
 };
 
-
-get("startCampaign").onclick = function() {
-
+get("startCampaign").onclick=function(){
   goTo("campaign");
-
 };
 
-
-get("exploreAds").onclick = function() {
-
+get("exploreAds").onclick=function(){
   goTo("advertisements");
-
 };
 
+get("backToAds").onclick=function(){
 
-get("backToAds").onclick = function() {
-
-  get("adPage").style.display = "none";
+  get("adPage").style.display="none";
 
   goTo("advertisements");
-
 };
 
 
@@ -736,110 +498,74 @@ get("backToAds").onclick = function() {
    PACKAGE SELECTION
 ====================================== */
 
-const packages =
-  document.querySelectorAll(".package");
+const packages=document.querySelectorAll(".package");
 
+packages.forEach(function(button){
 
-packages.forEach(function(button) {
+  button.onclick=function(){
 
-  button.onclick = function() {
-
-    packages.forEach(function(item) {
-
+    packages.forEach(function(item){
       item.classList.remove("selected");
-
     });
-
 
     button.classList.add("selected");
 
-
-    selectedPackage = {
-
-      name:
-        button.dataset.name,
-
-      price:
-        Number(button.dataset.price),
-
-      duration:
-        Number(button.dataset.duration)
-
+    selectedPackage={
+      name:button.dataset.name,
+      price:Number(button.dataset.price),
+      duration:Number(button.dataset.duration)
     };
 
-
-    get("selectedPackage").textContent =
-
-      "Selected package: " +
-
-      selectedPackage.name +
-
-      " — $" +
-
-      selectedPackage.price +
-
-      " — " +
-
-      selectedPackage.duration +
-
+    get("selectedPackage").textContent=
+      "Selected package: "+
+      selectedPackage.name+
+      " — $"+
+      selectedPackage.price+
+      " — "+
+      selectedPackage.duration+
       " days";
 
-
     goTo("campaign");
-
   };
 
 });
 
 
 /* ======================================
-   CREATE UNIQUE ID
-====================================== */
-
-function createId() {
-
-  return Date.now().toString(36) +
-
-    Math.random()
-      .toString(36)
-      .substring(2, 8);
-
-}
-
-
-/* ======================================
    LOCAL STORAGE
 ====================================== */
 
-function getAds() {
+function createId(){
 
-  try {
+  return Date.now().toString(36)+
+    Math.random()
+    .toString(36)
+    .substring(2,8);
+
+}
+
+function getAds(){
+
+  try{
 
     return JSON.parse(
-
-      localStorage.getItem(
-        "maje_ads"
-      ) || "[]"
-
+      localStorage.getItem("maje_ads")||"[]"
     );
 
-  } catch {
+  }catch(error){
+
+    console.error("Local storage error:",error);
 
     return [];
 
   }
-
 }
 
-
-function saveAds(ads) {
+function saveAds(ads){
 
   localStorage.setItem(
-
     "maje_ads",
-
     JSON.stringify(ads)
-
   );
 
 }
@@ -849,34 +575,22 @@ function saveAds(ads) {
    CREATE CAMPAIGN
 ====================================== */
 
-get("campaignForm").onsubmit =
-async function(event) {
+get("campaignForm").onsubmit=async function(event){
 
   event.preventDefault();
 
+  const business=get("business").value.trim();
+  const title=get("title").value.trim();
+  const description=get("description").value.trim();
+  const contact=get("contact").value.trim();
+  const image=get("image").value.trim();
 
-  const business =
-    get("business").value.trim();
-
-  const title =
-    get("title").value.trim();
-
-  const description =
-    get("description").value.trim();
-
-  const contact =
-    get("contact").value.trim();
-
-  const image =
-    get("image").value.trim();
-
-
-  if (
-    !business ||
-    !title ||
-    !description ||
+  if(
+    !business||
+    !title||
+    !description||
     !contact
-  ) {
+  ){
 
     showMessage(
       "Please complete all required fields.",
@@ -884,143 +598,82 @@ async function(event) {
     );
 
     return;
-
   }
 
 
-  /* ======================================
-     CREATE LOCAL AD OBJECT
-  ====================================== */
-
-  const ad = {
-
-    id:
-      createId(),
-
-    business:
-      business,
-
-    title:
-      title,
-
-    description:
-      description,
-
-    contact:
-      contact,
-
-    image:
-      image,
-
-    package:
-      selectedPackage.name,
-
-    price:
-      selectedPackage.price,
-
-    duration:
-      selectedPackage.duration,
-
-    created:
-      new Date().toISOString()
-
+  const ad={
+    id:createId(),
+    business:business,
+    title:title,
+    description:description,
+    contact:contact,
+    image:image,
+    package:selectedPackage.name,
+    price:selectedPackage.price,
+    duration:selectedPackage.duration,
+    created:new Date().toISOString()
   };
 
 
-  /* ======================================
-     SEND TO SUPABASE
-  ====================================== */
+  /*
+    Save to Supabase first.
+    id and created_at are intentionally omitted
+    because Supabase should generate them.
+  */
 
-  try {
+  try{
 
-    const response =
-      await fetch(
+    const response=await fetch(
+      SUPABASE_URL+"/rest/v1/advertisements",
+      {
+        method:"POST",
 
-        SUPABASE_URL +
-        "/rest/v1/advertisements",
+        headers:{
+          "Content-Type":"application/json",
+          "apikey":sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
+          "Authorization":"Bearer "+sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
+          "Prefer":"return=representation"
+        },
 
-        {
+        body:JSON.stringify({
 
-          method:
-            "POST",
+          advertiser_name:business,
 
-          headers: {
+          advert_title:title,
 
-            "Content-Type":
-              "application/json",
+          description:description,
 
-            "apikey":
-              sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
+          contact:contact,
 
-            "Authorization":
-              "Bearer " +
-              sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
+          image_url:image||null,
 
-            "Prefer":
-              "return=representation"
+          status:"pending",
 
-          },
+          extended_description:"",
 
-          body:
-            JSON.stringify({
+          /*
+            Use lowercase "featured".
+            Your previous error showed that
+            "Featured" did not exist.
+          */
+          featured:false,
 
-              /*
-                 id omitted:
-                 Supabase generates it.
-              */
+          view_count:0,
 
-              advertiser_name:
-                ad.business,
+          package:selectedPackage.name,
 
-              advert_title:
-                ad.title,
+          duration_days:selectedPackage.duration,
 
-              description:
-                ad.description,
+          payment_status:"pending"
 
-              contact:
-                ad.contact,
-
-              image_url:
-                ad.image || null,
-
-              status:
-                "pending",
-
-              /*
-                 created_at omitted:
-                 Supabase generates it.
-              */
-
-              extended_description:
-                "",
-
-              featured:
-                false,
-
-              view_count:
-                0,
-
-              package:
-                ad.package,
-
-              duration_days:
-                ad.duration,
-
-              payment_status:
-                "pending"
-
-            })
-
-        }
-
-      );
+        })
+      }
+    );
 
 
-    if (!response.ok) {
+    if(!response.ok){
 
-      const errorText =
-        await response.text();
+      const errorText=await response.text();
 
       console.error(
         "Supabase error:",
@@ -1028,42 +681,38 @@ async function(event) {
       );
 
       showMessage(
-
-        "Advertisement could not be created. " +
-        "Supabase error: " +
+        "Advertisement could not be created. Supabase error: "+
         errorText,
-
         false
-
       );
 
       return;
-
     }
 
 
-    /* ======================================
-       SAVE LOCAL COPY
-    ====================================== */
+    const supabaseData=await response.json();
 
-    const ads =
-      getAds();
+    console.log(
+      "Saved to Supabase:",
+      supabaseData
+    );
+
+
+    /*
+      Save a local copy only after
+      Supabase successfully accepts it.
+    */
+
+    const ads=getAds();
 
     ads.push(ad);
 
     saveAds(ads);
 
 
-    /* ======================================
-       SUCCESS
-    ====================================== */
-
     showMessage(
-
       "Advertisement created successfully!",
-
       true
-
     );
 
 
@@ -1073,16 +722,14 @@ async function(event) {
     renderAds();
 
 
-    setTimeout(function() {
+    setTimeout(function(){
 
-      openAdvertisement(
-        ad.id
-      );
+      openAdvertisement(ad.id);
 
-    }, 600);
+    },600);
 
 
-  } catch (error) {
+  }catch(error){
 
     console.error(
       "Supabase connection error:",
@@ -1090,12 +737,9 @@ async function(event) {
     );
 
     showMessage(
-
-      "Could not connect to Supabase. " +
+      "Could not connect to Supabase. "+
       error.message,
-
       false
-
     );
 
   }
@@ -1107,27 +751,16 @@ async function(event) {
    SHOW MESSAGE
 ====================================== */
 
-function showMessage(
-  text,
-  success
-) {
+function showMessage(text,success){
 
-  const message =
-    get("message");
+  const message=get("message");
 
+  message.style.display="block";
 
-  message.style.display =
-    "block";
+  message.className=
+    success?"success":"error";
 
-
-  message.className =
-    success
-      ? "success"
-      : "error";
-
-
-  message.textContent =
-    text;
+  message.textContent=text;
 
 }
 
@@ -1136,114 +769,79 @@ function showMessage(
    RENDER ADS
 ====================================== */
 
-function renderAds() {
+function renderAds(){
 
-  const list =
-    get("adsList");
+  const list=get("adsList");
 
-  const ads =
-    getAds();
+  const ads=getAds();
 
-
-  list.innerHTML =
-    "";
+  list.innerHTML="";
 
 
-  if (!ads.length) {
+  if(!ads.length){
 
-    list.innerHTML =
-
-      '<div class="card">' +
-
-      'No advertisements have been created yet.' +
-
+    list.innerHTML=
+      '<div class="card">'+
+      'No advertisements have been created yet.'+
       '</div>';
 
     return;
-
   }
 
 
-  ads.forEach(function(ad) {
+  ads.forEach(function(ad){
 
-    const card =
-      document.createElement("div");
+    const card=document.createElement("div");
 
+    card.className="ad-card";
 
-    card.className =
-      "ad-card";
+    let imageHTML="";
 
+    if(ad.image){
 
-    let imageHTML =
-      "";
-
-
-    if (ad.image) {
-
-      imageHTML =
-
-        '<img src="' +
-
-        escapeHTML(ad.image) +
-
+      imageHTML=
+        '<img src="'+
+        escapeHTML(ad.image)+
         '" alt="Advertisement">';
 
     }
 
 
-    card.innerHTML =
+    card.innerHTML=
+      imageHTML+
+      '<div class="ad-body">'+
 
-      imageHTML +
+      '<div class="ad-business">'+
+      escapeHTML(ad.business)+
+      '</div>'+
 
-      '<div class="ad-body">' +
+      '<h3>'+
+      escapeHTML(ad.title)+
+      '</h3>'+
 
-      '<div class="ad-business">' +
+      '<p>'+
+      escapeHTML(ad.description)+
+      '</p>'+
 
-      escapeHTML(ad.business) +
+      '<div class="ad-actions">'+
 
-      '</div>' +
+      '<button type="button" class="viewAd">'+
+      'View Advertisement'+
+      '</button>'+
 
-      '<h3>' +
-
-      escapeHTML(ad.title) +
-
-      '</h3>' +
-
-      '<p>' +
-
-      escapeHTML(ad.description) +
-
-      '</p>' +
-
-      '<div class="ad-actions">' +
-
-      '<button ' +
-      'type="button" ' +
-      'class="viewAd">' +
-
-      'View Advertisement' +
-
-      '</button>' +
-
-      '</div>' +
+      '</div>'+
 
       '</div>';
 
 
-    card
-      .querySelector(".viewAd")
-      .onclick = function() {
+    card.querySelector(".viewAd").onclick=function(){
 
-        openAdvertisement(
-          ad.id
-        );
+      openAdvertisement(ad.id);
 
-      };
+    };
 
 
-    list.appendChild(
-      card
-    );
+    list.appendChild(card);
 
   });
 
@@ -1251,307 +849,192 @@ function renderAds() {
 
 
 /* ======================================
-   OPEN INDIVIDUAL ADVERTISEMENT
+   OPEN ADVERTISEMENT
 ====================================== */
 
-function openAdvertisement(id) {
+function openAdvertisement(id){
 
-  const ads =
-    getAds();
+  const ads=getAds();
 
-
-  const ad =
-    ads.find(function(item) {
-
-      return item.id === id;
-
-    });
+  const ad=ads.find(function(item){
+    return item.id===id;
+  });
 
 
-  if (!ad) {
+  if(!ad){
 
-    alert(
-      "Advertisement not found."
-    );
+    alert("Advertisement not found.");
 
     return;
+  }
+
+
+  const page=get("adPage");
+
+  const single=get("singleAd");
+
+  let imageHTML="";
+
+
+  if(ad.image){
+
+    imageHTML=
+      '<img src="'+
+      escapeHTML(ad.image)+
+      '" alt="Advertisement" '+
+      'style="width:100%;max-height:400px;'+
+      'object-fit:cover;border-radius:10px">';
 
   }
 
 
-  const page =
-    get("adPage");
+  single.innerHTML=
+    imageHTML+
 
+    '<div style="margin-top:20px">'+
 
-  const single =
-    get("singleAd");
+    '<div class="ad-business">'+
+    escapeHTML(ad.business)+
+    '</div>'+
 
+    '<h2>'+
+    escapeHTML(ad.title)+
+    '</h2>'+
 
-  let imageHTML =
-    "";
+    '<p>'+
+    escapeHTML(ad.description)+
+    '</p>'+
 
+    '<p>'+
+    '<strong>Contact:</strong> '+
+    escapeHTML(ad.contact)+
+    '</p>'+
 
-  if (ad.image) {
+    '<p>'+
+    '<strong>Package:</strong> '+
+    escapeHTML(ad.package)+
+    '</p>'+
 
-    imageHTML =
+    '</div>'+
 
-      '<img src="' +
+    '<div class="share-box">'+
 
-      escapeHTML(ad.image) +
+    '<strong>Share this advertisement</strong>'+
 
-      '" alt="Advertisement" ' +
+    '<div class="share-buttons">'+
 
-      'style="width:100%;' +
+    '<button type="button" id="whatsappShare">'+
+    'WhatsApp'+
+    '</button>'+
 
-      'max-height:400px;' +
+    '<button type="button" id="facebookShare">'+
+    'Facebook'+
+    '</button>'+
 
-      'object-fit:cover;' +
+    '<button type="button" id="xShare">'+
+    'X / Twitter'+
+    '</button>'+
 
-      'border-radius:10px">';
+    '<button type="button" id="nativeShare">'+
+    'Share'+
+    '</button>'+
 
-  }
+    '<button type="button" class="secondary" id="copyLink">'+
+    'Copy Link'+
+    '</button>'+
 
-
-  single.innerHTML =
-
-    imageHTML +
-
-    '<div style="margin-top:20px">' +
-
-    '<div class="ad-business">' +
-
-    escapeHTML(ad.business) +
-
-    '</div>' +
-
-    '<h2>' +
-
-    escapeHTML(ad.title) +
-
-    '</h2>' +
-
-    '<p>' +
-
-    escapeHTML(ad.description) +
-
-    '</p>' +
-
-    '<p>' +
-
-    '<strong>Contact:</strong> ' +
-
-    escapeHTML(ad.contact) +
-
-    '</p>' +
-
-    '<p>' +
-
-    '<strong>Package:</strong> ' +
-
-    escapeHTML(ad.package) +
-
-    '</p>' +
-
-    '</div>' +
-
-    '<div class="share-box">' +
-
-    '<strong>' +
-
-    'Share this advertisement' +
-
-    '</strong>' +
-
-    '<div class="share-buttons">' +
-
-    '<button ' +
-    'type="button" ' +
-    'id="whatsappShare">' +
-
-    'WhatsApp' +
-
-    '</button>' +
-
-    '<button ' +
-    'type="button" ' +
-    'id="facebookShare">' +
-
-    'Facebook' +
-
-    '</button>' +
-
-    '<button ' +
-    'type="button" ' +
-    'id="xShare">' +
-
-    'X / Twitter' +
-
-    '</button>' +
-
-    '<button ' +
-    'type="button" ' +
-    'id="nativeShare">' +
-
-    'Share' +
-
-    '</button>' +
-
-    '<button ' +
-    'type="button" ' +
-    'class="secondary" ' +
-    'id="copyLink">' +
-
-    'Copy Link' +
-
-    '</button>' +
-
-    '</div>' +
+    '</div>'+
 
     '</div>';
 
 
-  page.style.display =
-    "block";
-
+  page.style.display="block";
 
   goTo("adPage");
 
 
-  const shareUrl =
-
-    window.location.href
-      .split("#")[0] +
-
-    "#ad=" +
-
-    encodeURIComponent(
-      ad.id
-    );
+  const shareUrl=
+    window.location.href.split("#")[0]+
+    "#ad="+
+    encodeURIComponent(ad.id);
 
 
-  get("whatsappShare").onclick =
-    function() {
+  get("whatsappShare").onclick=function(){
 
-      const url =
-
-        "https://wa.me/?text=" +
-
-        encodeURIComponent(
-
-          ad.title +
-          " - " +
-          shareUrl
-
-        );
-
-
-      window.open(
-        url,
-        "_blank"
+    const url=
+      "https://wa.me/?text="+
+      encodeURIComponent(
+        ad.title+" - "+shareUrl
       );
 
-    };
+    window.open(url,"_blank");
+
+  };
 
 
-  get("facebookShare").onclick =
-    function() {
+  get("facebookShare").onclick=function(){
 
-      const url =
+    const url=
+      "https://www.facebook.com/sharer/sharer.php?u="+
+      encodeURIComponent(shareUrl);
 
-        "https://www.facebook.com/sharer/sharer.php?u=" +
+    window.open(url,"_blank");
 
-        encodeURIComponent(
-          shareUrl
-        );
-
-
-      window.open(
-        url,
-        "_blank"
-      );
-
-    };
+  };
 
 
-  get("xShare").onclick =
-    function() {
+  get("xShare").onclick=function(){
 
-      const url =
+    const url=
+      "https://twitter.com/intent/tweet?text="+
+      encodeURIComponent(ad.title)+
+      "&url="+
+      encodeURIComponent(shareUrl);
 
-        "https://twitter.com/intent/tweet?text=" +
+    window.open(url,"_blank");
 
-        encodeURIComponent(
-          ad.title
-        ) +
-
-        "&url=" +
-
-        encodeURIComponent(
-          shareUrl
-        );
+  };
 
 
-      window.open(
-        url,
-        "_blank"
-      );
+  get("nativeShare").onclick=async function(){
 
-    };
+    if(navigator.share){
 
+      try{
 
-  get("nativeShare").onclick =
-    async function() {
+        await navigator.share({
+          title:ad.title,
+          text:ad.description,
+          url:shareUrl
+        });
 
-      if (
-        navigator.share
-      ) {
+      }catch(error){
 
-        try {
-
-          await navigator.share({
-
-            title:
-              ad.title,
-
-            text:
-              ad.description,
-
-            url:
-              shareUrl
-
-          });
-
-        } catch {
-
-          /*
-             User cancelled sharing.
-          */
-
-        }
-
-      } else {
-
-        copyToClipboard(
-          shareUrl
-        );
-
-        alert(
-          "Your device does not support the native share menu. The link was copied."
+        console.log(
+          "Share cancelled.",
+          error
         );
 
       }
 
-    };
+    }else{
 
+      await copyToClipboard(shareUrl);
 
-  get("copyLink").onclick =
-    function() {
-
-      copyToClipboard(
-        shareUrl
+      alert(
+        "Your device does not support the native share menu. The link was copied."
       );
 
-    };
+    }
+
+  };
+
+
+  get("copyLink").onclick=function(){
+
+    copyToClipboard(shareUrl);
+
+  };
 
 }
 
@@ -1560,41 +1043,29 @@ function openAdvertisement(id) {
    COPY LINK
 ====================================== */
 
-async function copyToClipboard(text) {
+async function copyToClipboard(text){
 
-  try {
+  try{
 
-    await navigator.clipboard.writeText(
-      text
-    );
+    await navigator.clipboard.writeText(text);
 
-    alert(
-      "Advertisement link copied!"
-    );
+    alert("Advertisement link copied!");
 
-  } catch {
+  }catch(error){
 
-    const input =
-      document.createElement("input");
+    const input=document.createElement("input");
 
-    input.value =
-      text;
+    input.value=text;
 
-    document.body.appendChild(
-      input
-    );
+    document.body.appendChild(input);
 
     input.select();
 
-    document.execCommand(
-      "copy"
-    );
+    document.execCommand("copy");
 
     input.remove();
 
-    alert(
-      "Advertisement link copied!"
-    );
+    alert("Advertisement link copied!");
 
   }
 
@@ -1605,12 +1076,72 @@ async function copyToClipboard(text) {
    ESCAPE HTML
 ====================================== */
 
-function escapeHTML(value) {
+function escapeHTML(value){
 
-  const div =
-    document.createElement("div");
+  const div=document.createElement("div");
 
-  div.textContent =
-    value || "";
+  div.textContent=value||"";
 
-  return div.
+  return div.innerHTML;
+
+}
+
+
+/* ======================================
+   LOAD AD FROM URL
+====================================== */
+
+function loadAdFromHash(){
+
+  const hash=window.location.hash;
+
+
+  if(!hash.startsWith("#ad=")){
+
+    return;
+
+  }
+
+
+  const id=decodeURIComponent(
+    hash.substring(4)
+  );
+
+
+  const ads=getAds();
+
+
+  const ad=ads.find(function(item){
+
+    return item.id===id;
+
+  });
+
+
+  if(ad){
+
+    openAdvertisement(id);
+
+  }
+
+}
+
+
+/* ======================================
+   INITIALIZE
+====================================== */
+
+renderAds();
+
+loadAdFromHash();
+
+
+window.addEventListener(
+  "hashchange",
+  loadAdFromHash
+);
+
+</script>
+
+</body>
+  </html>
