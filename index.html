@@ -874,31 +874,39 @@ async function(event) {
 
   const ad = {
 
-    id: createId(),
+  id: createId(),
 
-    business,
 
-    title,
+  business,
+  title,
+  description,
+  contact,
+  image,
 
-    description,
+  package:
+    selectedPackage.name,
 
-    contact,
+  price:
+    selectedPackage.price,
 
-    image,
+  duration:
+    selectedPackage.duration,
 
-    package:
-      selectedPackage.name,
+  created:
+    new Date().toISOString(),
 
-    price:
-      selectedPackage.price,
+  // Additional advertisement fields
+  status: "pending",
 
-    duration:
-      selectedPackage.duration,
+  extended_description: "",
 
-    created:
-      new Date().toISOString()
+  featured: false,
 
-  };
+  view_count: 0,
+
+  payments: "pending"
+
+};
 
 
   const ads = getAds();
