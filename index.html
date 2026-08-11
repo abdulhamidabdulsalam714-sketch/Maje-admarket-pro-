@@ -852,61 +852,63 @@ function saveAds(ads) {
 }
 
 
+
 /* ======================================
    CREATE CAMPAIGN
 ====================================== */
 
 get("campaignForm").onsubmit =
-
-function(event) {
+async function(event) {
 
   event.preventDefault();
 
 
+  /* ======================================
+     GET FORM VALUES
+  ====================================== */
+
   const business =
     get("business").value.trim();
-
 
   const title =
     get("title").value.trim();
 
-
   const description =
     get("description").value.trim();
 
-
   const contact =
     get("contact").value.trim();
-
 
   const image =
     get("image").value.trim();
 
 
+  /* ======================================
+     VALIDATE FORM
+  ====================================== */
+
   if (
-
     !business ||
-
     !title ||
-
     !description ||
-
     !contact
-
   ) {
 
     showMessage(
-
       "Please complete all required fields.",
-
       false
-
     );
 
     return;
 
   }
 
+
+  /* ======================================
+     CREATE LOCAL AD
+     This keeps your existing advertisement
+     display and sharing system working.
+  ====================================== */
 
   const ad = {
 
@@ -943,38 +945,178 @@ function(event) {
   };
 
 
-  const ads =
-    getAds();
+  /* ======================================
+     SEND ADVERTISEMENT TO SUPABASE
+  ====================================== */
+
+  try {
+
+    const response =
+      await fetch(
+
+        "https://rkobepfufwybyaixzgcu.supabase.co/rest/v1/advertisements",
+
+        {
+
+          method:
+            "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json",
+
+            "apikey":
+              "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX",
+
+            "Authorization":
+              "Bearer sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX",
+
+            "Prefer":
+              "return=representation"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              advertiser_name:
+                business,
+
+              advert_title:
+                title,
+
+              description:
+                description,
+
+              contact:
+                contact,
+
+              image_url:
+                image || null,
+
+              status:
+                "pending",
+
+              extended_description:
+                "",
+
+              Featured:
+                false,
+
+              view_count:
+                0,
+
+              package:
+                selectedPackage.name,
+
+              duration_days:
+                selectedPackage.duration,
+
+              payment_status:
+                "pending"
+
+            })
+
+        }
+
+      );
 
 
-  ads.push(ad);
+    /* ======================================
+       CHECK SUPABASE RESPONSE
+    ====================================== */
+
+    if (!response.ok) {
+
+      const errorText =
+        await response.text();
+
+      console.error(
+        "Supabase error:",
+        errorText
+      );
+
+      showMessage(
+        "Advertisement could not be created. " +
+        "Supabase error: " +
+        errorText,
+        false
+      );
+
+      return;
+
+    }
 
 
-  saveAds(ads);
+    /* ======================================
+       SAVE LOCAL COPY
+       Keeps your current advertisement
+       page and sharing buttons working.
+    ====================================== */
+
+    const ads =
+      getAds();
+
+    ads.push(ad);
+
+    saveAds(ads);
 
 
-  showMessage(
+    /* ======================================
+       SUCCESS MESSAGE
+    ====================================== */
 
-    "Advertisement created successfully!",
-
-    true
-
-  );
-
-
-  get("campaignForm").reset();
-
-
-  renderAds();
-
-
-  setTimeout(function() {
-
-    openAdvertisement(
-      ad.id
+    showMessage(
+      "Advertisement created successfully!",
+      true
     );
 
-  }, 600);
+
+    /* ======================================
+       RESET FORM
+    ====================================== */
+
+    get("campaignForm").reset();
+
+
+    /* ======================================
+       REFRESH ADVERTISEMENT LIST
+    ====================================== */
+
+    renderAds();
+
+
+    /* ======================================
+       OPEN NEW ADVERTISEMENT
+    ====================================== */
+
+    setTimeout(
+      function() {
+
+        openAdvertisement(
+          ad.id
+        );
+
+      },
+      600
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Supabase submission error:",
+      error
+    );
+
+    showMessage(
+      "Advertisement could not be created. " +
+      error.message,
+      false
+    );
+
+  }
 
 };
 
