@@ -887,37 +887,22 @@ function saveAds(ads) {
    CREATE CAMPAIGN
 ====================================== */
 
-get("campaignForm").onsubmit =
-async function(event) {
+get("campaignForm").onsubmit = async function(event) {
 
   event.preventDefault();
 
-  const business =
-    get("business").value.trim();
-
-  const title =
-    get("title").value.trim();
-
-  const description =
-    get("description").value.trim();
-
-  const contact =
-    get("contact").value.trim();
-
-  const image =
-    get("image").value.trim();
+  const business = get("business").value.trim();
+  const title = get("title").value.trim();
+  const description = get("description").value.trim();
+  const contact = get("contact").value.trim();
+  const image = get("image").value.trim();
 
 
   /* ======================================
      VALIDATE FORM
   ====================================== */
 
-  if (
-    !business ||
-    !title ||
-    !description ||
-    !contact
-  ) {
+  if (!business || !title || !description || !contact) {
 
     showMessage(
       "Please complete all required fields.",
@@ -925,7 +910,6 @@ async function(event) {
     );
 
     return;
-
   }
 
 
@@ -959,16 +943,14 @@ async function(event) {
 
 
   /* ======================================
-     SAVE LOCAL COPY FIRST
-     This keeps your existing advertisement
-     page working even if Supabase fails.
+     SUPABASE CONNECTION
   ====================================== */
 
-  const ads = getAds();
+  const SUPABASE_URL =
+    "https://rkobepfufwybyaixzgcu.supabase.co";
 
-  ads.push(ad);
-
-  saveAds(ads);
+  const SUPABASE_KEY =
+    "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
 
 
   /* ======================================
@@ -978,21 +960,26 @@ async function(event) {
   try {
 
     const response = await fetch(
-      "https://rkobepfufwybyaixzgcu.supabase.co/rest/v1/advertisements",
+      SUPABASE_URL +
+      "/rest/v1/advertisements",
       {
+
         method: "POST",
 
         headers: {
-          "Content-Type": "application/json",
+
+          "Content-Type":
+            "application/json",
 
           "apikey":
-            "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX",
+            sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
 
           "Authorization":
-            "Bearer sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX",
+            "Bearer " + sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
 
           "Prefer":
             "return=representation"
+
         },
 
         body: JSON.stringify({
@@ -1040,7 +1027,7 @@ async function(event) {
 
 
     /* ======================================
-       CHECK SUPABASE RESPONSE
+       SUPABASE ERROR
     ====================================== */
 
     if (!response.ok) {
@@ -1054,24 +1041,29 @@ async function(event) {
       );
 
       showMessage(
-        "Advertisement saved locally, but Supabase failed: " +
+        "Advertisement could not be saved to Supabase. " +
         errorText,
         false
       );
 
       return;
-
     }
 
 
     /* ======================================
-       SUPABASE SUCCESS
+       SAVE LOCAL COPY
     ====================================== */
 
-    console.log(
-      "Advertisement successfully saved to Supabase."
-    );
+    const ads = getAds();
 
+    ads.push(ad);
+
+    saveAds(ads);
+
+
+    /* ======================================
+       SUCCESS
+    ====================================== */
 
     showMessage(
       "Advertisement created successfully!",
@@ -1085,14 +1077,15 @@ async function(event) {
     renderAds();
 
 
-    setTimeout(
-      function() {
+    /* ======================================
+       OPEN ADVERTISEMENT
+    ====================================== */
 
-        openAdvertisement(ad.id);
+    setTimeout(function() {
 
-      },
-      600
-    );
+      openAdvertisement(ad.id);
+
+    }, 600);
 
 
   } catch (error) {
@@ -1103,7 +1096,7 @@ async function(event) {
     );
 
     showMessage(
-      "Advertisement saved locally, but Supabase connection failed: " +
+      "Could not connect to Supabase. " +
       error.message,
       false
     );
@@ -1111,7 +1104,6 @@ async function(event) {
   }
 
 };
-
               
 
 
