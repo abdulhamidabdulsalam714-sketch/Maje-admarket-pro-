@@ -787,70 +787,39 @@ get("campaignForm").addEventListener(
     try{
 
       const response = await fetch(
-        SUPABASE_URL +
-        "/rest/v1/advertisements",
-        {
-          method: "POST",
+  SUPABASE_URL + "/rest/v1/advertisements",
+  {
+    method: "POST",
 
-          headers: {
+    headers: {
+      "Content-Type": "application/json",
 
-            "Content-Type":
-              "application/json",
+      "apikey":
+        "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX",
 
-            "apikey":
-              sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
+      "Authorization":
+        "Bearer sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX",
 
-            "Authorization":
-              "Bearer " +
-              sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
+      "Prefer":
+        "return=representation"
+    },
 
-            "Prefer":
-              "return=representation"
-
-          },
-
-          body: JSON.stringify({
-
-            advertiser_name:
-              business,
-
-            advert_title:
-              title,
-
-            description:
-              description,
-
-            contact:
-              contact,
-
-            image_url:
-              image || null,
-
-            status:
-              "pending",
-
-            extended_description:
-              "",
-
-            featured:
-              false,
-
-            view_count:
-              0,
-
-            package:
-              selectedPackage.name,
-
-            duration_days:
-              selectedPackage.duration,
-
-            payment_status:
-              "pending"
-
-          })
-
-        }
-      );
+    body: JSON.stringify({
+      advertiser_name: business,
+      advert_title: title,
+      description: description,
+      contact: contact,
+      image_url: image || null,
+      status: "pending",
+      extended_description: "",
+      featured: false,
+      view_count: 0,
+      package: selectedPackage.name,
+      duration_days: selectedPackage.duration,
+      payment_status: "pending"
+    })
+  }
+);
 
 
       if(!response.ok){
