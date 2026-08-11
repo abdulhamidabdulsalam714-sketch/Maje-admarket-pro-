@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -40,11 +41,9 @@ header {
   max-width: 1100px;
   margin: auto;
   padding: 16px 20px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   gap: 15px;
 }
 
@@ -86,10 +85,8 @@ button.secondary {
 .hero {
   min-height: 500px;
   padding: 80px 20px;
-
   display: flex;
   align-items: center;
-
   background:
     radial-gradient(
       circle at 80% 30%,
@@ -149,10 +146,8 @@ section {
 .package {
   min-height: 190px;
   text-align: left;
-
   background: #191b1b;
   color: #f4f1e9;
-
   border: 1px solid #383936;
 }
 
@@ -176,9 +171,7 @@ section {
 
 .card {
   padding: 28px;
-
   background: #191b1b;
-
   border: 1px solid #383936;
   border-radius: 12px;
 }
@@ -197,15 +190,11 @@ label {
 input,
 textarea {
   width: 100%;
-
   padding: 14px;
-
   border-radius: 7px;
   border: 1px solid #383936;
-
   background: #111313;
   color: white;
-
   font-size: 15px;
 }
 
@@ -272,7 +261,6 @@ textarea:focus {
 .share-box {
   margin-top: 25px;
   padding: 20px;
-
   background: #111313;
   border: 1px solid #383936;
   border-radius: 10px;
@@ -333,7 +321,6 @@ textarea:focus {
 </head>
 
 <body>
-
 
 <header>
 
@@ -417,7 +404,6 @@ Choose a package for your advertisement.
 
 <div class="package-grid">
 
-
 <button
   type="button"
   class="package selected"
@@ -480,7 +466,6 @@ $20
 
 </button>
 
-
 </div>
 
 </div>
@@ -531,9 +516,7 @@ Create Campaign
 Selected package: Basic — $5 — 7 days
 </div>
 
-
 <form id="campaignForm">
-
 
 <label for="business">
 Business / Advertiser Name
@@ -592,7 +575,6 @@ Advertisement Image URL
   placeholder="https://example.com/image.jpg"
 >
 
-
 <br><br>
 
 <button type="submit">
@@ -600,7 +582,6 @@ Create Advertisement
 </button>
 
 </form>
-
 
 <div id="message"></div>
 
@@ -642,6 +623,22 @@ Create Advertisement
 <script>
 
 "use strict";
+
+
+/* ======================================
+   SUPABASE CONFIGURATION
+====================================== */
+
+const SUPABASE_URL =
+  "https://rkobepfufwybyaixzgcu.supabase.co";
+
+/*
+   Replace this placeholder with your
+   Supabase PUBLISHABLE key.
+*/
+
+const SUPABASE_KEY =
+  "YOUR_SUPABASE_PUBLISHABLE_KEY";
 
 
 /* ======================================
@@ -811,7 +808,7 @@ function createId() {
 
 
 /* ======================================
-   GET SAVED ADS
+   LOCAL STORAGE
 ====================================== */
 
 function getAds() {
@@ -835,10 +832,6 @@ function getAds() {
 }
 
 
-/* ======================================
-   SAVE ADS
-====================================== */
-
 function saveAds(ads) {
 
   localStorage.setItem(
@@ -852,24 +845,167 @@ function saveAds(ads) {
 }
 
 
+/* ======================================
+   CREATE CAMPAIGN
+====================================== */
 
-                status:
+get("campaignForm").onsubmit =
+async function(event) {
+
+  event.preventDefault();
+
+
+  const business =
+    get("business").value.trim();
+
+  const title =
+    get("title").value.trim();
+
+  const description =
+    get("description").value.trim();
+
+  const contact =
+    get("contact").value.trim();
+
+  const image =
+    get("image").value.trim();
+
+
+  if (
+    !business ||
+    !title ||
+    !description ||
+    !contact
+  ) {
+
+    showMessage(
+      "Please complete all required fields.",
+      false
+    );
+
+    return;
+
+  }
+
+
+  /* ======================================
+     CREATE LOCAL AD OBJECT
+  ====================================== */
+
+  const ad = {
+
+    id:
+      createId(),
+
+    business:
+      business,
+
+    title:
+      title,
+
+    description:
+      description,
+
+    contact:
+      contact,
+
+    image:
+      image,
+
+    package:
+      selectedPackage.name,
+
+    price:
+      selectedPackage.price,
+
+    duration:
+      selectedPackage.duration,
+
+    created:
+      new Date().toISOString()
+
+  };
+
+
+  /* ======================================
+     SEND TO SUPABASE
+  ====================================== */
+
+  try {
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/advertisements",
+
+        {
+
+          method:
+            "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json",
+
+            "apikey":
+              sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
+
+            "Authorization":
+              "Bearer " +
+              sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
+
+            "Prefer":
+              "return=representation"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              /*
+                 id omitted:
+                 Supabase generates it.
+              */
+
+              advertiser_name:
+                ad.business,
+
+              advert_title:
+                ad.title,
+
+              description:
+                ad.description,
+
+              contact:
+                ad.contact,
+
+              image_url:
+                ad.image || null,
+
+              status:
                 "pending",
+
+              /*
+                 created_at omitted:
+                 Supabase generates it.
+              */
 
               extended_description:
                 "",
 
-              Featured:
+              featured:
                 false,
 
               view_count:
                 0,
 
               package:
-                selectedPackage.name,
+                ad.package,
 
               duration_days:
-                selectedPackage.duration,
+                ad.duration,
 
               payment_status:
                 "pending"
@@ -880,155 +1016,6 @@ function saveAds(ads) {
 
       );
 
-
-
-      
-/* ======================================
-   CREATE CAMPAIGN
-====================================== */
-
-get("campaignForm").onsubmit = async function(event) {
-
-  event.preventDefault();
-
-  const business = get("business").value.trim();
-  const title = get("title").value.trim();
-  const description = get("description").value.trim();
-  const contact = get("contact").value.trim();
-  const image = get("image").value.trim();
-
-
-  /* ======================================
-     VALIDATE FORM
-  ====================================== */
-
-  if (!business || !title || !description || !contact) {
-
-    showMessage(
-      "Please complete all required fields.",
-      false
-    );
-
-    return;
-  }
-
-
-  /* ======================================
-     CREATE LOCAL AD
-  ====================================== */
-
-  const ad = {
-
-    id: createId(),
-
-    business: business,
-
-    title: title,
-
-    description: description,
-
-    contact: contact,
-
-    image: image,
-
-    package: selectedPackage.name,
-
-    price: selectedPackage.price,
-
-    duration: selectedPackage.duration,
-
-    created: new Date().toISOString()
-
-  };
-
-
-  /* ======================================
-     SUPABASE CONNECTION
-  ====================================== */
-
-  const SUPABASE_URL =
-    "https://rkobepfufwybyaixzgcu.supabase.co";
-
-  const SUPABASE_KEY =
-    "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
-
-
-  /* ======================================
-     SEND TO SUPABASE
-  ====================================== */
-
-  try {
-
-    const response = await fetch(
-      SUPABASE_URL +
-      "/rest/v1/advertisements",
-      {
-
-        method: "POST",
-
-        headers: {
-
-          "Content-Type":
-            "application/json",
-
-          "apikey":
-            sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
-
-          "Authorization":
-            "Bearer " + sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX,
-
-          "Prefer":
-            "return=representation"
-
-        },
-
-        body: JSON.stringify({
-
-          advertiser_name:
-            ad.business,
-
-          advert_title:
-            ad.title,
-
-          description:
-            ad.description,
-
-          contact:
-            ad.contact,
-
-          image_url:
-            ad.image || null,
-
-          status:
-            "pending",
-
-          extended_description:
-            "",
-
-          featured:
-            false,
-
-          view_count:
-            0,
-
-          package:
-            ad.package,
-
-          duration_days:
-            ad.duration,
-
-          payment_status:
-            "pending"
-
-        })
-
-      }
-    );
-
-
-    /* ======================================
-       SUPABASE ERROR
-    ====================================== */
 
     if (!response.ok) {
 
@@ -1041,12 +1028,17 @@ get("campaignForm").onsubmit = async function(event) {
       );
 
       showMessage(
-        "Advertisement could not be saved to Supabase. " +
+
+        "Advertisement could not be created. " +
+        "Supabase error: " +
         errorText,
+
         false
+
       );
 
       return;
+
     }
 
 
@@ -1054,7 +1046,8 @@ get("campaignForm").onsubmit = async function(event) {
        SAVE LOCAL COPY
     ====================================== */
 
-    const ads = getAds();
+    const ads =
+      getAds();
 
     ads.push(ad);
 
@@ -1066,8 +1059,11 @@ get("campaignForm").onsubmit = async function(event) {
     ====================================== */
 
     showMessage(
+
       "Advertisement created successfully!",
+
       true
+
     );
 
 
@@ -1077,13 +1073,11 @@ get("campaignForm").onsubmit = async function(event) {
     renderAds();
 
 
-    /* ======================================
-       OPEN ADVERTISEMENT
-    ====================================== */
-
     setTimeout(function() {
 
-      openAdvertisement(ad.id);
+      openAdvertisement(
+        ad.id
+      );
 
     }, 600);
 
@@ -1096,18 +1090,17 @@ get("campaignForm").onsubmit = async function(event) {
     );
 
     showMessage(
+
       "Could not connect to Supabase. " +
       error.message,
+
       false
+
     );
 
   }
 
 };
-              
-
-
-
 
 
 /* ======================================
@@ -1147,7 +1140,6 @@ function renderAds() {
 
   const list =
     get("adsList");
-
 
   const ads =
     getAds();
@@ -1207,34 +1199,26 @@ function renderAds() {
 
       '<div class="ad-business">' +
 
-      escapeHTML(
-        ad.business
-      ) +
+      escapeHTML(ad.business) +
 
       '</div>' +
 
       '<h3>' +
 
-      escapeHTML(
-        ad.title
-      ) +
+      escapeHTML(ad.title) +
 
       '</h3>' +
 
       '<p>' +
 
-      escapeHTML(
-        ad.description
-      ) +
+      escapeHTML(ad.description) +
 
       '</p>' +
 
       '<div class="ad-actions">' +
 
       '<button ' +
-
       'type="button" ' +
-
       'class="viewAd">' +
 
       'View Advertisement' +
@@ -1247,9 +1231,7 @@ function renderAds() {
 
 
     card
-      .querySelector(
-        ".viewAd"
-      )
+      .querySelector(".viewAd")
       .onclick = function() {
 
         openAdvertisement(
@@ -1269,7 +1251,7 @@ function renderAds() {
 
 
 /* ======================================
-   OPEN INDIVIDUAL AD
+   OPEN INDIVIDUAL ADVERTISEMENT
 ====================================== */
 
 function openAdvertisement(id) {
@@ -1315,9 +1297,7 @@ function openAdvertisement(id) {
 
       '<img src="' +
 
-      escapeHTML(
-        ad.image
-      ) +
+      escapeHTML(ad.image) +
 
       '" alt="Advertisement" ' +
 
@@ -1340,25 +1320,19 @@ function openAdvertisement(id) {
 
     '<div class="ad-business">' +
 
-    escapeHTML(
-      ad.business
-    ) +
+    escapeHTML(ad.business) +
 
     '</div>' +
 
     '<h2>' +
 
-    escapeHTML(
-      ad.title
-    ) +
+    escapeHTML(ad.title) +
 
     '</h2>' +
 
     '<p>' +
 
-    escapeHTML(
-      ad.description
-    ) +
+    escapeHTML(ad.description) +
 
     '</p>' +
 
@@ -1366,9 +1340,7 @@ function openAdvertisement(id) {
 
     '<strong>Contact:</strong> ' +
 
-    escapeHTML(
-      ad.contact
-    ) +
+    escapeHTML(ad.contact) +
 
     '</p>' +
 
@@ -1376,9 +1348,7 @@ function openAdvertisement(id) {
 
     '<strong>Package:</strong> ' +
 
-    escapeHTML(
-      ad.package
-    ) +
+    escapeHTML(ad.package) +
 
     '</p>' +
 
@@ -1395,9 +1365,7 @@ function openAdvertisement(id) {
     '<div class="share-buttons">' +
 
     '<button ' +
-
     'type="button" ' +
-
     'id="whatsappShare">' +
 
     'WhatsApp' +
@@ -1405,9 +1373,7 @@ function openAdvertisement(id) {
     '</button>' +
 
     '<button ' +
-
     'type="button" ' +
-
     'id="facebookShare">' +
 
     'Facebook' +
@@ -1415,9 +1381,7 @@ function openAdvertisement(id) {
     '</button>' +
 
     '<button ' +
-
     'type="button" ' +
-
     'id="xShare">' +
 
     'X / Twitter' +
@@ -1425,9 +1389,7 @@ function openAdvertisement(id) {
     '</button>' +
 
     '<button ' +
-
     'type="button" ' +
-
     'id="nativeShare">' +
 
     'Share' +
@@ -1435,11 +1397,8 @@ function openAdvertisement(id) {
     '</button>' +
 
     '<button ' +
-
     'type="button" ' +
-
     'class="secondary" ' +
-
     'id="copyLink">' +
 
     'Copy Link' +
@@ -1470,141 +1429,129 @@ function openAdvertisement(id) {
     );
 
 
-  get(
-    "whatsappShare"
-  ).onclick = function() {
+  get("whatsappShare").onclick =
+    function() {
 
-    const url =
+      const url =
 
-      "https://wa.me/?text=" +
+        "https://wa.me/?text=" +
 
-      encodeURIComponent(
+        encodeURIComponent(
 
-        ad.title +
+          ad.title +
+          " - " +
+          shareUrl
 
-        " - " +
+        );
 
-        shareUrl
 
+      window.open(
+        url,
+        "_blank"
       );
 
-
-    window.open(
-      url,
-      "_blank"
-    );
-
-  };
+    };
 
 
-  get(
-    "facebookShare"
-  ).onclick = function() {
+  get("facebookShare").onclick =
+    function() {
 
-    const url =
+      const url =
 
-      "https://www.facebook.com/sharer/sharer.php?u=" +
+        "https://www.facebook.com/sharer/sharer.php?u=" +
 
-      encodeURIComponent(
-        shareUrl
+        encodeURIComponent(
+          shareUrl
+        );
+
+
+      window.open(
+        url,
+        "_blank"
       );
 
-
-    window.open(
-      url,
-      "_blank"
-    );
-
-  };
+    };
 
 
-  get(
-    "xShare"
-  ).onclick = function() {
+  get("xShare").onclick =
+    function() {
 
-    const url =
+      const url =
 
-      "https://twitter.com/intent/tweet?text=" +
+        "https://twitter.com/intent/tweet?text=" +
 
-      encodeURIComponent(
-        ad.title
-      ) +
+        encodeURIComponent(
+          ad.title
+        ) +
 
-      "&url=" +
+        "&url=" +
 
-      encodeURIComponent(
-        shareUrl
+        encodeURIComponent(
+          shareUrl
+        );
+
+
+      window.open(
+        url,
+        "_blank"
       );
 
-
-    window.open(
-      url,
-      "_blank"
-    );
-
-  };
+    };
 
 
-  get(
-    "nativeShare"
-  ).onclick = async function() {
+  get("nativeShare").onclick =
+    async function() {
 
-    if (
-      navigator.share
-    ) {
+      if (
+        navigator.share
+      ) {
 
-      try {
+        try {
 
-        await navigator.share({
+          await navigator.share({
 
-          title:
-            ad.title,
+            title:
+              ad.title,
 
-          text:
-            ad.description,
+            text:
+              ad.description,
 
-          url:
-            shareUrl
+            url:
+              shareUrl
 
-        });
+          });
 
-      } catch {
+        } catch {
 
-        // User cancelled.
+          /*
+             User cancelled sharing.
+          */
+
+        }
+
+      } else {
+
+        copyToClipboard(
+          shareUrl
+        );
+
+        alert(
+          "Your device does not support the native share menu. The link was copied."
+        );
 
       }
 
-    } else {
+    };
+
+
+  get("copyLink").onclick =
+    function() {
 
       copyToClipboard(
         shareUrl
       );
 
-
-      alert(
-
-        "Your device does not support " +
-
-        "the native share menu. " +
-
-        "The link was copied."
-
-      );
-
-    }
-
-  };
-
-
-  get(
-    "copyLink"
-  ).onclick = function() {
-
-    copyToClipboard(
-      shareUrl
-    );
-
-  };
+    };
 
 }
 
@@ -1613,16 +1560,13 @@ function openAdvertisement(id) {
    COPY LINK
 ====================================== */
 
-async function copyToClipboard(
-  text
-) {
+async function copyToClipboard(text) {
 
   try {
 
     await navigator.clipboard.writeText(
       text
     );
-
 
     alert(
       "Advertisement link copied!"
@@ -1631,30 +1575,22 @@ async function copyToClipboard(
   } catch {
 
     const input =
-      document.createElement(
-        "input"
-      );
-
+      document.createElement("input");
 
     input.value =
       text;
-
 
     document.body.appendChild(
       input
     );
 
-
     input.select();
-
 
     document.execCommand(
       "copy"
     );
 
-
     input.remove();
-
 
     alert(
       "Advertisement link copied!"
@@ -1669,92 +1605,12 @@ async function copyToClipboard(
    ESCAPE HTML
 ====================================== */
 
-function escapeHTML(
-  value
-) {
+function escapeHTML(value) {
 
   const div =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   div.textContent =
     value || "";
 
-
-  return div.innerHTML;
-
-}
-
-
-/* ======================================
-   LOAD AD FROM URL
-====================================== */
-
-function loadAdFromHash() {
-
-  const hash =
-    window.location.hash;
-
-
-  if (
-    !hash.startsWith("#ad=")
-  ) {
-
-    return;
-
-  }
-
-
-  const id =
-
-    decodeURIComponent(
-      hash.substring(4)
-    );
-
-
-  const ads =
-    getAds();
-
-
-  const ad =
-    ads.find(function(item) {
-
-      return item.id === id;
-
-    });
-
-
-  if (ad) {
-
-    openAdvertisement(
-      id
-    );
-
-  }
-
-}
-
-
-/* ======================================
-   INITIALIZE
-====================================== */
-
-renderAds();
-
-loadAdFromHash();
-
-
-window.addEventListener(
-
-  "hashchange",
-
-  loadAdFromHash
-
-);
-
-</script>
-
-</body>
-  </html>
+  return div.
