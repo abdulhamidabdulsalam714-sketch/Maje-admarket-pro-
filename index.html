@@ -899,10 +899,27 @@ const paymentCurrency =
          SUCCESS
       ====================================== */
 
-      showMessage(
-  "Advertisement created successfully. Proceed to payment.",
+     showMessage(
+  "Advertisement created successfully.",
   true
 );
+
+const paymentButton = document.createElement("button");
+
+paymentButton.type = "button";
+paymentButton.textContent = "Proceed to Payment";
+paymentButton.className = "primary-button";
+
+paymentButton.addEventListener("click", () => {
+  showMessage(
+    "Payment setup is ready. We will connect the payment gateway next.",
+    true
+  );
+});
+
+const campaignForm = get("campaignForm");
+
+campaignForm.appendChild(paymentButton); 
 
 
       get("campaignForm").reset();
