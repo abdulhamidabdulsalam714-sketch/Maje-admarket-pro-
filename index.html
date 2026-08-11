@@ -852,27 +852,6 @@ function saveAds(ads) {
 }
 
 
-/* ======================================
-   CREATE CAMPAIGN
-====================================== */
-
-get("campaignForm").onsubmit =
-
-function(event) {
-
-  event.preventDefault();
-
-
-  const business =
-    get("business").value.trim();
-
-
-  const title =
-    get("title").value.trim();
-
-
-  const description =
-    get("description").value.trim();
 
 
   const contact =
@@ -895,18 +874,64 @@ function(event) {
 
   ) {
 
+
+    return;
+
+  }
+
+
+   
+  
+/* ======================================
+   CREATE CAMPAIGN
+====================================== */
+
+get("campaignForm").onsubmit = async function(event) {
+
+  event.preventDefault();
+
+  const business =
+    get("business").value.trim();
+
+  const title =
+    get("title").value.trim();
+
+  const description =
+    get("description").value.trim();
+
+  const contact =
+    get("contact").value.trim();
+
+  const image =
+    get("image").value.trim();
+
+
+  /* ======================================
+     VALIDATE FORM
+  ====================================== */
+
+  if (
+    !business ||
+    !title ||
+    !description ||
+    !contact
+  ) {
+
     showMessage(
-
       "Please complete all required fields.",
-
       false
-
     );
 
     return;
 
   }
 
+
+  /* ======================================
+     CREATE LOCAL AD OBJECT
+     These fields keep your existing
+     advertisement page working.
+  ====================================== */
 
   const ad = {
 
@@ -943,41 +968,165 @@ function(event) {
   };
 
 
-  const ads =
-    getAds();
+  /* ======================================
+     SEND ADVERTISEMENT TO SUPABASE
+  ====================================== */
 
+  try {
 
-  ads.push(ad);
+    const response = await fetch(
 
+      "https://rkobepfufwybyaixzgcu.supabase.co/rest/v1/advertisements",
 
-  saveAds(ads);
+      {
 
+        method: "POST",
 
-  showMessage(
+        headers: {
 
-    "Advertisement created successfully!",
+          "Content-Type":
+            "application/json",
 
-    true
+          "apikey":
+            "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX",
 
-  );
+          "Authorization":
+            "Bearer sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX",
 
+          "Prefer":
+            "return=representation"
 
-  get("campaignForm").reset();
+        },
 
+        body: JSON.stringify({
 
-  renderAds();
+          advertiser_name:
+            ad.business,
 
+          advert_title:
+            ad.title,
 
-  setTimeout(function() {
+          description:
+            ad.description,
 
-    openAdvertisement(
-      ad.id
+          contact:
+            ad.contact,
+
+          image_url:
+            ad.image || null,
+
+          package:
+            ad.package,
+
+          duration_day:
+            ad.duration,
+
+          status:
+            "pending",
+
+          extended_description:
+            "",
+
+          featured:
+            false,
+
+          view_count:
+            0,
+
+          payments:
+            "pending"
+
+        })
+
+      }
+
     );
 
-  }, 600);
+
+    /* ======================================
+       CHECK SUPABASE RESPONSE
+    ====================================== */
+
+    if (!response.ok) {
+
+      const errorText =
+        await response.text();
+
+      console.error(
+        "Supabase error:",
+        errorText
+      );
+
+      showMessage(
+        "Advertisement could not be created. " +
+        "Supabase returned an error.",
+        false
+      );
+
+      return;
+
+    }
+
+
+    /* ======================================
+       KEEP A LOCAL COPY
+       This preserves your current
+       advertisement page and buttons.
+    ====================================== */
+
+    const ads =
+      getAds();
+
+    ads.push(ad);
+
+    saveAds(ads);
+
+
+    /* ======================================
+       SUCCESS
+    ====================================== */
+
+    showMessage(
+      "Advertisement created successfully!",
+      true
+    );
+
+
+    get("campaignForm").reset();
+
+
+    renderAds();
+
+
+    /* ======================================
+       OPEN THE ADVERTISEMENT
+    ====================================== */
+
+    setTimeout(function() {
+
+      openAdvertisement(
+        ad.id
+      );
+
+    }, 600);
+
+
+  } catch (error) {
+
+    console.error(
+      "Advertisement submission error:",
+      error
+    );
+
+    showMessage(
+      "Advertisement could not be created. " +
+      "Please check your internet connection.",
+      false
+    );
+
+  }
 
 };
-
 
 /* ======================================
    SHOW MESSAGE
