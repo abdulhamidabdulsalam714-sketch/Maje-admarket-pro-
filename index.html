@@ -1057,19 +1057,14 @@ async function(event) {
 
   } catch (error) {
 
-    console.error(
-      "Create advertisement error:",
-      error
-    );
+  console.error(
+    "Create advertisement error:",
+    error
+  );
 
-
-    showMessage(
-
-      "Advertisement could not be created. " +
-      "Check the browser console for the Supabase error.",
-
-      false
-
+  showMessage(
+    "Supabase error: " + error.message,
+    false
     );
 
   }
