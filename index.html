@@ -843,22 +843,20 @@ const paymentCurrency =
       "Prefer": "return=minimal"
     },
 
-    body: JSON.stringify({
-      advertiser_name: business,
-      advert_title: title,
-      description: description,
-      contact: contact,
-      image_url: image || null,
-      status: "pending",
-      extended_description: "",
-      featured: false,
-      view_count: 0,
-      package: selectedPackage.name,
-      duration_days: selectedPackage.duration,
-      payment_status: "pending",
-     payment_currency: paymentCurrency,
-price_usd: selectedPackage.price 
-    })
+   body: JSON.stringify({
+  advertiser_name: business,
+  advert_title: title,
+  description: description,
+  contact: contact,
+  image_url: image || null,
+  status: "pending",
+  extended_description: "",
+  featured: false,
+  view_count: 0,
+  package: selectedPackage.name,
+  duration_days: selectedPackage.duration,
+  payment_status: "pending"
+}) 
   }
 );
 
