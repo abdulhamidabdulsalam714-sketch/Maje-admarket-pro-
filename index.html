@@ -884,6 +884,19 @@ price_usd: selectedPackage.price
 
       }
 
+      const createdCampaign = await response.json();
+
+console.log("Created campaign:", createdCampaign);
+
+const campaignId = createdCampaign[0]?.id;
+
+if (!campaignId) {
+  showMessage(
+    "Campaign was created, but its ID could not be retrieved.",
+    false
+  );
+  return;
+    }
 
       /* ======================================
          SAVE LOCAL COPY
