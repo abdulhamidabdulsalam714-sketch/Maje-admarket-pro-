@@ -1034,9 +1034,14 @@ paymentButton.addEventListener("click", async function () {
     );
 
     showMessage(
-      "Could not connect to payment service.",
-      false
-    );
+  "Payment error: " + error.message,
+  false
+);
+
+console.error(
+  "FULL PAYMENT ERROR:",
+  error
+);
 
   } finally {
 
