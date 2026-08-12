@@ -506,15 +506,22 @@ textarea:focus{
   Payment amount will be calculated after you continue.
 </div>  Payment amount will be calculated after you continue.
 </div>
-    <label for="image">
-      Advertisement Image URL
-    </label>
+   <label for="mediaType">Media Type</label>
 
-    <input
-      id="image"
-      type="url"
-      placeholder="https://example.com/image.jpg"
-    >
+<select id="mediaType" required>
+  <option value="image">🖼️ Image</option>
+  <option value="video">🎥 Video</option>
+</select>
+
+<label for="mediaUrl">
+  Advertisement Media URL
+</label>
+
+<input
+  id="mediaUrl"
+  type="url"
+  placeholder="Paste image or video URL"
+> 
 
     <br><br>
 
@@ -764,8 +771,12 @@ get("campaignForm").addEventListener(
     const contact =
       get("contact").value.trim();
 
-    const image =
-      get("image").value.trim();
+    const mediaType =
+  get("mediaType").value;
+
+const mediaUrl =
+  get("mediaUrl").value.trim();
+
 const paymentCurrency =
   get("paymentCurrency").value;
 
@@ -848,7 +859,8 @@ const paymentCurrency =
   advert_title: title,
   description: description,
   contact: contact,
-  image_url: image || null,
+  media_url: mediaUrl || null,
+media_type: mediaType,
   status: "pending",
   extended_description: "",
   featured: false,
