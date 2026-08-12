@@ -816,12 +816,20 @@ if (mediaFile) {
     );
 
   if (!uploadResponse.ok) {
-    showMessage(
-      "Media upload failed.",
-      false
-    );
-    return;
-  }
+  const uploadError = await uploadResponse.text();
+
+  console.error(
+    "Media upload error:",
+    uploadError
+  );
+
+  showMessage(
+    "Media upload failed: " + uploadError,
+    false
+  );
+
+  return;
+    }
 
   finalMediaUrl =
     `${SUPABASE_URL}/storage/v1/object/public/advertisement-images/${fileName}`;
