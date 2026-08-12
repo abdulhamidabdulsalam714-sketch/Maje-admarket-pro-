@@ -369,11 +369,11 @@ textarea:focus{
     type="button"
     class="package selected"
     data-name="Basic"
-    data-price="5"
+    data-price="10000"
     data-duration="7"
   >
     <span class="package-name">Basic</span>
-    <span class="package-price">$5</span>
+    <span class="package-price">₦10,000</span>
     7 days
   </button>
 
@@ -381,11 +381,11 @@ textarea:focus{
     type="button"
     class="package"
     data-name="Premium"
-    data-price="10"
+    data-price="20000"
     data-duration="14"
   >
     <span class="package-name">Premium</span>
-    <span class="package-price">$10</span>
+    <span class="package-price">₦20,000</span>
     14 days
   </button>
 
@@ -393,16 +393,15 @@ textarea:focus{
     type="button"
     class="package"
     data-name="Premium Plus"
-    data-price="20"
+    data-price="30000"
     data-duration="30"
   >
     <span class="package-name">Premium Plus</span>
-    <span class="package-price">$20</span>
+    <span class="package-price">₦30,000</span>
     30 days
   </button>
 
 </div>
-
   </div>
 </section><section id="advertisements">
   <div class="container"><h2>Advertisements</h2>
@@ -969,17 +968,81 @@ paymentButton.type = "button";
 paymentButton.textContent = "Proceed to Payment";
 paymentButton.className = "primary-button";
 
-paymentButton.addEventListener("click", () => {
-  showMessage(
-    "Payment setup is ready. We will connect the payment gateway next.",
-    true
-  );
+paymentButton.addEventListener("click", async function () {
+
+  try {
+
+    paymentButton.disabled = true;
+    paymentButton.textContent = "Opening payment...";
+
+    const response = await fetch(
+      SUPABASE_URL +
+      "/functions/v1/initialize-payment",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY
+        },
+
+        body: JSON.stringify({
+  email: contact,
+  amount: selectedPackage.price * 100,
+  currency: "NGN"
+})
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.authorization_url) {
+
+      console.error(
+        "Payment initialization error:",
+        data
+      );
+
+      showMessage(
+        data.error ||
+        "Could not initialize payment.",
+        false
+      );
+
+      return;
+    }
+
+    window.location.href =
+      data.authorization_url;
+
+  } catch (error) {
+
+    console.error(
+      "Payment connection error:",
+      error
+    );
+
+    showMessage(
+      "Could not connect to payment service.",
+      false
+    );
+
+  } finally {
+
+    paymentButton.disabled = false;
+    paymentButton.textContent =
+      "Proceed to Payment";
+
+  }
+
 });
 
-const campaignForm = get("campaignForm");
+const campaignForm =
+  get("campaignForm");
 
-campaignForm.appendChild(paymentButton); 
-
+campaignForm.appendChild(
+  paymentButton
+);
 
       get("campaignForm").reset();
 
