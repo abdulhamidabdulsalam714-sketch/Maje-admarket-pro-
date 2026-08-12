@@ -1095,21 +1095,34 @@ function renderAds(){
       "ad-card";
 
 
-    let imageHTML = "";
+    let mediaHTML = "";
 
+if(ad.media_url){
 
-    if(ad.image){
+  if(ad.media_type === "video"){
 
-      imageHTML =
-        '<img src="' +
-        escapeHTML(ad.image) +
-        '" alt="Advertisement">';
+    mediaHTML =
+      '<video src="' +
+      escapeHTML(ad.media_url) +
+      '" controls playsinline ' +
+      'style="width:100%;max-height:280px;object-fit:cover">' +
+      '</video>';
 
-    }
+  }else{
+
+    mediaHTML =
+      '<img src="' +
+      escapeHTML(ad.media_url) +
+      '" alt="Advertisement" ' +
+      'style="width:100%;max-height:280px;object-fit:cover">';
+
+  }
+
+}
 
 
     card.innerHTML =
-      imageHTML +
+      mediaHTML +
 
       '<div class="ad-body">' +
 
