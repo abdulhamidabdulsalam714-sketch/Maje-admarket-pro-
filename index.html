@@ -794,46 +794,8 @@ const paymentCurrency =
       !title ||
       !description ||
       !contact
-    ){
-let finalMediaUrl = mediaUrl;
-
-if (mediaFile) {
-  const fileName =
-    Date.now() + "_" + mediaFile.name;
-
-  const uploadResponse =
-    await fetch(
-      `${SUPABASE_URL}/storage/v1/object/advertisement-images/${fileName}`,
-      {
-        method: "POST",
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY,
-          "Content-Type": mediaFile.type
-        },
-        body: mediaFile
-      }
-    );
-
-  if (!uploadResponse.ok) {
-  const uploadError = await uploadResponse.text();
-
-  console.error(
-    "Media upload error:",
-    uploadError
-  );
-
-  showMessage(
-    "Media upload failed: " + uploadError,
-    false
-  );
-
-  return;
-    }
-
-  finalMediaUrl =
-    `${SUPABASE_URL}/storage/v1/object/public/advertisement-images/${fileName}`;
-    }
+    )
+    {
       showMessage(
         "Please complete all required fields.",
         false
@@ -856,7 +818,8 @@ if (mediaFile) {
 
       contact: contact,
 
-      image: image,
+      media_url: mediaUrl,
+media_type: mediaType,
 
       package: selectedPackage.name,
 
@@ -906,7 +869,7 @@ if (mediaFile) {
   advert_title: title,
   description: description,
   contact: contact,
-  media_url: finalMediaUrl || null,
+  media_url: mediaUrl || null,
 media_type: mediaType,
   status: "pending",
   extended_description: "",
