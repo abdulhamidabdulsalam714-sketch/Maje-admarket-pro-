@@ -986,17 +986,6 @@ campaignForm.appendChild(paymentButton);
 
       renderAds();
 
-
-      setTimeout(
-        function(){
-
-          openAdvertisement(ad.id);
-
-        },
-        500
-      );
-
-
     }catch(error){
 
       console.error(
@@ -1514,7 +1503,7 @@ window.addEventListener(
   "hashchange",
   loadAdFromHash
 );
-
+renderAds();
 </script>
 
 </body>
