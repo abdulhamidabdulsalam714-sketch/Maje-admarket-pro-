@@ -236,17 +236,16 @@ const ad =
 ads[0];
 
 
-const image =
-ad.image_url
-?
-
-'<img src="' +
-escapeHTML(ad.image_url) +
-'" alt="Advertisement image">'
-
-:
-
-"";
+const media =
+ad.media_type === "video"
+  ? '<video src="' +
+    escapeHTML(ad.media_url) +
+    '" controls playsinline></video>'
+  : ad.media_url
+    ? '<img src="' +
+      escapeHTML(ad.media_url) +
+      '" alt="Advertisement image">'
+    : "";
 
 
 const extended =
@@ -288,7 +287,7 @@ ad.advertiser_name ||
 
 "</strong></p>" +
 
-image +
+media +
 
 '<div class="description">' +
 
