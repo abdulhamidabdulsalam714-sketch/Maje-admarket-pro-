@@ -472,6 +472,16 @@ textarea:focus{
       placeholder="Phone, WhatsApp or email"
       required
     >
+    <label for="email">
+  Email Address
+</label>
+
+<input
+  id="email"
+  type="email"
+  placeholder="your@email.com"
+  required
+>
 <label for="paymentCurrency">Payment Currency</label>
 
 <select id="paymentCurrency" required>
@@ -777,7 +787,8 @@ get("campaignForm").addEventListener(
 
     const contact =
       get("contact").value.trim();
-
+const email =
+  get("email").value.trim();
     const mediaType =
   get("mediaType").value;
 
@@ -987,7 +998,7 @@ paymentButton.addEventListener("click", async function () {
         },
 
         body: JSON.stringify({
-  email: contact,
+   email: email,
   amount: selectedPackage.price * 100,
   currency: "NGN"
 })
