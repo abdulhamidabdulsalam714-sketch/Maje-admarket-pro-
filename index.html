@@ -1048,116 +1048,192 @@ function showMessage(text,type){
 }
 
 
+
 /* ======================================
-   RENDER LOCAL ADS
+   RENDER APPROVED ADS FROM SUPABASE
 ====================================== */
 
-function renderAds(){
+async function renderAds(){
 
-  const list =
-    get("adsList");
+  const list = get("adsList");
 
-  const ads =
-    getAds();
+  list.innerHTML =
+    '<div class="card">Loading advertisements...</div>';
 
-  list.innerHTML = "";
+  try {
+
+    const response = await fetch(
+      SUPABASE_URL +
+      "/rest/v1/advertisements" +
+      "?select=*" +
+      "&status=eq.approved" +
+      "&order=created_at.desc",
+      {
+        method: "GET",
+
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY
+        }
+      }
+    );
+
+    if(!response.ok){
+
+      const errorText =
+        await response.text();
+
+      console.error(
+        "Advertisement loading error:",
+        errorText
+      );
+
+      list.innerHTML =
+        '<div class="card">' +
+        'Could not load advertisements.' +
+        '</div>';
+
+      return;
+    }
+
+    const ads =
+      await response.json();
+
+    list.innerHTML = "";
+
+    if(!ads.length){
+
+      list.innerHTML =
+        '<div class="card">' +
+        'No approved advertisements available yet.' +
+        '</div>';
+
+      return;
+    }
 
 
-  if(!ads.length){
+    /* ======================================
+       DISPLAY EACH APPROVED AD
+    ====================================== */
+
+    ads.forEach(function(ad){
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "ad-card";
+
+
+      /* ======================================
+         MEDIA
+      ====================================== */
+
+      let mediaHTML = "";
+
+      if(ad.media_url){
+
+        if(ad.media_type === "video"){
+
+          mediaHTML =
+            '<video src="' +
+            escapeHTML(ad.media_url) +
+            '" controls playsinline ' +
+            'style="width:100%;max-height:280px;' +
+            'object-fit:cover">' +
+            '</video>';
+
+        }else{
+
+          mediaHTML =
+            '<img src="' +
+            escapeHTML(ad.media_url) +
+            '" alt="Advertisement" ' +
+            'style="width:100%;max-height:280px;' +
+            'object-fit:cover">';
+
+        }
+
+      }
+
+
+      /* ======================================
+         AD CARD
+      ====================================== */
+
+      card.innerHTML =
+
+        mediaHTML +
+
+        '<div class="ad-body">' +
+
+        '<div class="ad-business">' +
+        escapeHTML(
+          ad.advertiser_name || ""
+        ) +
+        '</div>' +
+
+        '<h3>' +
+        escapeHTML(
+          ad.advert_title || ""
+        ) +
+        '</h3>' +
+
+        '<p>' +
+        escapeHTML(
+          ad.description || ""
+        ) +
+        '</p>' +
+
+        '<div class="ad-actions">' +
+
+        '<button ' +
+        'type="button" ' +
+        'class="viewAd">' +
+        'View Advertisement' +
+        '</button>' +
+
+        '</div>' +
+
+        '</div>';
+
+
+      /* ======================================
+         VIEW BUTTON
+      ====================================== */
+
+      card
+        .querySelector(".viewAd")
+        .addEventListener(
+          "click",
+          function(){
+
+            openAdvertisement(ad);
+
+          }
+        );
+
+
+      list.appendChild(card);
+
+    });
+
+
+  }catch(error){
+
+    console.error(
+      "Supabase advertisement error:",
+      error
+    );
 
     list.innerHTML =
       '<div class="card">' +
-      'No advertisements have been created yet.' +
+      'Could not connect to the advertisement database.' +
       '</div>';
-
-    return;
 
   }
 
-
-  ads.forEach(function(ad){
-
-    const card =
-      document.createElement("div");
-
-    card.className =
-      "ad-card";
-
-
-    let mediaHTML = "";
-
-if(ad.media_url){
-
-  if(ad.media_type === "video"){
-
-    mediaHTML =
-      '<video src="' +
-      escapeHTML(ad.media_url) +
-      '" controls playsinline ' +
-      'style="width:100%;max-height:280px;object-fit:cover">' +
-      '</video>';
-
-  }else{
-
-    mediaHTML =
-      '<img src="' +
-      escapeHTML(ad.media_url) +
-      '" alt="Advertisement" ' +
-      'style="width:100%;max-height:280px;object-fit:cover">';
-
-  }
-
-}
-
-
-    card.innerHTML =
-      mediaHTML +
-
-      '<div class="ad-body">' +
-
-      '<div class="ad-business">' +
-      escapeHTML(ad.business) +
-      '</div>' +
-
-      '<h3>' +
-      escapeHTML(ad.title) +
-      '</h3>' +
-
-      '<p>' +
-      escapeHTML(ad.description) +
-      '</p>' +
-
-      '<div class="ad-actions">' +
-
-      '<button ' +
-      'type="button" ' +
-      'class="viewAd">' +
-      'View Advertisement' +
-      '</button>' +
-
-      '</div>' +
-
-      '</div>';
-
-
-    card
-      .querySelector(".viewAd")
-      .addEventListener(
-        "click",
-        function(){
-
-          openAdvertisement(ad.id);
-
-        }
-      );
-
-
-    list.appendChild(card);
-
-  });
-
-}
-
+    }
 
 /* ======================================
    OPEN ADVERTISEMENT
