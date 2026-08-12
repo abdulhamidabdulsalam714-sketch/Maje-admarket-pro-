@@ -782,7 +782,7 @@ get("campaignForm").addEventListener(
     const mediaType =
   get("mediaType").value;
 
-const mediaUrl =
+let mediaUrl =
   get("mediaUrl").value.trim();
 const mediaFile =
   get("mediaFile").files[0];
@@ -805,6 +805,42 @@ const paymentCurrency =
 
     }
 
+
+    // Upload selected image/video to Supabase Storage
+    if (mediaFile) {
+      const fileName =
+        Date.now() + "_" + mediaFile.name.replace(/\s+/g, "_");
+
+      const uploadResponse = await fetch(
+        `${SUPABASE_URL}/storage/v1/object/advertisement-images/${fileName}`,
+        {
+          method: "POST",
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+            "Content-Type": mediaFile.type
+          },
+          body: mediaFile
+        }
+      );
+
+      if (!uploadResponse.ok) {
+        const uploadError = await uploadResponse.text();
+
+        console.error("Media upload error:", uploadError);
+
+        showMessage(
+          "Media upload failed: " + uploadError,
+          false
+        );
+
+        return;
+      }
+
+      // Get the public URL of the uploaded file
+      mediaUrl =
+        `${SUPABASE_URL}/storage/v1/object/public/advertisement-images/${fileName}`;
+    }
 
     const ad = {
 
