@@ -906,10 +906,11 @@ media_type: mediaType,
     method: "POST",
 
     headers: {
-      "Content-Type": "application/json",
-      "apikey": "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX",
-      "Prefer": "return=minimal"
-    },
+  "Content-Type": "application/json",
+  "apikey": SUPABASE_KEY,
+  "Prefer": "return=representation"
+},
+    
 
    body: JSON.stringify({
   advertiser_name: business,
@@ -928,9 +929,22 @@ media_type: mediaType,
 }) 
   }
 );
+const createdAds = await response.json();
 
+if (!response.ok || !createdAds.length) {
+  console.error("Advertisement creation error:", createdAds);
 
-      if(!response.ok){
+  showMessage(
+    "Could not create advertisement.",
+    false
+  );
+
+  return;
+}
+
+const advertisementId = createdAds[0].id;
+
+      if (!paymentResponse.ok ...)
 
         const errorText =
           await response.text();
@@ -968,11 +982,11 @@ media_type: mediaType,
          SUCCESS
       ====================================== */
 
-     showMessage(
-  "Advertisement created successfully.",
+     
+showMessage(
+  "Advertisement created. Proceed to payment.",
   true
 );
-
 const paymentButton = document.createElement("button");
 
 paymentButton.type = "button";
@@ -986,28 +1000,29 @@ paymentButton.addEventListener("click", async function () {
     paymentButton.disabled = true;
     paymentButton.textContent = "Opening payment...";
 
-    const response = await fetch(
+    const paymentResponse = await fetch(
       SUPABASE_URL +
       "/functions/v1/initialize-payment",
       {
         method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": SUPABASE_KEY
-        },
+    headers: {
+  "Content-Type": "application/json",
+  "apikey": SUPABASE_KEY,  
+},
 
         body: JSON.stringify({
-   email: email,
+  email: email,
   amount: selectedPackage.price * 100,
-  currency: "NGN"
+  currency: "NGN",
+  advertisement_id: advertisementId
 })
       }
     );
 
-    const data = await response.json();
+    const data = await paymentResponse.json();
 
-    if (!response.ok || !data.authorization_url) {
+    if (!paymentResponse.ok || !data.authorization_url) {
 
       console.error(
         "Payment initialization error:",
