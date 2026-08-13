@@ -897,7 +897,21 @@ media_type: mediaType,
   "apikey": SUPABASE_KEY,
   "Prefer": "return=representation"
 },
-    
+    console.log("SUPABASE INSERT DATA:", {
+  advertiser_name: business,
+  advert_title: title,
+  description: description,
+  contact: contact,
+  media_url: mediaUrl || null,
+  media_type: mediaType,
+  status: "pending",
+  extended_description: "",
+  featured: false,
+  view_count: 0,
+  package: selectedPackage.name,
+  duration_days: selectedPackage.duration,
+  payment_status: "pending"
+});
 
    body: JSON.stringify({
   advertiser_name: business,
