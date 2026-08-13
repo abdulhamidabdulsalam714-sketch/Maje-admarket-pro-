@@ -1,4 +1,5 @@
-i<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -405,9 +406,8 @@ textarea:focus{
   </div>
 </section><section id="advertisements">
   <div class="container"><h2>Advertisements</h2>
-
 <p>
-  Advertisements saved on this device will appear here.
+  Advertisements approved on Maje AdMarket Pro will appear here.
 </p>
 
 <div
@@ -425,7 +425,7 @@ textarea:focus{
     class="selected-package"
     id="selectedPackage"
   >
-    Selected package: Basic — $5 — 7 days
+    Selected package: Basic — ₦10,000 — 7 days
   </div>
 
   <form id="campaignForm">
@@ -482,39 +482,8 @@ textarea:focus{
   placeholder="your@email.com"
   required
 >
-<label for="paymentCurrency">Payment Currency</label>
 
-<select id="paymentCurrency" required>
-  <option value="USD">🇺🇸 USD — US Dollar</option>
-  <option value="NGN">🇳🇬 NGN — Nigerian Naira</option>
-  <option value="GBP">🇬🇧 GBP — British Pound</option>
-  <option value="EUR">🇪🇺 EUR — Euro</option>
-  <option value="CAD">🇨🇦 CAD — Canadian Dollar</option>
-  <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
-</select>
-
-<div
-  id="paymentAmountPreview"
-  style="margin-top:12px;color:#e0c17a;font-weight:bold"
->
-<label for="paymentCurrency">Payment Currency</label>
-
-<select id="paymentCurrency" required>
-  <option value="USD">🇺🇸 USD — US Dollar</option>
-  <option value="NGN">🇳🇬 NGN — Nigerian Naira</option>
-  <option value="GBP">🇬🇧 GBP — British Pound</option>
-  <option value="EUR">🇪🇺 EUR — Euro</option>
-  <option value="CAD">🇨🇦 CAD — Canadian Dollar</option>
-  <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
-</select>
-
-<div
-  id="paymentAmountPreview"
-  style="margin-top:12px;color:#e0c17a;font-weight:bold"
->
-  Payment amount will be calculated after you continue.
-</div>  Payment amount will be calculated after you continue.
-</div>
+  
    <label for="mediaType">Media Type</label>
 
 <select id="mediaType" required>
@@ -591,7 +560,7 @@ const SUPABASE_KEY =
 
 let selectedPackage = {
   name: "Basic",
-  price: 5,
+  price: 10000,
   duration: 7
 };
 
@@ -704,13 +673,13 @@ packages.forEach(function(button){
       };
 
       get("selectedPackage").textContent =
-        "Selected package: " +
-        selectedPackage.name +
-        " — $" +
-        selectedPackage.price +
-        " — " +
-        selectedPackage.duration +
-        " days";
+  "Selected package: " +
+selectedPackage.name +
+" — ₦" +
+selectedPackage.price +
+" — " +
+selectedPackage.duration +
+" days";
 
       goTo("campaign");
 
@@ -797,15 +766,16 @@ let mediaUrl =
 const mediaFile =
   get("mediaFile").files[0];
     console.log("Selected media file:", mediaFile);
-const paymentCurrency =
-  get("paymentCurrency").value;
 
-    if(
-      !business ||
-      !title ||
-      !description ||
-      !contact
-    )
+
+  if(
+  !business ||
+  !title ||
+  !description ||
+  !contact ||
+  !email
+)
+    
     {
       showMessage(
         "Please complete all required fields.",
@@ -815,10 +785,27 @@ const paymentCurrency =
       return;
 
     }
-
+if (!mediaUrl && !mediaFile) {
+  showMessage(
+    "Please provide an advertisement image or video.",
+    false
+  );
+  return;
+    }
 
     // Upload selected image/video to Supabase Storage
     if (mediaFile) {
+      if (
+  (mediaType === "image" && !mediaFile.type.startsWith("image/")) ||
+  (mediaType === "video" && !mediaFile.type.startsWith("video/"))
+) {
+  showMessage(
+    "The uploaded file does not match the selected media type.",
+    false
+  );
+
+  return;
+      }
       const fileName =
         Date.now() + "_" + mediaFile.name.replace(/\s+/g, "_");
 
@@ -944,38 +931,14 @@ if (!response.ok || !createdAds.length) {
 
 const advertisementId = createdAds[0].id;
 
-      if (!paymentResponse.ok ...)
 
-        const errorText =
-          await response.text();
 
-        console.error(
-          "Supabase error:",
-          errorText
-        );
-
-        showMessage(
-          "Advertisement could not be created. " +
-          "Supabase error: " +
-          errorText,
-          false
-        );
-
-        return;
-
-      }
-
-      
 
       /* ======================================
          SAVE LOCAL COPY
       ====================================== */
 
-      const ads = getAds();
-
-      ads.push(ad);
-
-      saveAds(ads);
+      
 
 
       /* ======================================
@@ -1330,30 +1293,9 @@ async function renderAds(){
 
 /* ======================================
    OPEN ADVERTISEMENT
-====================================== */
+=========================================*/
 
-function openAdvertisement(id){
-
-  const ads =
-    getAds();
-
-
-  const ad =
-    ads.find(function(item){
-      return item.id === id;
-    });
-
-
-  if(!ad){
-
-    alert(
-      "Advertisement not found."
-    );
-
-    return;
-
-  }
-
+function openAdvertisement(ad){
 
   const page =
     get("adPage");
@@ -1364,17 +1306,30 @@ function openAdvertisement(id){
 
   let imageHTML = "";
 
+if (ad.media_url) {
 
-  if(ad.image){
+  if (ad.media_type === "video") {
+
+    imageHTML =
+      '<video src="' +
+      escapeHTML(ad.media_url) +
+      '" controls playsinline ' +
+      'style="width:100%;max-height:400px;' +
+      'object-fit:cover;border-radius:10px">' +
+      '</video>';
+
+  } else {
 
     imageHTML =
       '<img src="' +
-      escapeHTML(ad.image) +
+      escapeHTML(ad.media_url) +
       '" alt="Advertisement" ' +
       'style="width:100%;max-height:400px;' +
       'object-fit:cover;border-radius:10px">';
 
   }
+
+    }
 
 
   single.innerHTML =
@@ -1384,11 +1339,11 @@ function openAdvertisement(id){
     '<div style="margin-top:20px">' +
 
     '<div class="ad-business">' +
-    escapeHTML(ad.business) +
+    escapeHTML(ad.advertiser_name)+
     '</div>' +
 
     '<h2>' +
-    escapeHTML(ad.title) +
+    escapeHTML(ad.advert_title) +
     '</h2>' +
 
     '<p>' +
@@ -1644,7 +1599,7 @@ function escapeHTML(value) {
   return div.innerHTML;
 }
 
-function loadAdFromHash() {
+async function loadAdFromHash() {
 
   const hash = window.location.hash;
 
@@ -1654,14 +1609,42 @@ function loadAdFromHash() {
 
   const id = decodeURIComponent(hash.substring(4));
 
-  const ads = getAds();
+  try {
 
-  const ad = ads.find(function(item) {
-    return item.id === id;
-  });
+  const response = await fetch(
+    SUPABASE_URL +
+    "/rest/v1/advertisements?id=eq." +
+    encodeURIComponent(id) +
+    "&select=*",
+    {
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY
+      }
+    }
+  );
 
-  if (ad) {
-    openAdvertisement(id);
+  if (!response.ok) {
+    console.error(
+      "Advertisement loading error:",
+      await response.text()
+    );
+    return;
+  }
+
+  const ads = await response.json();
+
+  if (ads.length) {
+    openAdvertisement(ads[0]);
+  }
+
+} catch (error) {
+
+  console.error(
+    "Could not load advertisement:",
+    error
+  );
+
   }
 }
 
@@ -1672,7 +1655,7 @@ window.addEventListener(
   "hashchange",
   loadAdFromHash
 );
-renderAds();
+
 </script>
 
 </body>
