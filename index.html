@@ -922,9 +922,10 @@ if (!response.ok || !createdAds.length) {
   console.error("Advertisement creation error:", createdAds);
 
   showMessage(
-    "Could not create advertisement.",
-    false
-  );
+  "Could not create advertisement: " +
+  JSON.stringify(createdAds),
+  false
+);
 
   return;
 }
