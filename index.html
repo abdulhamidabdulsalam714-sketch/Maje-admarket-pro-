@@ -916,7 +916,11 @@ media_type: mediaType,
   }
 );
 const responseText = await response.text();
-
+showMessage(
+  "Supabase status: " + response.status +
+  " | Response: " + responseText,
+  false
+);
 console.log("SUPABASE STATUS:", response.status);
 console.log("SUPABASE RESPONSE:", responseText);
 
