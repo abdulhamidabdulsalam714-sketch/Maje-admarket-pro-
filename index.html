@@ -1725,6 +1725,74 @@ window.addEventListener(
 );
 
 </script>
+<script>
+const authSection = document.getElementById("authSection");
+const navLogin = document.getElementById("navLogin");
+const authForm = document.getElementById("authForm");
+const signupButton = document.getElementById("signupButton");
+const authMessage = document.getElementById("authMessage");
 
+function showAuthMessage(message, success = false) {
+  authMessage.textContent = message;
+  authMessage.className = success ? "success" : "error";
+  authMessage.style.display = "block";
+}
+
+navLogin.addEventListener("click", () => {
+  authSection.style.display = "block";
+  authSection.scrollIntoView({ behavior: "smooth" });
+});
+
+authForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+
+  showAuthMessage("Logging in...", true);
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    showAuthMessage(error.message);
+    return;
+  }
+
+  showAuthMessage("Login successful.", true);
+  console.log("Logged-in user:", data.user);
+});
+
+signupButton.addEventListener("click", async () => {
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+
+  if (!email || !password) {
+    showAuthMessage("Enter an email and password first.");
+    return;
+  }
+
+  showAuthMessage("Creating account...", true);
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email,
+    password
+  });
+
+  if (error) {
+    showAuthMessage(error.message);
+    return;
+  }
+
+  if (data.user) {
+    showAuthMessage(
+      "Account created successfully. Check your email if confirmation is required.",
+      true
+    );
+  }
+});
+</script>
 </body>
 </html>
