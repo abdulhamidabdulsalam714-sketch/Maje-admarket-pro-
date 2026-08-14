@@ -915,7 +915,20 @@ media_type: mediaType,
 }) 
   }
 );
-const createdAds = await response.json();
+const responseText = await response.text();
+
+console.log("SUPABASE STATUS:", response.status);
+console.log("SUPABASE RESPONSE:", responseText);
+
+let createdAds;
+
+try {
+  createdAds = JSON.parse(responseText);
+} catch (error) {
+  console.error("Invalid JSON response:", responseText);
+  showMessage("Supabase returned an invalid response.", false);
+  return;
+    }
 
 if (!response.ok || !createdAds.length) {
   console.error("Advertisement creation error:", createdAds);
