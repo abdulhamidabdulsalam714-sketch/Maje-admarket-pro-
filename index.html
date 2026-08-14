@@ -309,7 +309,8 @@ textarea:focus{
     grid-template-columns:1fr;
   }
 }
-</style></head><body><header>
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head><body><header>
   <div class="nav"><div class="logo">
   Maje <span>AdMarket Pro</span>
 </div>
@@ -552,7 +553,10 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
   "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
-
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 /* ======================================
    STATE
