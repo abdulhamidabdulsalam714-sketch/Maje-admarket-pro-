@@ -1805,6 +1805,91 @@ signupButton.addEventListener("click", async () => {
     );
   }
 });
+  async function verifyReturnedPayment() {
+  const params = new URLSearchParams(window.location.search);
+
+  const reference = params.get("reference");
+
+  if (!reference) {
+    return;
+  }
+
+  try {
+    showAuthMessage(
+      "Payment returned. Verifying payment...",
+      true
+    );
+
+    /*
+     * Ask Paystack verification through our Edge Function.
+     *
+     * We first send the reference.
+     * The Edge Function will verify the transaction
+     * directly with Paystack.
+     */
+    const response = await fetch(
+      SUPABASE_URL +
+        "/functions/v1/verify-payment",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY
+        },
+
+        body: JSON.stringify({
+          reference: reference
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    console.log(
+      "PAYMENT VERIFICATION RESPONSE:",
+      data
+    );
+
+    if (!response.ok || !data.ok) {
+      showAuthMessage(
+        data.error ||
+        data.message ||
+        "Payment could not be verified."
+      );
+      return;
+    }
+
+    showAuthMessage(
+      "Payment verified successfully. Your advertisement is now awaiting admin approval.",
+      true
+    );
+
+    /*
+     * Remove the Paystack reference
+     * from the browser URL.
+     */
+    window.history.replaceState(
+      {},
+      document.title,
+      window.location.pathname
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Payment verification error:",
+      error
+    );
+
+    showAuthMessage(
+      "Payment verification error: " +
+      error.message
+    );
+  }
+}
+
+verifyReturnedPayment();
 </script>
 </body>
 </html>
