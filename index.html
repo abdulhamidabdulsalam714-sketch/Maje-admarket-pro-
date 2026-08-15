@@ -1817,7 +1817,7 @@ signupButton.addEventListener("click", async () => {
   const params = new URLSearchParams(window.location.search);
 
   const reference = params.get("reference");
-
+alert("Reference found: " + reference);
   if (!reference) {
     return;
   }
