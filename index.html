@@ -1853,7 +1853,10 @@ alert("Reference found: " + reference);
     );
 
     const data = await response.json();
-
+alert(
+  "Verification response: " +
+  JSON.stringify(data)
+);
     console.log(
       "PAYMENT VERIFICATION RESPONSE:",
       data
