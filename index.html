@@ -1081,8 +1081,16 @@ paymentButton.addEventListener("click", async function () {
       return;
     }
 
-    window.location.href =
-      data.authorization_url;
+    if (data.authorization_url) {
+  window.location.assign(
+    data.authorization_url
+  );
+} else {
+  showMessage(
+    "Paystack payment link was not returned.",
+    false
+  );
+    }
 
   } catch (error) {
 
