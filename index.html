@@ -3,10 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maje AdMarket Pro</title><style>
+
+<title>Maje AdMarket Pro</title>
+
+<style>
 *{box-sizing:border-box}
 
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   margin:0;
@@ -60,6 +65,11 @@ button{
 
 button:hover{
   background:#e0c17a;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 button.secondary{
@@ -174,15 +184,7 @@ label{
 }
 
 input,
-textarea{
-  width:100%;
-  padding:14px;
-  border-radius:7px;
-  border:1px solid #383936;
-  background:#111313;
-  color:white;
-  font-size:15px;
-}
+textarea,
 select{
   width:100%;
   padding:14px;
@@ -193,19 +195,20 @@ select{
   font-size:15px;
 }
 
-select:focus{
-  outline:none;
-  border-color:#c9a45c;
-      }
-textarea{
-  min-height:130px;
-  resize:vertical;
+select{
+  appearance:auto;
 }
 
 input:focus,
-textarea:focus{
+textarea:focus,
+select:focus{
   outline:none;
   border-color:#c9a45c;
+}
+
+textarea{
+  min-height:130px;
+  resize:vertical;
 }
 
 .selected-package{
@@ -227,10 +230,12 @@ textarea:focus{
   overflow:hidden;
 }
 
-.ad-card img{
+.ad-card img,
+.ad-card video{
   width:100%;
   max-height:280px;
   object-fit:cover;
+  display:block;
 }
 
 .ad-body{
@@ -238,7 +243,7 @@ textarea:focus{
 }
 
 .ad-body h3{
-  margin-top:0;
+  margin-top:8px;
 }
 
 .ad-business{
@@ -272,7 +277,8 @@ textarea:focus{
   margin-top:15px;
 }
 
-#message{
+#message,
+#authMessage{
   display:none;
   margin-top:20px;
   padding:14px;
@@ -294,7 +300,14 @@ textarea:focus{
   color:#e0c17a;
 }
 
+.account-status{
+  color:#aaa69c;
+  font-size:14px;
+  margin-top:10px;
+}
+
 @media(max-width:800px){
+
   .nav{
     flex-direction:column;
     align-items:stretch;
@@ -309,43 +322,81 @@ textarea:focus{
     grid-template-columns:1fr;
   }
 }
-</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head><body><header>
-  <div class="nav"><div class="logo">
-  Maje <span>AdMarket Pro</span>
-</div>
+</style>
 
-<div class="nav-buttons">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <button type="button" id="navPackages">
-    Packages
-  </button>
+</head>
 
-  <button type="button" id="navAds">
-    Advertisements
-  </button>
+<body>
 
-  <button type="button" id="navLogin" class="secondary">
-    Login / Sign Up
-  </button>
+<header>
+  <div class="nav">
 
-  <button type="button" id="navCampaign">
-    Create Campaign
-  </button>
+    <div class="logo">
+      Maje <span>AdMarket Pro</span>
+    </div>
 
-</div>
+    <div class="nav-buttons">
 
-</div>
-</header><section id="authSection" style="display:none;">
+      <button type="button" id="navPackages">
+        Packages
+      </button>
+
+      <button type="button" id="navAds">
+        Advertisements
+      </button>
+
+      <button
+        type="button"
+        id="navLogin"
+        class="secondary"
+      >
+        Login / Sign Up
+      </button>
+
+      <button
+        type="button"
+        id="navCampaign"
+      >
+        Create Campaign
+      </button>
+
+    </div>
+
+  </div>
+</header>
+
+
+<!-- ==============================
+     AUTHENTICATION
+================================ -->
+
+<section
+  id="authSection"
+  style="display:none;"
+>
+
   <div class="container">
-    <div class="card" style="max-width:520px;margin:auto;">
+
+    <div
+      class="card"
+      style="max-width:520px;margin:auto;"
+    >
+
       <h2>Advertiser Account</h2>
 
-      <p>Create an account or log in to manage your advertisements.</p>
+      <p>
+        Create an account or log in to manage
+        your advertisements.
+      </p>
 
       <form id="authForm">
 
-        <label for="authEmail">Email</label>
+        <label for="authEmail">
+          Email
+        </label>
+
         <input
           type="email"
           id="authEmail"
@@ -353,7 +404,10 @@ textarea:focus{
           autocomplete="email"
         >
 
-        <label for="authPassword">Password</label>
+        <label for="authPassword">
+          Password
+        </label>
+
         <input
           type="password"
           id="authPassword"
@@ -363,231 +417,362 @@ textarea:focus{
         >
 
         <div class="hero-buttons">
-          <button type="submit" id="loginButton">
+
+          <button
+            type="submit"
+            id="loginButton"
+          >
             Login
           </button>
 
-          <button type="button" id="signupButton" class="secondary">
+          <button
+            type="button"
+            id="signupButton"
+            class="secondary"
+          >
             Create Account
           </button>
+
         </div>
 
       </form>
 
       <div id="authMessage"></div>
+
     </div>
-  </div>
-</section><section id="home">
-  <div class="container"><h1>
-  Put your brand
-  <span>where people see it.</span>
-</h1>
-
-<p>
-  Maje AdMarket Pro gives businesses a professional
-  way to promote products and services online.
-</p>
-
-<div class="hero-buttons">
-
-  <button type="button" id="startCampaign">
-    Start a Campaign
-  </button>
-
-  <button
-    type="button"
-    class="secondary"
-    id="exploreAds"
-  >
-    Explore Advertisements
-  </button>
-
-</div>
 
   </div>
-</section><section id="packages">
-  <div class="container"><h2>Advertising Packages</h2>
 
-<p>
-  Choose a package for your advertisement.
-</p>
+</section>
 
-<div class="package-grid">
 
-  <button
-    type="button"
-    class="package selected"
-    data-name="Basic"
-    data-price="10000"
-    data-duration="7"
-  >
-    <span class="package-name">Basic</span>
-    <span class="package-price">₦10,000</span>
-    7 days
-  </button>
+<!-- ==============================
+     HOME
+================================ -->
 
-  <button
-    type="button"
-    class="package"
-    data-name="Premium"
-    data-price="20000"
-    data-duration="14"
-  >
-    <span class="package-name">Premium</span>
-    <span class="package-price">₦20,000</span>
-    14 days
-  </button>
+<section id="home">
 
-  <button
-    type="button"
-    class="package"
-    data-name="Premium Plus"
-    data-price="30000"
-    data-duration="30"
-  >
-    <span class="package-name">Premium Plus</span>
-    <span class="package-price">₦30,000</span>
-    30 days
-  </button>
+  <div class="container">
 
-</div>
-  </div>
-</section><section id="advertisements">
-  <div class="container"><h2>Advertisements</h2>
-<p>
-  Advertisements approved on Maje AdMarket Pro will appear here.
-</p>
+    <h1>
+      Put your brand
+      <span>where people see it.</span>
+    </h1>
 
-<div
-  class="ads-grid"
-  id="adsList"
-></div>
+    <p>
+      Maje AdMarket Pro gives businesses a professional
+      way to promote products and services online.
+    </p>
+
+    <div class="hero-buttons">
+
+      <button
+        type="button"
+        id="startCampaign"
+      >
+        Start a Campaign
+      </button>
+
+      <button
+        type="button"
+        class="secondary"
+        id="exploreAds"
+      >
+        Explore Advertisements
+      </button>
+
+    </div>
 
   </div>
-</section><section id="campaign">
-  <div class="container"><h2>Create Campaign</h2>
 
-<div class="card">
+</section>
 
-  <div
-    class="selected-package"
-    id="selectedPackage"
-  >
-    Selected package: Basic — ₦10,000 — 7 days
-  </div>
 
-  <form id="campaignForm">
+<!-- ==============================
+     PACKAGES
+================================ -->
 
-    <label for="business">
-      Business / Advertiser Name
-    </label>
+<section id="packages">
 
-    <input
-      id="business"
-      type="text"
-      placeholder="Business name"
-      required
-    >
+  <div class="container">
 
-    <label for="title">
-      Advertisement Title
-    </label>
+    <h2>Advertising Packages</h2>
 
-    <input
-      id="title"
-      type="text"
-      placeholder="Advertisement title"
-      required
-    >
+    <p>
+      Choose a package for your advertisement.
+    </p>
 
-    <label for="description">
-      Advertisement Description
-    </label>
+    <div class="package-grid">
 
-    <textarea
-      id="description"
-      placeholder="Describe your product or service"
-      required
-    ></textarea>
+      <button
+        type="button"
+        class="package selected"
+        data-name="Basic"
+        data-price="10000"
+        data-duration="7"
+      >
 
-    <label for="contact">
-      Contact Information
-    </label>
+        <span class="package-name">
+          Basic
+        </span>
 
-    <input
-      id="contact"
-      type="text"
-      placeholder="Phone, WhatsApp or email"
-      required
-    >
-    <label for="email">
-  Email Address
-</label>
+        <span class="package-price">
+          ₦10,000
+        </span>
 
-<input
-  id="email"
-  type="email"
-  placeholder="your@email.com"
-  required
->
+        7 days
 
-  
-   <label for="mediaType">Media Type</label>
+      </button>
 
-<select id="mediaType" required>
-  <option value="image">🖼️ Image</option>
-  <option value="video">🎥 Video</option>
-</select>
 
-<label for="mediaUrl">
-  Advertisement Media URL
-</label>
+      <button
+        type="button"
+        class="package"
+        data-name="Premium"
+        data-price="20000"
+        data-duration="14"
+      >
 
-<input
-  id="mediaUrl"
-  type="url"
-  placeholder="Paste image or video URL"
-> 
-<label for="mediaFile">
-  Or Upload Image/Video
-</label>
+        <span class="package-name">
+          Premium
+        </span>
 
-<input
-  id="mediaFile"
-  type="file"
-  accept="image/*,video/*"
->
-    <br><br>
+        <span class="package-price">
+          ₦20,000
+        </span>
 
-    <button type="submit" id="createAdButton">
-      Create Advertisement
-    </button>
+        14 days
 
-  </form>
+      </button>
 
-  <div id="message"></div>
 
-</div>
+      <button
+        type="button"
+        class="package"
+        data-name="Premium Plus"
+        data-price="30000"
+        data-duration="30"
+      >
+
+        <span class="package-name">
+          Premium Plus
+        </span>
+
+        <span class="package-price">
+          ₦30,000
+        </span>
+
+        30 days
+
+      </button>
+
+    </div>
 
   </div>
-</section><section
+
+</section>
+
+
+<!-- ==============================
+     ADVERTISEMENTS
+================================ -->
+
+<section id="advertisements">
+
+  <div class="container">
+
+    <h2>Advertisements</h2>
+
+    <p>
+      Advertisements approved on Maje AdMarket Pro
+      will appear here.
+    </p>
+
+    <div
+      class="ads-grid"
+      id="adsList"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- ==============================
+     CREATE CAMPAIGN
+================================ -->
+
+<section id="campaign">
+
+  <div class="container">
+
+    <h2>Create Campaign</h2>
+
+    <div class="card">
+
+      <div
+        class="selected-package"
+        id="selectedPackage"
+      >
+        Selected package:
+        Basic — ₦10,000 — 7 days
+      </div>
+
+
+      <form id="campaignForm">
+
+        <label for="business">
+          Business / Advertiser Name
+        </label>
+
+        <input
+          id="business"
+          type="text"
+          placeholder="Business name"
+          required
+        >
+
+
+        <label for="title">
+          Advertisement Title
+        </label>
+
+        <input
+          id="title"
+          type="text"
+          placeholder="Advertisement title"
+          required
+        >
+
+
+        <label for="description">
+          Advertisement Description
+        </label>
+
+        <textarea
+          id="description"
+          placeholder="Describe your product or service"
+          required
+        ></textarea>
+
+
+        <label for="contact">
+          Contact Information
+        </label>
+
+        <input
+          id="contact"
+          type="text"
+          placeholder="Phone, WhatsApp or email"
+          required
+        >
+
+
+        <label for="email">
+          Email Address
+        </label>
+
+        <input
+          id="email"
+          type="email"
+          placeholder="your@email.com"
+          required
+        >
+
+
+        <label for="mediaType">
+          Media Type
+        </label>
+
+        <select
+          id="mediaType"
+          required
+        >
+
+          <option value="image">
+            🖼️ Image
+          </option>
+
+          <option value="video">
+            🎥 Video
+          </option>
+
+        </select>
+
+
+        <label for="mediaUrl">
+          Advertisement Media URL
+        </label>
+
+        <input
+          id="mediaUrl"
+          type="url"
+          placeholder="Paste image or video URL"
+        >
+
+
+        <label for="mediaFile">
+          Or Upload Image/Video
+        </label>
+
+        <input
+          id="mediaFile"
+          type="file"
+          accept="image/*,video/*"
+        >
+
+
+        <br><br>
+
+        <button
+          type="submit"
+          id="createAdButton"
+        >
+          Create Advertisement
+        </button>
+
+      </form>
+
+      <div id="message"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==============================
+     SINGLE ADVERTISEMENT PAGE
+================================ -->
+
+<section
   id="adPage"
   class="ad-page"
->  <div class="container"><button
-  type="button"
-  class="secondary"
-  id="backToAds"
 >
-  ← Back to Advertisements
-</button>
 
-<div
-  class="card"
-  id="singleAd"
-  style="margin-top:20px"
-></div>
+  <div class="container">
 
-  </div></section><script>
+    <button
+      type="button"
+      class="secondary"
+      id="backToAds"
+    >
+      ← Back to Advertisements
+    </button>
+
+    <div
+      class="card"
+      id="singleAd"
+      style="margin-top:20px"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<script>
 "use strict";
 
 
@@ -600,11 +785,14 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
   "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-alert("Supabase client loaded: " + !!supabaseClient);
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
 /* ======================================
    STATE
 ====================================== */
@@ -617,7 +805,7 @@ let selectedPackage = {
 
 
 /* ======================================
-   HELPER
+   HELPERS
 ====================================== */
 
 function get(id){
@@ -630,7 +818,10 @@ function goTo(id){
   const element = get(id);
 
   if(!element){
-    console.error("Element not found:", id);
+    console.error(
+      "Element not found:",
+      id
+    );
     return;
   }
 
@@ -638,6 +829,85 @@ function goTo(id){
     behavior:"smooth",
     block:"start"
   });
+}
+
+
+/*
+ * Escape text before putting database
+ * content inside innerHTML.
+ */
+function escapeHTML(value){
+
+  if(value === null ||
+     value === undefined){
+    return "";
+  }
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* ======================================
+   NORMAL MESSAGE
+====================================== */
+
+function showMessage(text,type){
+
+  const message = get("message");
+
+  if(!message){
+    return;
+  }
+
+  message.style.display = "block";
+
+  if(type === true){
+
+    message.className = "success";
+
+  }else if(type === "loading"){
+
+    message.className = "loading";
+
+  }else{
+
+    message.className = "error";
+  }
+
+  message.textContent = text;
+}
+
+
+/* ======================================
+   AUTH MESSAGE
+====================================== */
+
+function showAuthMessage(text,type){
+
+  const message =
+    get("authMessage");
+
+  if(!message){
+    return;
+  }
+
+  message.style.display = "block";
+
+  if(type === true){
+
+    message.className = "success";
+
+  }else{
+
+    message.className = "error";
+  }
+
+  message.textContent = text;
 }
 
 
@@ -663,7 +933,26 @@ get("navAds").addEventListener(
 
 get("navCampaign").addEventListener(
   "click",
-  function(){
+  async function(){
+
+    const {
+      data
+    } = await supabaseClient.auth.getSession();
+
+    if(!data.session){
+
+      showAuthMessage(
+        "Please log in before creating an advertisement."
+      );
+
+      get("authSection").style.display =
+        "block";
+
+      goTo("authSection");
+
+      return;
+    }
+
     goTo("campaign");
   }
 );
@@ -671,7 +960,26 @@ get("navCampaign").addEventListener(
 
 get("startCampaign").addEventListener(
   "click",
-  function(){
+  async function(){
+
+    const {
+      data
+    } = await supabaseClient.auth.getSession();
+
+    if(!data.session){
+
+      get("authSection").style.display =
+        "block";
+
+      showAuthMessage(
+        "Please log in or create an account first."
+      );
+
+      goTo("authSection");
+
+      return;
+    }
+
     goTo("campaign");
   }
 );
@@ -685,14 +993,36 @@ get("exploreAds").addEventListener(
 );
 
 
+get("navLogin").addEventListener(
+  "click",
+  function(){
+
+    const section =
+      get("authSection");
+
+    if(section.style.display === "none"){
+
+      section.style.display = "block";
+
+      goTo("authSection");
+
+    }else{
+
+      section.style.display = "none";
+    }
+
+  }
+);
+
+
 get("backToAds").addEventListener(
   "click",
   function(){
 
-    get("adPage").style.display = "none";
+    get("adPage").style.display =
+      "none";
 
     goTo("advertisements");
-
   }
 );
 
@@ -712,25 +1042,48 @@ packages.forEach(function(button){
     function(){
 
       packages.forEach(function(item){
-        item.classList.remove("selected");
+
+        item.classList.remove(
+          "selected"
+        );
+
       });
 
-      button.classList.add("selected");
+
+      button.classList.add(
+        "selected"
+      );
+
 
       selectedPackage = {
-        name: button.dataset.name,
-        price: Number(button.dataset.price),
-        duration: Number(button.dataset.duration)
+
+        name:
+          button.dataset.name,
+
+        price:
+          Number(
+            button.dataset.price
+          ),
+
+        duration:
+          Number(
+            button.dataset.duration
+          )
       };
 
-      get("selectedPackage").textContent =
-  "Selected package: " +
-selectedPackage.name +
-" — ₦" +
-selectedPackage.price +
-" — " +
-selectedPackage.duration +
-" days";
+
+      get(
+        "selectedPackage"
+      ).textContent =
+
+        "Selected package: " +
+        selectedPackage.name +
+        " — ₦" +
+        selectedPackage.price.toLocaleString() +
+        " — " +
+        selectedPackage.duration +
+        " days";
+
 
       goTo("campaign");
 
@@ -741,49 +1094,189 @@ selectedPackage.duration +
 
 
 /* ======================================
-   LOCAL STORAGE
+   AUTHENTICATION
 ====================================== */
 
-function createId(){
+get("authForm").addEventListener(
+  "submit",
+  async function(event){
 
-  return Date.now().toString(36) +
-    Math.random()
-      .toString(36)
-      .substring(2,8);
+    event.preventDefault();
 
-}
+    const email =
+      get("authEmail")
+        .value
+        .trim();
+
+    const password =
+      get("authPassword")
+        .value;
 
 
-function getAds(){
+    if(!email || !password){
 
-  try{
+      showAuthMessage(
+        "Enter your email and password."
+      );
 
-    return JSON.parse(
-      localStorage.getItem("maje_ads") || "[]"
-    );
+      return;
+    }
 
-  }catch(error){
 
-    console.error(
-      "Local storage error:",
+    const loginButton =
+      get("loginButton");
+
+    loginButton.disabled = true;
+
+    loginButton.textContent =
+      "Logging in...";
+
+
+    const {
+      data,
       error
+    } =
+      await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+      });
+
+
+    loginButton.disabled = false;
+
+    loginButton.textContent =
+      "Login";
+
+
+    if(error){
+
+      showAuthMessage(
+        error.message
+      );
+
+      return;
+    }
+
+
+    showAuthMessage(
+      "Login successful.",
+      true
     );
 
-    return [];
+
+    console.log(
+      "Logged-in user:",
+      data.user
+    );
+
+
+    setTimeout(
+      function(){
+
+        get("authSection")
+          .style.display =
+          "none";
+
+        goTo("campaign");
+
+      },
+      800
+    );
 
   }
+);
 
-}
+
+/* ======================================
+   SIGN UP
+====================================== */
+
+get("signupButton").addEventListener(
+  "click",
+  async function(){
+
+    const email =
+      get("authEmail")
+        .value
+        .trim();
+
+    const password =
+      get("authPassword")
+        .value;
 
 
-function saveAds(ads){
+    if(!email || !password){
 
-  localStorage.setItem(
-    "maje_ads",
-    JSON.stringify(ads)
-  );
+      showAuthMessage(
+        "Enter an email and password first."
+      );
 
-}
+      return;
+    }
+
+
+    if(password.length < 6){
+
+      showAuthMessage(
+        "Password must contain at least 6 characters."
+      );
+
+      return;
+    }
+
+
+    const signupButton =
+      get("signupButton");
+
+    signupButton.disabled = true;
+
+    signupButton.textContent =
+      "Creating...";
+
+
+    showAuthMessage(
+      "Creating account...",
+      true
+    );
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.signUp({
+        email,
+        password
+      });
+
+
+    signupButton.disabled = false;
+
+    signupButton.textContent =
+      "Create Account";
+
+
+    if(error){
+
+      showAuthMessage(
+        error.message
+      );
+
+      return;
+    }
+
+
+    if(data.user){
+
+      showAuthMessage(
+        "Account created successfully. Check your email if confirmation is required.",
+        true
+      );
+
+    }
+
+  }
+);
 
 
 /* ======================================
@@ -796,462 +1289,475 @@ get("campaignForm").addEventListener(
 
     event.preventDefault();
 
+
+    const {
+      data: sessionData,
+      error: sessionError
+    } =
+      await supabaseClient.auth.getSession();
+
+
+    if(
+      sessionError ||
+      !sessionData.session
+    ){
+
+      showMessage(
+        "Please log in before creating an advertisement.",
+        false
+      );
+
+      get("authSection").style.display =
+        "block";
+
+      goTo("authSection");
+
+      return;
+    }
+
+
     const business =
-      get("business").value.trim();
+      get("business")
+        .value
+        .trim();
 
     const title =
-      get("title").value.trim();
+      get("title")
+        .value
+        .trim();
 
     const description =
-      get("description").value.trim();
+      get("description")
+        .value
+        .trim();
 
     const contact =
-      get("contact").value.trim();
-const email =
-  get("email").value.trim();
+      get("contact")
+        .value
+        .trim();
+
+    const email =
+      get("email")
+        .value
+        .trim();
+
     const mediaType =
-  get("mediaType").value;
+      get("mediaType")
+        .value;
 
-let mediaUrl =
-  get("mediaUrl").value.trim();
-const mediaFile =
-  get("mediaFile").files[0];
-    console.log("Selected media file:", mediaFile);
+    let mediaUrl =
+      get("mediaUrl")
+        .value
+        .trim();
+
+    const mediaFile =
+      get("mediaFile")
+        .files[0];
 
 
-  if(
-  !business ||
-  !title ||
-  !description ||
-  !contact ||
-  !email
-)
-    
-    {
+    if(
+      !business ||
+      !title ||
+      !description ||
+      !contact ||
+      !email
+    ){
+
       showMessage(
         "Please complete all required fields.",
         false
       );
 
       return;
-
-    }
-if (!mediaUrl && !mediaFile) {
-  showMessage(
-    "Please provide an advertisement image or video.",
-    false
-  );
-  return;
     }
 
-    // Upload selected image/video to Supabase Storage
-    if (mediaFile) {
-      if (
-  (mediaType === "image" && !mediaFile.type.startsWith("image/")) ||
-  (mediaType === "video" && !mediaFile.type.startsWith("video/"))
-) {
-  showMessage(
-    "The uploaded file does not match the selected media type.",
-    false
-  );
 
-  return;
-      }
-      const fileName =
-        Date.now() + "_" + mediaFile.name.replace(/\s+/g, "_");
-
-      const uploadResponse = await fetch(
-        `${SUPABASE_URL}/storage/v1/object/advertisement-images/${fileName}`,
-        {
-          method: "POST",
-          headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": "Bearer " + SUPABASE_KEY,
-            "Content-Type": mediaFile.type
-          },
-          body: mediaFile
-        }
-      );
-
-      if (!uploadResponse.ok) {
-        const uploadError = await uploadResponse.text();
-
-        console.error("Media upload error:", uploadError);
-
-        showMessage(
-          "Media upload failed: " + uploadError,
-          false
-        );
-
-        return;
-      }
-
-      // Get the public URL of the uploaded file
-      mediaUrl =
-        `${SUPABASE_URL}/storage/v1/object/public/advertisement-images/${fileName}`;
-    }
-
-    const ad = {
-
-      id: createId(),
-
-      business: business,
-
-      title: title,
-
-      description: description,
-
-      contact: contact,
-
-      media_url: mediaUrl,
-media_type: mediaType,
-
-      package: selectedPackage.name,
-
-      price: selectedPackage.price,
-
-      duration: selectedPackage.duration,
-
-      created: new Date().toISOString()
-
-    };
-
-
-    const button =
-      get("createAdButton");
-
-    button.disabled = true;
-
-    button.textContent =
-      "Saving...";
-
-
-    showMessage(
-      "Saving advertisement...",
-      "loading"
-    );
-
-
-    /* ======================================
-       SUPABASE INSERT
-    ====================================== */
-
-    try{
-const { data: { session }, error: sessionError } =
-  await supabaseClient.auth.getSession();
-
-if (sessionError || !session) {
-  showMessage("Please log in before creating an advertisement.", false);
-  return;
-}
-
-const userId = session.user.id;
-const accessToken = session.access_token;
-      const response = await fetch(
-  SUPABASE_URL + "/rest/v1/advertisements",
-  {
-    method: "POST",
-
-    
-headers: {
-  "Content-Type": "application/json",
-  "apikey": SUPABASE_KEY,
-  "Authorization": "Bearer " + accessToken,
-  "Prefer": "return=representation"
-},
-    
-   body: JSON.stringify({
-     user_id: userId,
-  advertiser_name: business,
-  advert_title: title,
-  description: description,
-  contact: contact,
-  media_url: mediaUrl || null,
-media_type: mediaType,
-  status: "pending",
-  extended_description: "",
-  featured: false,
-  view_count: 0,
-  package: selectedPackage.name,
-  duration_days: selectedPackage.duration,
-  payment_status: "pending"
-}) 
-  }
-);
-const responseText = await response.text();
-showMessage(
-  "Supabase status: " + response.status +
-  " | Response: " + responseText,
-  false
-);
-console.log("SUPABASE STATUS:", response.status);
-console.log("SUPABASE RESPONSE:", responseText);
-
-let createdAds;
-
-try {
-  createdAds = JSON.parse(responseText);
-} catch (error) {
-  console.error("Invalid JSON response:", responseText);
-  showMessage("Supabase returned an invalid response.", false);
-  return;
-    }
-
-if (!response.ok || !createdAds.length) {
-  console.error("Advertisement creation error:", createdAds);
-
-  showMessage(
-  "Could not create advertisement: " +
-  JSON.stringify(createdAds),
-  false
-);
-
-  return;
-}
-
-const advertisementId = createdAds[0].id;
-
-
-
-
-      /* ======================================
-         SAVE LOCAL COPY
-      ====================================== */
-
-      
-
-
-      /* ======================================
-         SUCCESS
-      ====================================== */
-
-     
-showMessage(
-  "Advertisement created. Proceed to payment.",
-  true
-);
-const paymentButton = document.createElement("button");
-
-paymentButton.type = "button";
-paymentButton.textContent = "Proceed to Payment";
-paymentButton.className = "primary-button";
-
-paymentButton.addEventListener("click", async function () {
-
-  try {
-
-    paymentButton.disabled = true;
-    paymentButton.textContent = "Opening payment...";
-
-    const paymentResponse = await fetch(
-      SUPABASE_URL +
-      "/functions/v1/initialize-payment",
-      {
-        method: "POST",
-
-    headers: {
-  "Content-Type": "application/json",
-  "apikey": SUPABASE_KEY,  
-},
-
-        body: JSON.stringify({
-  email: email,
-  amount: selectedPackage.price * 100,
-  currency: "NGN",
-  advertisement_id: advertisementId
-})
-      }
-    );
-
-    const data = await paymentResponse.json();
-
-    if (!paymentResponse.ok || !data.authorization_url) {
-
-      console.error(
-        "Payment initialization error:",
-        data
-      );
+    if(
+      !mediaUrl &&
+      !mediaFile
+    ){
 
       showMessage(
-        data.error ||
-        "Could not initialize payment.",
+        "Please provide an advertisement image or video.",
         false
       );
 
       return;
     }
 
-    if (data.authorization_url) {
-  window.location.assign(
-    data.authorization_url
-  );
-} else {
+
+    if(mediaFile){
+
+      if (
+  (mediaType === "image" &&
+    !mediaFile.type.startsWith("image/")) ||
+  (mediaType === "video" &&
+    !mediaFile.type.startsWith("video/"))
+) {
   showMessage(
-    "Paystack payment link was not returned.",
+    "The uploaded file does not match the selected media type.",
     false
   );
-    }
-
-  } catch (error) {
-
-    console.error(
-      "Payment connection error:",
-      error
-    );
-
-    showMessage(
-  "Payment error: " + error.message,
-  false
-);
-
-console.error(
-  "FULL PAYMENT ERROR:",
-  error
-);
-
-  } finally {
-
-    paymentButton.disabled = false;
-    paymentButton.textContent =
-      "Proceed to Payment";
-
-  }
-
-});
-
-const campaignForm =
-  get("campaignForm");
-
-campaignForm.appendChild(
-  paymentButton
-);
-
-
-
-      renderAds();
-
-    }catch(error){
-
-      console.error(
-        "Supabase connection error:",
-        error
-      );
-
-      showMessage(
-        "Could not connect to Supabase. " +
-        error.message,
-        false
-      );
-
-
-    }finally{
-
-      button.disabled = false;
-
-      button.textContent =
-        "Create Advertisement";
-
-    }
-
-  }
-);
-
-
-/* ======================================
-   MESSAGE
-====================================== */
-
-function showMessage(text,type){
-
-  const message =
-    get("message");
-
-  message.style.display =
-    "block";
-
-  if(type === true){
-
-    message.className =
-      "success";
-
-  }else if(type === "loading"){
-
-    message.className =
-      "loading";
-
-  }else{
-
-    message.className =
-      "error";
-
-  }
-
-  message.textContent =
-    text;
-
+  return;
 }
 
+const fileName =
+  Date.now() +
+  "_" +
+  mediaFile.name.replace(/\s+/g, "_");
+
+const uploadResponse = await fetch(
+  `${SUPABASE_URL}/storage/v1/object/advertisement-images/${fileName}`,
+  {
+    method: "POST",
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Content-Type": mediaFile.type
+    },
+    body: mediaFile
+  }
+);
+
+if (!uploadResponse.ok) {
+  const uploadError =
+    await uploadResponse.text();
+
+  console.error(
+    "Media upload error:",
+    uploadError
+  );
+
+  showMessage(
+    "Media upload failed: " + uploadError,
+    false
+  );
+
+  return;
+}
+
+mediaUrl =
+  `${SUPABASE_URL}/storage/v1/object/public/advertisement-images/${fileName}`;const ad = {
+  id: createId(),
+  business: business,
+  title: title,
+  description: description,
+  contact: contact,
+  media_url: mediaUrl,
+  media_type: mediaType,
+  package: selectedPackage.name,
+  price: selectedPackage.price,
+  duration: selectedPackage.duration,
+  created: new Date().toISOString()
+};
+
+const button = get("createAdButton");
+
+button.disabled = true;
+button.textContent = "Saving...";
+
+showMessage(
+  "Saving advertisement...",
+  "loading"
+);
+
+try {
+  const {
+    data: { session },
+    error: sessionError
+  } = await supabaseClient.auth.getSession();
+
+  if (sessionError || !session) {
+    showMessage(
+      "Please log in before creating an advertisement.",
+      false
+    );
+    return;
+  }
+
+  const userId = session.user.id;
+  const accessToken = session.access_token;
+
+  const response = await fetch(
+    SUPABASE_URL +
+      "/rest/v1/advertisements",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_KEY,
+        "Authorization":
+          "Bearer " + accessToken,
+        "Prefer": "return=representation"
+      },
+      body: JSON.stringify({
+        user_id: userId,
+        advertiser_name: business,
+        advert_title: title,
+        description: description,
+        contact: contact,
+        media_url: mediaUrl || null,
+        media_type: mediaType,
+        status: "pending",
+        extended_description: "",
+        featured: false,
+        view_count: 0,
+        package: selectedPackage.name,
+        duration_days:
+          selectedPackage.duration,
+        payment_status: "pending"
+      })
+    }
+  );
+
+  const responseText =
+    await response.text();
+
+  console.log(
+    "SUPABASE STATUS:",
+    response.status
+  );
+
+  console.log(
+    "SUPABASE RESPONSE:",
+    responseText
+  );
+
+  if (!response.ok) {
+    showMessage(
+      "Could not create advertisement: " +
+        responseText,
+      false
+    );
+    return;
+  }
+
+  let createdAds;
+
+  try {
+    createdAds =
+      JSON.parse(responseText);
+  } catch (error) {
+    showMessage(
+      "Supabase returned an invalid response.",
+      false
+    );
+    return;
+  }
+
+  if (
+    !Array.isArray(createdAds) ||
+    createdAds.length === 0
+  ) {
+    showMessage(
+      "Advertisement was not created.",
+      false
+    );
+    return;
+  }
+
+  const advertisementId =
+    createdAds[0].id;
+
+  showMessage(
+    "Advertisement created. Proceed to payment.",
+    true
+  );
+
+  const paymentButton =
+    document.createElement("button");
+
+  paymentButton.type = "button";
+  paymentButton.textContent =
+    "Proceed to Payment";
+  paymentButton.style.marginTop =
+    "15px";
+
+  paymentButton.addEventListener(
+    "click",
+    async function () {
+
+      try {
+        paymentButton.disabled = true;
+        paymentButton.textContent =
+          "Opening payment...";
+
+        const paymentResponse =
+          await fetch(
+            SUPABASE_URL +
+              "/functions/v1/initialize-payment",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type":
+                  "application/json",
+                "apikey": SUPABASE_KEY
+              },
+              body: JSON.stringify({
+                email: email,
+                amount:
+                  selectedPackage.price * 100,
+                currency: "NGN",
+                advertisement_id:
+                  advertisementId
+              })
+            }
+          );
+
+        const data =
+          await paymentResponse.json();
+
+        console.log(
+          "PAYMENT RESPONSE:",
+          data
+        );
+
+        if (
+          !paymentResponse.ok ||
+          !data.authorization_url
+        ) {
+          showMessage(
+            data.error ||
+              "Could not initialize payment.",
+            false
+          );
+          return;
+        }
+
+        window.location.assign(
+          data.authorization_url
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Payment error:",
+          error
+        );
+
+        showMessage(
+          "Payment error: " +
+            error.message,
+          false
+        );
+
+      } finally {
+
+        paymentButton.disabled = false;
+        paymentButton.textContent =
+          "Proceed to Payment";
+      }
+    }
+  );
+
+  get("campaignForm").appendChild(
+    paymentButton
+  );
+
+  await renderAds();
+
+} catch (error) {
+
+  console.error(
+    "Supabase connection error:",
+    error
+  );
+
+  showMessage(
+    "Could not connect to Supabase: " +
+      error.message,
+    false
+  );
+
+} finally {
+
+  button.disabled = false;
+  button.textContent =
+    "Create Advertisement";
+  }
+      
+    });
 
 
 /* ======================================
    RENDER APPROVED ADS FROM SUPABASE
 ====================================== */
 
-;
+async function renderAds() {
+
+  const list = get("adsList");
+
+  if (!list) return;
+
+  list.innerHTML =
+    '<div class="card">Loading advertisements...</div>';
+
+  try {
+
+    const response = await fetch(
+      SUPABASE_URL +
+      "/rest/v1/advertisements?status=eq.approved&order=created_at.desc",
+      {
+        method: "GET",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        "Supabase returned " + response.status
+      );
     }
 
+    const ads = await response.json();
 
-    /* ======================================
-       DISPLAY EACH APPROVED AD
-    ====================================== */
+    list.innerHTML = "";
 
-    ads.forEach(function(ad){
+    if (!ads || ads.length === 0) {
+
+      list.innerHTML =
+        '<div class="card">' +
+        'No approved advertisements available yet.' +
+        '</div>';
+
+      return;
+    }
+
+    ads.forEach(function(ad) {
 
       const card =
         document.createElement("div");
 
-      card.className =
-        "ad-card";
-
-
-      /* ======================================
-         MEDIA
-      ====================================== */
+      card.className = "ad-card";
 
       let mediaHTML = "";
 
-      if(ad.media_url){
+      if (ad.media_url) {
 
-        if(ad.media_type === "video"){
+        if (ad.media_type === "video") {
 
           mediaHTML =
             '<video src="' +
             escapeHTML(ad.media_url) +
             '" controls playsinline ' +
-            'style="width:100%;max-height:280px;' +
-            'object-fit:cover">' +
+            'style="width:100%;max-height:280px;object-fit:cover">' +
             '</video>';
 
-        }else{
+        } else {
 
           mediaHTML =
             '<img src="' +
             escapeHTML(ad.media_url) +
             '" alt="Advertisement" ' +
-            'style="width:100%;max-height:280px;' +
-            'object-fit:cover">';
+            'style="width:100%;max-height:280px;object-fit:cover">';
 
         }
-
       }
 
-
-      /* ======================================
-         AD CARD
-      ====================================== */
-
       card.innerHTML =
-
         mediaHTML +
 
         '<div class="ad-body">' +
@@ -1274,139 +1780,11 @@ function showMessage(text,type){
         ) +
         '</p>' +
 
-        '<div class="ad-actions">' +
-
-        '<button ' +
-        'type="button" ' +
-        'class="viewAd">' +
-        'View Advertisement' +
-        '</button>' +
-
-        '</div>' +
-
-        '</div>';
-
-
-      /* ======================================
-         VIEW BUTTON
-      ====================================== */
-
-      card
-        .querySelector(".viewAd")
-        .addEventListener(
-          "click",
-          function(){
-
-            openAdvertisement(ad);
-
-          }
-        );
-
-
-      list.appendChild(card);
-
-    });
-
-async function renderAds(){
-
-  const list = get("adsList");
-
-  list.innerHTML =
-    '<div class="card">Loading advertisements...</div>';
-
-  try {
-
-    const response = await fetch(
-      SUPABASE_URL +
-      "/rest/v1/advertisements" +
-      "?select=*" +
-      "&status=eq.approved" +
-      "&order=featured.desc,created_at.desc",
-      {
-        method: "GET",
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY
-        }
-      }
-    );
-
-    if(!response.ok){
-
-      list.innerHTML =
-        '<div class="card">Could not load advertisements.</div>';
-
-      return;
-    }
-
-    const ads = await response.json();
-
-    list.innerHTML = "";
-
-    if(!ads.length){
-
-      list.innerHTML =
-        '<div class="card">' +
-        'No approved advertisements available yet.' +
-        '</div>';
-
-      return;
-    }
-
-    ads.forEach(function(ad){
-
-      const card = document.createElement("div");
-
-      card.className = "ad-card";
-
-      let mediaHTML = "";
-
-      if(ad.media_url){
-
-        if(ad.media_type === "video"){
-
-          mediaHTML =
-            '<video src="' +
-            escapeHTML(ad.media_url) +
-            '" controls playsinline ' +
-            'style="width:100%;max-height:280px;' +
-            'object-fit:cover">' +
-            '</video>';
-
-        }else{
-
-          mediaHTML =
-            '<img src="' +
-            escapeHTML(ad.media_url) +
-            '" alt="Advertisement" ' +
-            'style="width:100%;max-height:280px;' +
-            'object-fit:cover">';
-
-        }
-
-      }
-
-      card.innerHTML =
-
-        mediaHTML +
-
-        '<div class="ad-body">' +
-
-        '<div class="ad-business">' +
-        escapeHTML(ad.advertiser_name || "") +
-        '</div>' +
-
-        '<h3>' +
-        escapeHTML(ad.advert_title || "") +
-        '</h3>' +
-
-        '<p>' +
-        escapeHTML(ad.description || "") +
-        '</p>' +
-
         '<p>' +
         '<strong>Package:</strong> ' +
-        escapeHTML(ad.package || "") +
+        escapeHTML(
+          ad.package || ""
+        ) +
         '</p>' +
 
         '<div class="ad-actions">' +
@@ -1421,549 +1799,194 @@ async function renderAds(){
 
       card
         .querySelector(".viewAd")
-        .addEventListener("click", function(){
-
-          openAdvertisement(ad);
-
-        });
+        .addEventListener(
+          "click",
+          function() {
+            openAdvertisement(ad);
+          }
+        );
 
       list.appendChild(card);
 
     });
 
-  }catch(error){
+  } catch (error) {
 
     console.error(
-      "Supabase advertisement error:",
+      "Advertisement loading error:",
       error
     );
 
     list.innerHTML =
       '<div class="card">' +
-      'Could not connect to the advertisement database.' +
+      'Could not load advertisements.' +
       '</div>';
-
   }
-
 }
+
+
+/* ======================================
+   ESCAPE HTML
+====================================== */
+
+function escapeHTML(value) {
+
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 
 /* ======================================
    OPEN ADVERTISEMENT
-=========================================*/
+====================================== */
 
-function openAdvertisement(ad){
+function openAdvertisement(ad) {
 
-  const page =
-    get("adPage");
+  const page = get("adPage");
+  const single = get("singleAd");
 
-  const single =
-    get("singleAd");
+  if (!page || !single) return;
 
+  let mediaHTML = "";
 
-  let imageHTML = "";
+  if (ad.media_url) {
 
-if (ad.media_url) {
+    if (ad.media_type === "video") {
 
-  if (ad.media_type === "video") {
+      mediaHTML =
+        '<video src="' +
+        escapeHTML(ad.media_url) +
+        '" controls playsinline ' +
+        'style="width:100%;max-height:400px;object-fit:cover;border-radius:10px">' +
+        '</video>';
 
-    imageHTML =
-      '<video src="' +
-      escapeHTML(ad.media_url) +
-      '" controls playsinline ' +
-      'style="width:100%;max-height:400px;' +
-      'object-fit:cover;border-radius:10px">' +
-      '</video>';
+    } else {
 
-  } else {
-
-    imageHTML =
-      '<img src="' +
-      escapeHTML(ad.media_url) +
-      '" alt="Advertisement" ' +
-      'style="width:100%;max-height:400px;' +
-      'object-fit:cover;border-radius:10px">';
-
-  }
+      mediaHTML =
+        '<img src="' +
+        escapeHTML(ad.media_url) +
+        '" alt="Advertisement" ' +
+        'style="width:100%;max-height:400px;object-fit:cover;border-radius:10px">';
 
     }
-
+  }
 
   single.innerHTML =
-
-    imageHTML +
+    mediaHTML +
 
     '<div style="margin-top:20px">' +
 
     '<div class="ad-business">' +
-    escapeHTML(ad.advertiser_name)+
+    escapeHTML(
+      ad.advertiser_name || ""
+    ) +
     '</div>' +
 
     '<h2>' +
-    escapeHTML(ad.advert_title) +
+    escapeHTML(
+      ad.advert_title || ""
+    ) +
     '</h2>' +
 
     '<p>' +
-    escapeHTML(ad.description) +
+    escapeHTML(
+      ad.description || ""
+    ) +
     '</p>' +
 
     '<p>' +
     '<strong>Contact:</strong> ' +
-    escapeHTML(ad.contact) +
+    escapeHTML(
+      ad.contact || ""
+    ) +
     '</p>' +
 
     '<p>' +
     '<strong>Package:</strong> ' +
-    escapeHTML(ad.package) +
+    escapeHTML(
+      ad.package || ""
+    ) +
     '</p>' +
-
-    '</div>' +
 
     '<div class="share-box">' +
 
-    '<strong>' +
-    'Share this advertisement' +
-    '</strong>' +
+    '<strong>Share this advertisement</strong>' +
 
     '<div class="share-buttons">' +
 
-    '<button ' +
-    'type="button" ' +
-    'id="whatsappShare">' +
-    'WhatsApp' +
-    '</button>' +
-
-    '<button ' +
-    'type="button" ' +
-    'id="facebookShare">' +
-    'Facebook' +
-    '</button>' +
-
-    '<button ' +
-    'type="button" ' +
-    'id="xShare">' +
-    'X / Twitter' +
-    '</button>' +
-
-    '<button ' +
-    'type="button" ' +
-    'id="nativeShare">' +
+    '<button type="button" id="shareAd">' +
     'Share' +
     '</button>' +
 
-    '<button ' +
-    'type="button" ' +
-    'class="secondary" ' +
-    'id="copyLink">' +
-    'Copy Link' +
-    '</button>' +
+    '</div>' +
 
     '</div>' +
 
     '</div>';
 
+  page.style.display = "block";
 
-  page.style.display =
-    "block";
+  document.getElementById("shareAd")
+    .addEventListener(
+      "click",
+      async function() {
 
+        const shareData = {
+          title:
+            ad.advert_title ||
+            "Maje AdMarket Pro",
+          text:
+            ad.description ||
+            "Advertisement",
+          url: window.location.href
+        };
 
-  goTo("adPage");
+        try {
 
+          if (navigator.share) {
 
-  const shareUrl =
-    window.location.href.split("#")[0] +
-    "#ad=" +
-    encodeURIComponent(ad.id);
+            await navigator.share(
+              shareData
+            );
 
+          } else {
 
-  get("whatsappShare").onclick =
-    function(){
+            await navigator.clipboard.writeText(
+              window.location.href
+            );
 
-      const url =
-        "https://wa.me/?text=" +
-        encodeURIComponent(
-          ad.title +
-          " - " +
-          shareUrl
-        );
+            alert(
+              "Advertisement link copied."
+            );
+          }
 
-      window.open(
-        url,
-        "_blank"
-      );
-
-    };
-
-
-  get("facebookShare").onclick =
-    function(){
-
-      const url =
-        "https://www.facebook.com/sharer/sharer.php?u=" +
-        encodeURIComponent(
-          shareUrl
-        );
-
-      window.open(
-        url,
-        "_blank"
-      );
-
-    };
-
-
-  get("xShare").onclick =
-    function(){
-
-      const url =
-        "https://twitter.com/intent/tweet?text=" +
-        encodeURIComponent(
-          ad.title
-        ) +
-        "&url=" +
-        encodeURIComponent(
-          shareUrl
-        );
-
-      window.open(
-        url,
-        "_blank"
-      );
-
-    };
-
-
-  get("nativeShare").onclick =
-    async function(){
-
-      if(navigator.share){
-
-        try{
-
-          await navigator.share({
-
-            title:
-              ad.title,
-
-            text:
-              ad.description,
-
-            url:
-              shareUrl
-
-          });
-
-        }catch(error){
+        } catch (error) {
 
           console.log(
-            "Share cancelled.",
+            "Share cancelled:",
             error
           );
-
         }
-
-      }else{
-
-        await copyToClipboard(
-          shareUrl
-        );
-
-        alert(
-          "Native sharing is not supported. The link was copied."
-        );
-
       }
+    );
 
-    };
-
-
-  get("copyLink").onclick =
-    function(){
-
-      copyToClipboard(
-        shareUrl
-      );
-
-    };
-
+  page.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 }
 
 
 /* ======================================
-   COPY LINK
+   LOAD ADS WHEN PAGE OPENS
 ====================================== */
 
-async function copyToClipboard(text){
-
-  try{
-
-    if(
-      navigator.clipboard &&
-      window.isSecureContext
-    ){
-
-      await navigator.clipboard.writeText(
-        text
-      );
-
-      alert(
-        "Advertisement link copied!"
-      );
-
-      return;
-
-    }
-
-  }catch(error){
-
-    console.log(
-      "Clipboard API failed:",
-      error
-    );
-
-  }
-
-
-  const input =
-    document.createElement("input");
-
-  input.value =
-    text;
-
-  document.body.appendChild(
-    input
-  );
-
-  input.select();
-
-  try {
-  document.execCommand("copy");
-  alert("Advertisement link copied!");
-} catch (error) {
-  alert(
-    "Copy failed. Please copy this link manually:\n" +
-    text
-  );
-}
-
-input.remove();
-
-}
-
-function escapeHTML(value) {
-  const div = document.createElement("div");
-  div.textContent = value || "";
-  return div.innerHTML;
-}
-
-async function loadAdFromHash() {
-
-  const hash = window.location.hash;
-
-  if (!hash.startsWith("#ad=")) {
-    return;
-  }
-
-  const id = decodeURIComponent(hash.substring(4));
-
-  try {
-
-  const response = await fetch(
-    SUPABASE_URL +
-    "/rest/v1/advertisements?id=eq." +
-    encodeURIComponent(id) +
-    "&select=*",
-    {
-      headers: {
-        "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + SUPABASE_KEY
-      }
-    }
-  );
-
-  if (!response.ok) {
-    console.error(
-      "Advertisement loading error:",
-      await response.text()
-    );
-    return;
-  }
-
-  const ads = await response.json();
-
-  if (ads.length) {
-    openAdvertisement(ads[0]);
-  }
-
-} catch (error) {
-
-  console.error(
-    "Could not load advertisement:",
-    error
-  );
-
-  }
-}
-
 renderAds();
-loadAdFromHash();
 
-window.addEventListener(
-  "hashchange",
-  loadAdFromHash
-);
-
-</script>
-<script>
-const authSection = document.getElementById("authSection");
-const navLogin = document.getElementById("navLogin");
-const authForm = document.getElementById("authForm");
-const signupButton = document.getElementById("signupButton");
-const authMessage = document.getElementById("authMessage");
-
-function showAuthMessage(message, success = false) {
-  authMessage.textContent = message;
-  authMessage.className = success ? "success" : "error";
-  authMessage.style.display = "block";
-}
-
-navLogin.addEventListener("click", () => {
-  authSection.style.display = "block";
-  authSection.scrollIntoView({ behavior: "smooth" });
-});
-
-authForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-
-  showAuthMessage("Logging in...", true);
-
-  const { data, error } = await supabaseClient.auth.signInWithPassword({
-    email,
-    password
-  });
-
-  if (error) {
-    showAuthMessage(error.message);
-    return;
-  }
-
-  showAuthMessage("Login successful.", true);
-  console.log("Logged-in user:", data.user);
-});
-
-signupButton.addEventListener("click", async () => {
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-
-  if (!email || !password) {
-    showAuthMessage("Enter an email and password first.");
-    return;
-  }
-
-  showAuthMessage("Creating account...", true);
-
-  const { data, error } = await supabaseClient.auth.signUp({
-    email,
-    password
-  });
-
-  if (error) {
-    showAuthMessage(error.message);
-    return;
-  }
-
-  if (data.user) {
-    showAuthMessage(
-      "Account created successfully. Check your email if confirmation is required.",
-      true
-    );
-  }
-});
-  async function verifyReturnedPayment() {
-  const params = new URLSearchParams(window.location.search);
-
-  const reference = params.get("reference");
-  if (!reference) {
-    return;
-  }
-
-  try {
-    showAuthMessage(
-      "Payment returned. Verifying payment...",
-      true
-    );
-
-    /*
-     * Ask Paystack verification through our Edge Function.
-     *
-     * We first send the reference.
-     * The Edge Function will verify the transaction
-     * directly with Paystack.
-     */
-    const response = await fetch(
-      SUPABASE_URL +
-        "/functions/v1/verify-payment",
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": SUPABASE_KEY
-        },
-
-        body: JSON.stringify({
-          reference: reference
-        })
-      }
-    );
-
-    const data = await response.json();
-    console.log(
-      "PAYMENT VERIFICATION RESPONSE:",
-      data
-    );
-
-    if (!response.ok || !data.ok) {
-      showAuthMessage(
-        data.error ||
-        data.message ||
-        "Payment could not be verified."
-      );
-      return;
-    }
-
-    showAuthMessage(
-      "Payment verified successfully. Your advertisement is now awaiting admin approval.",
-      true
-    );
-
-    /*
-     * Remove the Paystack reference
-     * from the browser URL.
-     */
-    window.history.replaceState(
-      {},
-      document.title,
-      window.location.pathname
-    );
-
-  } catch (error) {
-
-    console.error(
-      "Payment verification error:",
-      error
-    );
-
-    showAuthMessage(
-      "Payment verification error: " +
-      error.message
-    );
-  }
-}
-
-verifyReturnedPayment();
 </script>
 </body>
 </html>
