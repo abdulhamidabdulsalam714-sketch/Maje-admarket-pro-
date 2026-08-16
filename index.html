@@ -1817,7 +1817,6 @@ signupButton.addEventListener("click", async () => {
   const params = new URLSearchParams(window.location.search);
 
   const reference = params.get("reference");
-alert("Reference found: " + reference);
   if (!reference) {
     return;
   }
@@ -1853,10 +1852,6 @@ alert("Reference found: " + reference);
     );
 
     const data = await response.json();
-alert(
-  "Verification response: " +
-  JSON.stringify(data)
-);
     console.log(
       "PAYMENT VERIFICATION RESPONSE:",
       data
