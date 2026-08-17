@@ -1128,14 +1128,18 @@ get("campaignForm").addEventListener(
       }
 
 
-      const fileName =
-        Date.now() +
-        "_" +
-        mediaFile.name
-          .replace(
-            /\s+/g,
-            "_"
-          );
+       const fileExtension =
+  mediaFile.name.includes(".")
+    ? mediaFile.name.split(".").pop()
+    : "";
+
+const fileName =
+  Date.now() +
+  "_" +
+  crypto.randomUUID() +
+  (fileExtension
+    ? "." + fileExtension
+    : "");
 
 
       showMessage(
@@ -1160,7 +1164,7 @@ get("campaignForm").addEventListener(
 
               "Authorization":
                 "Bearer " +
-                SUPABASE_KEY,
+accessToken
 
               "Content-Type":
                 mediaFile.type
