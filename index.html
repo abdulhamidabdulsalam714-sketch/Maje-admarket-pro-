@@ -1102,6 +1102,27 @@ console.log("CREATE ADVERTISEMENT BUTTON WORKED");
     /* ======================================
        MEDIA VALIDATION
     ====================================== */
+const {
+  data: {
+    session
+  },
+  error: sessionError
+} =
+  await supabaseClient
+    .auth
+    .getSession();
+
+if(
+  sessionError ||
+  !session
+){
+  showMessage(
+    "Please log in before creating an advertisement.",
+    false
+  );
+  return;
+}
+
 const userId =
   session.user.id;
 
