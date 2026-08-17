@@ -1102,6 +1102,11 @@ get("campaignForm").addEventListener(
     /* ======================================
        MEDIA VALIDATION
     ====================================== */
+const userId =
+  session.user.id;
+
+const accessToken =
+  session.access_token;
 
     if(mediaFile){
 
@@ -1164,7 +1169,7 @@ const fileName =
 
               "Authorization":
                 "Bearer " +
-accessToken
+accessToken,
 
               "Content-Type":
                 mediaFile.type
@@ -1260,11 +1265,7 @@ accessToken
       }
 
 
-      const userId =
-        session.user.id;
-
-      const accessToken =
-        session.access_token;
+      
 
 
       /* ======================================
