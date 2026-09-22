@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Dashboard — Maje AdMarket Pro</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#101111;
+  color:#f4f1e9;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#191b1b;
+  border-bottom:1px solid #383936;
+}
+
+.nav{
+  max-width:1150px;
+  margin:auto;
+  padding:16px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.logo span{
+  color:#c9a45c;
+}
+
+.nav-buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+button{
+  border:0;
+  border-radius:7px;
+  padding:11px 16px;
+  background:#c9a45c;
+  color:#111;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#e0c17a;
+}
+
+button.secondary{
+  background:transparent;
+  color:#f4f1e9;
+  border:1px solid #383936;
+}
+
+button.danger{
+  background:#7b3333;
+  color:#fff;
+}
+
+.container{
+  max-width:1150px;
+  width:100%;
+  margin:auto;
+  padding:0 20px;
+}
+
+.hero{
+  padding:55px 20px 30px;
+}
+
+.hero h1{
+  margin:0 0 10px;
+  font-size:clamp(32px,6vw,52px);
+}
+
+.hero h1 span{
+  color:#c9a45c;
+}
+
+.hero p{
+  color:#aaa69c;
+  margin:0;
+}
+
+section{
+  padding:25px 0 60px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.stat{
+  background:#191b1b;
+  border:1px solid #383936;
+  border-radius:12px;
+  padding:22px;
+}
+
+.stat-label{
+  color:#aaa69c;
+  font-size:14px;
+}
+
+.stat-value{
+  color:#e0c17a;
+  font-size:30px;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.card{
+  background:#191b1b;
+  border:1px solid #383936;
+  border-radius:12px;
+  padding:24px;
+  margin-bottom:18px;
+}
+
+.card h2{
+  margin-top:0;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.section-title h2{
+  margin:0;
+}
+
+.ad-list{
+  display:grid;
+  gap:16px;
+}
+
+.ad-card{
+  background:#111313;
+  border:1px solid #383936;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.ad-media{
+  width:100%;
+  max-height:320px;
+  object-fit:cover;
+  display:block;
+}
+
+.ad-content{
+  padding:20px;
+}
+
+.ad-content h3{
+  margin:0 0 8px;
+  font-size:22px;
+}
+
+.business{
+  color:#e0c17a;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.details{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.detail{
+  background:#191b1b;
+  border-radius:7px;
+  padding:12px;
+  border:1px solid #2f302e;
+}
+
+.detail-label{
+  display:block;
+  color:#aaa69c;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.detail-value{
+  font-weight:bold;
+  word-break:break-word;
+}
+
+.status{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.status-approved{
+  background:rgba(80,160,90,.15);
+  color:#9bc69f;
+}
+
+.status-pending{
+  background:rgba(201,164,92,.15);
+  color:#e0c17a;
+}
+
+.status-rejected{
+  background:rgba(200,70,70,.15);
+  color:#e59a9a;
+}
+
+.status-paid{
+  background:rgba(80,160,90,.15);
+  color:#9bc69f;
+}
+
+.status-unpaid{
+  background:rgba(200,70,70,.15);
+  color:#e59a9a;
+}
+
+.media-placeholder{
+  padding:45px 20px;
+  text-align:center;
+  color:#aaa69c;
+  background:#111313;
+}
+
+.empty{
+  text-align:center;
+  padding:50px 20px;
+  color:#aaa69c;
+}
+
+.loading{
+  text-align:center;
+  padding:50px 20px;
+  color:#e0c17a;
+}
+
+.error{
+  background:rgba(200,70,70,.15);
+  color:#e59a9a;
+  border:1px solid rgba(200,70,70,.35);
+  padding:15px;
+  border-radius:8px;
+}
+
+.success{
+  background:rgba(80,160,90,.15);
+  color:#9bc69f;
+  padding:15px;
+  border-radius:8px;
+}
+
+.hidden{
+  display:none !important;
+}
+
+@media(max-width:850px){
+
+  .nav{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .nav-buttons{
+    justify-content:center;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:600px){
+
+  .container{
+    padding:0 14px;
+  }
+
+  .hero{
+    padding:40px 14px 20px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .details{
+    grid-template-columns:1fr;
+  }
+
+  .nav-buttons button{
+    flex:1;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="nav">
+
+    <div class="logo">
+      Maje <span>AdMarket Pro</span>
+    </div>
+
+    <div class="nav-buttons">
+
+      <button
+        type="button"
+        class="secondary"
+        id="homeButton"
+      >
+        ← Main Website
+      </button>
+
+      <button
+        type="button"
+        class="danger"
+        id="logoutButton"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <!-- DASHBOARD HEADER -->
+
+  <div class="hero">
+
+    <div class="container">
+
+      <h1>
+        My <span>Dashboard</span>
+      </h1>
+
+      <p id="welcomeText">
+        Loading your account...
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- LOGIN REQUIRED -->
+
+  <section
+    id="loginRequired"
+    class="hidden"
+  >
+
+    <div class="container">
+
+      <div class="card">
+
+        <h2>Login Required</h2>
+
+        <p>
+          You need to log in or create an account
+          before you can access your dashboard.
+        </p>
+
+        <button
+          type="button"
+          id="loginRequiredButton"
+        >
+          Login / Create Account
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- DASHBOARD CONTENT -->
+
+  <section
+    id="dashboardContent"
+    class="hidden"
+  >
+
+    <div class="container">
+
+
+      <!-- STATISTICS -->
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <div class="stat-label">
+            Total Advertisements
+          </div>
+
+          <div
+            class="stat-value"
+            id="totalAds"
+          >
+            0
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-label">
+            Approved
+          </div>
+
+          <div
+            class="stat-value"
+            id="approvedAds"
+          >
+            0
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-label">
+            Pending
+          </div>
+
+          <div
+            class="stat-value"
+            id="pendingAds"
+          >
+            0
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-label">
+            Total Views
+          </div>
+
+          <div
+            class="stat-value"
+            id="totalViews"
+          >
+            0
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ADVERTISEMENTS -->
+
+      <div class="card" style="margin-top:20px;">
+
+        <div class="section-title">
+
+          <h2>
+            My Advertisements
+          </h2>
+
+          <button
+            type="button"
+            id="refreshButton"
+            class="secondary"
+          >
+            ↻ Refresh
+          </button>
+
+        </div>
+
+
+        <div
+          id="adsLoading"
+          class="loading"
+        >
+          Loading your advertisements...
+        </div>
+
+
+        <div
+          id="adsError"
+          class="error hidden"
+        ></div>
+
+
+        <div
+          id="adsEmpty"
+          class="empty hidden"
+        >
+          <h3>
+            No advertisements yet
+          </h3>
+
+          <p>
+            You have not created any advertisements
+            with this account yet.
+          </p>
+
+          <button
+            type="button"
+            id="createAdButton"
+          >
+            Create Advertisement
+          </button>
+
+        </div>
+
+
+        <div
+          id="adsList"
+          class="ad-list"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+/* ======================================
+   SUPABASE CONFIGURATION
+====================================== */
+
+const SUPABASE_URL =
+  "https://rkobepfufwybyaixzgcu.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_kZhOi6-GaJzn98OqWehkOA_PDBrPsxX";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* ======================================
+   HELPERS
+====================================== */
+
+function get(id){
+  return document.getElementById(id);
+}
+
+
+function escapeHTML(value){
+
+  return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return "—";
+  }
+
+  const date =
+    new Date(value);
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+    return value;
+  }
+
+  return date.toLocaleString();
+
+}
+
+
+function formatMoney(
+  amount,
+  currency
+){
+
+  if(
+    amount === null ||
+    amount === undefined ||
+    amount === ""
+  ){
+    return "—";
+  }
+
+  const number =
+    Number(amount);
+
+  if(
+    Number.isNaN(number)
+  ){
+    return escapeHTML(amount);
+  }
+
+  return (
+    currency
+      ? currency + " "
+      : ""
+  ) +
+  number.toLocaleString();
+
+}
+
+
+function statusClass(status){
+
+  const value =
+    String(
+      status || ""
+    ).toLowerCase();
+
+  if(value === "approved"){
+    return "status status-approved";
+  }
+
+  if(value === "rejected"){
+    return "status status-rejected";
+  }
+
+  return "status status-pending";
+
+}
+
+
+function paymentClass(status){
+
+  const value =
+    String(
+      status || ""
+    ).toLowerCase();
+
+  if(
+    value === "paid" ||
+    value === "success" ||
+    value === "successful" ||
+    value === "completed"
+  ){
+    return "status status-paid";
+  }
+
+  return "status status-unpaid";
+
+}
+
+
+/* ======================================
+   NAVIGATION
+====================================== */
+
+get("homeButton").addEventListener(
+  "click",
+  function(){
+
+    window.location.href =
+      "index.html";
+
+  }
+);
+
+
+get("loginRequiredButton")
+  .addEventListener(
+    "click",
+    function(){
+
+      window.location.href =
+        "index.html#authSection";
+
+    }
+  );
+
+
+get("createAdButton")
+  .addEventListener(
+    "click",
+    function(){
+
+      window.location.href =
+        "index.html#campaign";
+
+    }
+  );
+
+
+/* ======================================
+   LOGOUT
+====================================== */
+
+get("logoutButton")
+  .addEventListener(
+    "click",
+    async function(){
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .auth
+          .signOut();
+
+      if(error){
+
+        alert(
+          "Logout failed: " +
+          error.message
+        );
+
+        return;
+
+      }
+
+      window.location.href =
+        "index.html";
+
+    }
+  );
+
+
+/* ======================================
+   LOAD USER
+====================================== */
+
+async function loadDashboard(){
+
+  get("adsLoading")
+    .classList.remove("hidden");
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  if(
+    error ||
+    !data ||
+    !data.session
+  ){
+
+    get("dashboardContent")
+      .classList.add("hidden");
+
+    get("loginRequired")
+      .classList.remove("hidden");
+
+    get("welcomeText")
+      .textContent =
+      "Please log in to access your dashboard.";
+
+    get("adsLoading")
+      .classList.add("hidden");
+
+    return;
+
+  }
+
+
+  const user =
+    data.session.user;
+
+
+  get("loginRequired")
+    .classList.add("hidden");
+
+
+  get("dashboardContent")
+    .classList.remove("hidden");
+
+
+  get("welcomeText")
+    .textContent =
+    "Welcome back, " +
+    (
+      user.email ||
+      "Advertiser"
+    ) +
+    ". Here you can view your advertisements and their details.";
+
+
+  await loadAdvertisements(
+    user.id
+  );
+
+}
+
+
+/* ======================================
+   LOAD USER ADVERTISEMENTS
+====================================== */
+
+async function loadAdvertisements(
+  userId
+){
+
+  get("adsLoading")
+    .classList.remove("hidden");
+
+  get("adsError")
+    .classList.add("hidden");
+
+  get("adsEmpty")
+    .classList.add("hidden");
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("advertisements")
+      .select("*")
+      .eq(
+        "user_id",
+        userId
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
+
+
+  get("adsLoading")
+    .classList.add("hidden");
+
+
+  if(error){
+
+    console.error(
+      "Dashboard query error:",
+      error
+    );
+
+    get("adsError")
+      .textContent =
+      "Unable to load your advertisements: " +
+      error.message;
+
+    get("adsError")
+      .classList.remove("hidden");
+
+    return;
+
+  }
+
+
+  const ads =
+    data || [];
+
+
+  /* ======================================
+     STATISTICS
+  ====================================== */
+
+  get("totalAds")
+    .textContent =
+    ads.length;
+
+
+  get("approvedAds")
+    .textContent =
+    ads.filter(
+      ad =>
+        String(
+          ad.status || ""
+        ).toLowerCase()
+        === "approved"
+    ).length;
+
+
+  get("pendingAds")
+    .textContent =
+    ads.filter(
+      ad =>
+        String(
+          ad.status || ""
+        ).toLowerCase()
+        === "pending"
+    ).length;
+
+
+  const views =
+    ads.reduce(
+      (
+        total,
+        ad
+      ) =>
+        total +
+        (
+          Number(
+            ad.view_count
+          ) || 0
+        ),
+      0
+    );
+
+
+  get("totalViews")
+    .textContent =
+    views.toLocaleString();
+
+
+  /* ======================================
+     EMPTY
+  ====================================== */
+
+  if(!ads.length){
+
+    get("adsEmpty")
+      .classList.remove("hidden");
+
+    get("adsList")
+      .innerHTML = "";
+
+    return;
+
+  }
+
+
+  /* ======================================
+     RENDER ADS
+  ====================================== */
+
+  get("adsList")
+    .innerHTML =
+    ads
+      .map(
+        renderAdvertisement
+      )
+      .join("");
+
+}
+
+
+/* ======================================
+   RENDER ONE AD
+====================================== */
+
+function renderAdvertisement(
+  ad
+){
+
+  const mediaUrl =
+    ad.media_url ||
+    ad.image_url ||
+    "";
+
+
+  let mediaHTML =
+    `<div class="media-placeholder">
+       No advertisement media
+     </div>`;
+
+
+  if(mediaUrl){
+
+    if(
+      String(
+        ad.media_type || ""
+      ).toLowerCase()
+      === "video"
+    ){
+
+      mediaHTML =
+        `<video
+           class="ad-media"
+           controls
+           playsinline
+           preload="metadata"
+         >
+           <source
+             src="${escapeHTML(mediaUrl)}"
+           >
+           Your browser does not support video.
+         </video>`;
+
+    }else{
+
+      mediaHTML =
+        `<img
+           class="ad-media"
+           src="${escapeHTML(mediaUrl)}"
+           alt="${escapeHTML(
+             ad.advert_title
+           )}"
+           loading="lazy"
+         >`;
+
+    }
+
+  }
+
+
+  const approvalStatus =
+    ad.status ||
+    "pending";
+
+
+  const paymentStatus =
+    ad.payment_status ||
+    "pending";
+
+
+  return `
+
+    <article class="ad-card">
+
+      ${mediaHTML}
+
+      <div class="ad-content">
+
+        <h3>
+          ${escapeHTML(
+            ad.advert_title
+          )}
+        </h3>
+
+        <div class="business">
+          ${escapeHTML(
+            ad.advertiser_name
+          )}
+        </div>
+
+
+        <div class="details">
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Approval Status
+            </span>
+
+            <span
+              class="${statusClass(
+                approvalStatus
+              )}"
+            >
+              ${escapeHTML(
+                approvalStatus
+              )}
+            </span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Payment Status
+            </span>
+
+            <span
+              class="${paymentClass(
+                paymentStatus
+              )}"
+            >
+              ${
+                String(
+                  paymentStatus
+                ).toLowerCase()
+                === "paid"
+                  ? "✓ Paid"
+                  : escapeHTML(
+                      paymentStatus
+                    )
+              }
+            </span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Package
+            </span>
+
+            <span class="detail-value">
+              ${escapeHTML(
+                ad.package
+              ) || "—"}
+            </span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Duration
+            </span>
+
+            <span class="detail-value">
+              ${
+                ad.duration_days
+                  ? escapeHTML(
+                      ad.duration_days
+                    ) + " days"
+                  : "—"
+              }
+            </span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Payment Amount
+            </span>
+
+            <span class="detail-value">
+              ${formatMoney(
+                ad.payment_amount,
+                ad.payment_currency
+              )}
+            </span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Payment Reference
+            </span>
+
+            <span class="detail-value">
+              ${
+                escapeHTML(
+                  ad.payment_reference
+                ) || "—"
+              }
+            </span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Date Submitted
+            </span>
+
+            <span class="detail-value">
+              ${formatDate(
+                ad.created_at
+              )}
+            </span>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span class="detail-label">
+              Advertisement Views
+            </span>
+
+            <span class="detail-value">
+              ${
+                Number(
+                  ad.view_count
+                ) || 0
+              }
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div
+          style="
+            margin-top:18px;
+            color:#aaa69c;
+            line-height:1.6;
+          "
+        >
+
+          <strong
+            style="color:#f4f1e9;"
+          >
+            Description:
+          </strong>
+
+          <br>
+
+          ${escapeHTML(
+            ad.description
+          ) || "No description available."}
+
+        </div>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+/* ======================================
+   REFRESH
+====================================== */
+
+get("refreshButton")
+  .addEventListener(
+    "click",
+    async function(){
+
+      const {
+        data
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if(
+        data &&
+        data.session
+      ){
+
+        await loadAdvertisements(
+          data.session.user.id
+        );
+
+      }
+
+    }
+  );
+
+
+/* ======================================
+   AUTH STATE
+====================================== */
+
+supabaseClient
+  .auth
+  .onAuthStateChange(
+    function(
+      event,
+      session
+    ){
+
+      if(!session){
+
+        get("dashboardContent")
+          .classList.add("hidden");
+
+        get("loginRequired")
+          .classList.remove("hidden");
+
+        return;
+
+      }
+
+      loadDashboard();
+
+    }
+  );
+
+
+/* ======================================
+   START
+====================================== */
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>
