@@ -2589,7 +2589,8 @@ async function updateDashboardButton(){
   if(
     error ||
     !data ||
-    !data.session
+    !data.session ||
+    !data.session.user
   ){
 
     dashboardButton.style.display = "none";
@@ -2617,15 +2618,28 @@ if(dashboardButton){
 }
 
 
-/* Check current login */
+/* Check login status when page loads */
 updateDashboardButton();
 
 
 /* Watch for login/logout */
 supabaseClient.auth.onAuthStateChange(
-  function(){
+  function(event, session){
 
-    updateDashboardButton();
+    if(
+      session &&
+      session.user
+    ){
+
+      dashboardButton.style.display =
+        "inline-block";
+
+    }else{
+
+      dashboardButton.style.display =
+        "none";
+
+    }
 
   }
 );
