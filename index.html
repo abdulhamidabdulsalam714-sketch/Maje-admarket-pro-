@@ -335,6 +335,14 @@ textarea{
       >
         Login / Sign Up
       </button>
+      <button
+  type="button"
+  id="navDashboard"
+  class="secondary"
+  style="display:none;"
+>
+  My Dashboard
+      </button>
 
       <button type="button" id="navCampaign">
         Create Campaign
@@ -2559,7 +2567,68 @@ window.addEventListener(
   "hashchange",
   loadAdFromHash
 );
+/* ======================================
+   MY DASHBOARD BUTTON
+====================================== */
 
+const dashboardButton =
+  document.getElementById("navDashboard");
+
+
+async function updateDashboardButton(){
+
+  if(!dashboardButton){
+    return;
+  }
+
+  const {
+    data,
+    error
+  } = await supabaseClient.auth.getSession();
+
+  if(
+    error ||
+    !data ||
+    !data.session
+  ){
+
+    dashboardButton.style.display = "none";
+
+    return;
+  }
+
+  dashboardButton.style.display = "inline-block";
+}
+
+
+/* Open Dashboard */
+if(dashboardButton){
+
+  dashboardButton.addEventListener(
+    "click",
+    function(){
+
+      window.location.href =
+        "dashboard.html";
+
+    }
+  );
+
+}
+
+
+/* Check current login */
+updateDashboardButton();
+
+
+/* Watch for login/logout */
+supabaseClient.auth.onAuthStateChange(
+  function(){
+
+    updateDashboardButton();
+
+  }
+);
 </script>
 
 </body>
