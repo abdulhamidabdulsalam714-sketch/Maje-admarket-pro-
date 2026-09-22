@@ -332,50 +332,64 @@ async function loadAdvertisement(){
       ads[0];
 
 
-    /* ==================================
-       INCREASE VIEW COUNT
-    ================================== */
+    /* =================================
+   INCREASE VIEW COUNT
+================================== */
 
-    try{
+try {
 
-      const {
-        data: viewData,
-        error: viewError
-      } =
-        await supabaseClient.rpc(
-          "increment_ad_view",
-          {
-            ad_id: adId
-          }
-        );
+  const actualAdId = Number(ad.id);
 
+  if (
+    ad.status === "approved" &&
+    Number.isInteger(actualAdId)
+  ) {
 
-      if(viewError){
-
-        console.error(
-          "VIEW COUNT ERROR:",
-          viewError
-        );
-
-      }else{
-
-        console.log(
-          "VIEW COUNT UPDATED:",
-          adId,
-          viewData
-        );
-
+    const {
+      data: viewData,
+      error: viewError
+    } = await supabaseClient.rpc(
+      "increment_ad_view",
+      {
+        ad_id: actualAdId
       }
+    );
 
-    }catch(viewError){
+    if (viewError) {
 
       console.error(
-        "VIEW COUNT REQUEST FAILED:",
+        "VIEW COUNT ERROR:",
         viewError
+      );
+
+    } else {
+
+      console.log(
+        "VIEW COUNT UPDATED:",
+        actualAdId,
+        viewData
       );
 
     }
 
+  } else {
+
+    console.log(
+      "VIEW COUNT NOT UPDATED:",
+      ad.status,
+      actualAdId
+    );
+
+  }
+
+} catch (viewError) {
+
+  console.error(
+    "VIEW COUNT REQUEST FAILED:",
+    viewError
+  );
+
+}
 
     /* ==================================
        MEDIA
