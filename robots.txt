@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abdulhamidabdulsalam714-sketch.github.io/Maje-admarket-pro-/sitemap.xml
