@@ -345,40 +345,42 @@ try {
     Number.isInteger(actualAdId)
   ) {
 
-    const {
-      data: viewData,
-      error: viewError
-    } = await supabaseClient.rpc(
-      "increment_ad_view",
+    const viewResponse = await fetch(
+      SUPABASE_URL +
+      "/rest/v1/rpc/increment_ad_view",
       {
-        ad_id: actualAdId
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization":
+            "Bearer " + SUPABASE_KEY
+        },
+
+        body: JSON.stringify({
+          ad_id: actualAdId
+        })
       }
     );
 
-    if (viewError) {
+    const viewResult =
+      await viewResponse.text();
+
+    console.log(
+      "VIEW COUNT:",
+      viewResponse.status,
+      viewResult
+    );
+
+    if (!viewResponse.ok) {
 
       console.error(
-        "VIEW COUNT ERROR:",
-        viewError
-      );
-
-    } else {
-
-      console.log(
-        "VIEW COUNT UPDATED:",
-        actualAdId,
-        viewData
+        "VIEW COUNT FAILED:",
+        viewResult
       );
 
     }
-
-  } else {
-
-    console.log(
-      "VIEW COUNT NOT UPDATED:",
-      ad.status,
-      actualAdId
-    );
 
   }
 
@@ -390,7 +392,6 @@ try {
   );
 
 }
-
     /* ==================================
        MEDIA
     ================================== */
