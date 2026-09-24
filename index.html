@@ -370,7 +370,11 @@ textarea{
 </head>
 
 <body>
-
+<div id="intro-screen">
+  <div class="intro-content">
+    <img src="IMG-20260924-WA6805.jpg" alt="Maje AdMarket Pro">
+  </div>
+</div>
 <header>
   <div class="nav">
   <div class="logo">
@@ -2705,6 +2709,16 @@ supabaseClient.auth.onAuthStateChange(
 
   }
 );
+  setTimeout(function(){
+
+  const intro =
+    document.getElementById("intro-screen");
+
+  if(intro){
+    intro.remove();
+  }
+
+}, 3000);
 </script>
 
 </body>
